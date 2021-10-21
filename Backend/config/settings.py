@@ -37,14 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_scheme',
     'graphene_django',
     'backend_app',
-    'corsheaders'
+    'backend_app.schema',
+    'corsheaders',
+    'pydantic',
+    'graphene_gis',
+    'django_filters'
 ]
 
 GRAPHENE = {
-    "SCHEMA": "graphene_scheme.schema.schema"
+    "SCHEMA": "backend_app.schema.scheme.scheme"
 }
 
 MIDDLEWARE = [
@@ -92,9 +95,9 @@ DATABASES = {
         'ENGINE': 'djongo',
         'CLIENT': {
             'name': 'db_patitas',
-            'host': 'mongodb+srv://admin:ejqKVP5MkOCw9YKn@cluster0.gsiix.mongodb.net/db_patitas?retryWrites=true&w=majority',
+            'host': 'mongodb+srv://admin:LuJnWkrpjwgIA3X6@patitas.pqw6o.mongodb.net/db_patitas?retryWrites=true&w=majority',
             'username': 'admin',
-            'password':'ejqKVP5MkOCw9YKn',
+            'password':'LuJnWkrpjwgIA3X6',
             'authMechanism': 'SCRAM-SHA-1'
         }
     }
