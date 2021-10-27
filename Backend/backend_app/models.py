@@ -43,5 +43,26 @@ class User(models.Model):
     principalCellphone = models.CharField(max_length=10)
     auxiliarCellphone = models.CharField(max_length=10)
 
+class Vaccine(models.Model):
+    name = models.CharField(max_length=50)
+
+class PetCategory(models.Model):
+    name = models.CharField(max_length=50)
+    
+
+class Pet(models.Model):
+    name = models.CharField(max_length=70)
+    category = models.ForeignKey(PetCategory, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthDate = models.DateField()
+    breed = models.CharField(max_length=50)
+    color = models.CharField(max_length=50)
+    size = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10)
+    isSterilized = models.BooleanField(null=False,default=False)
+    isAdopted = models.BooleanField(null=False,default=False)
+    vaccines = models.ManyToManyField(Vaccine)
+    
+
 
 
