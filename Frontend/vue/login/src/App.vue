@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
 
@@ -58,4 +59,4 @@ padding-top:8%!important;
 span{
 font-size:20px!important;
 }
-</style>
+</style>  
