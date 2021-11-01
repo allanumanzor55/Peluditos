@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-qy$36x7!9kid**_-n5-xe#xfv2^deh!wl-*hfhj8i2d$d)-e_&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -65,8 +63,37 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+)
+ 
+ # Permitir que los encabezados de solicitud de dominio cruzado, puede usar el valor predeterminado, el jefe de solicitud predeterminado es:
+# from corsheaders.defaults import default_headers
+# CORS_ALLOW_HEADERS = default_headers
+ 
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
+
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = ('http://localhost:8081',)
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_WHITELIST = ('http://localhost:8081','http://localhost:8082')
 
 TEMPLATES = [
     {

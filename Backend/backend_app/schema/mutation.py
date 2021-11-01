@@ -366,10 +366,10 @@ class CreatePet(graphene.Mutation):
         )
         return CreatePet(pet=pet_instance)
 
-class UpdatePet(graphene.Mutation):
-    @staticmethod
-    def mutate(root,info,**kwargs):
-        pass
+# class UpdatePet(graphene.Mutation):
+#     @staticmethod
+#     def mutate(root,info,**kwargs):
+#         pass
 
 class DeletePet(graphene.Mutation):
     pet = graphene.Field(PetNode)
@@ -402,5 +402,5 @@ class Mutation(graphene.AbstractType):
     update_vaccine = UpdateVaccine.Field()
     delete_vaccine = DeleteVaccine.Field()
     create_pet = CreatePet.Field()
-    update_pet = UpdatePet.Field()
+    # update_pet = UpdatePet.Field()
     delete_pet = DeletePet.Field()

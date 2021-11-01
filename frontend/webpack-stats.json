@@ -1,0 +1,47 @@
+{
+  "status": "done",
+  "assets": {
+    "img/logo.ef0b8ca1.png": {
+      "name": "img/logo.ef0b8ca1.png",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\img\\logo.ef0b8ca1.png",
+      "publicPath": "http://localhost:8080/img/logo.ef0b8ca1.png"
+    },
+    "img/logo1.96251c86.png": {
+      "name": "img/logo1.96251c86.png",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\img\\logo1.96251c86.png",
+      "publicPath": "http://localhost:8080/img/logo1.96251c86.png"
+    },
+    "js/about.js": {
+      "name": "js/about.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\about.js",
+      "publicPath": "http://localhost:8080/js/about.js"
+    },
+    "js/app.js": {
+      "name": "js/app.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\app.js",
+      "publicPath": "http://localhost:8080/js/app.js"
+    },
+    "js/chunk-vendors.js": {
+      "name": "js/chunk-vendors.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\chunk-vendors.js",
+      "publicPath": "http://localhost:8080/js/chunk-vendors.js"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\index.html",
+      "publicPath": "http://localhost:8080/index.html"
+    },
+    "favicon.ico": {
+      "name": "favicon.ico",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\favicon.ico",
+      "publicPath": "http://localhost:8080/favicon.ico"
+    }
+  },
+  "chunks": {
+    "app": [
+      "js/chunk-vendors.js",
+      "js/app.js"
+    ]
+  },
+  "publicPath": "http://localhost:8080/"
+}

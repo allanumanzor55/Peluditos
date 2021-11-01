@@ -1,0 +1,6 @@
+query allUsers{
+    allUsers{
+        email
+        password
+    }    
+}
