@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <MyNavbar/>
     <ul>
       <li v-for="person in users" :key="person.idCliente">
         {{person.firstName}} - {{person.lastName}}
@@ -10,8 +11,12 @@
 
 <script>
 import {GET_ALL_USERS_QUERY} from '@/graphql/queries/userQueries'
+import MyNavbar from '@/components/navbar'
 export default {
   name: "Home",
+  components:{
+    MyNavbar
+  },
   data(){
     return{
       users:[]
