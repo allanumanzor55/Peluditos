@@ -71,11 +71,7 @@ CORS_ALLOW_METHODS = (
     'DELETE',
     'OPTIONS'
 )
- 
- # Permitir que los encabezados de solicitud de dominio cruzado, puede usar el valor predeterminado, el jefe de solicitud predeterminado es:
-# from corsheaders.defaults import default_headers
-# CORS_ALLOW_HEADERS = default_headers
- 
+
 CORS_ALLOW_HEADERS = (
     'accept',
     'XMLHttpRequest',
@@ -91,10 +87,8 @@ CORS_ALLOW_HEADERS = (
     'Pragma',
 )
 ALLOWED_HOSTS = ['*']
-#CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-
-#CORS_ORIGIN_WHITELIST = ('http://localhost:8081','http://localhost:8082','http://localhost:8080')
 
 TEMPLATES = [
     {
@@ -130,11 +124,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #         }
 #     }
 # }
-
-import dj_database_url  
-db_from_env = dj_database_url.config(conn_max_age=500)  
-DATABASES['default'].update(db_from_env)
-
+DATABASES = {
+    'default':{
+        'ENGINE':'djongo',
+        'NAME':'demo_database'
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -171,14 +166,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
 STATIC_URL = '/static/'
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (  
-    os.path.join(BASE_DIR, 'static'),
-)
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

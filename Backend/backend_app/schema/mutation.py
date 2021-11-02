@@ -229,7 +229,7 @@ class CreateUser(graphene.Mutation):
 
 class UpdateUser(graphene.Mutation):
     user = graphene.Field(UserNode)
-    class input:
+    class Input:
         user_data = UserInput(required=True)
 
     @staticmethod
@@ -242,8 +242,8 @@ class UpdateUser(graphene.Mutation):
             if user_data.lastName is not None: user_instance.lastName=user_data.lastName
             if user_data.dni is not None: user_instance.dni=user_data.dni
             if user_data.age is not None: user_instance.age=user_data.age
-            if user_data.principalCellPhone is not None: 
-                user_instance.principalCellPhone=user_data.principalCellPhone
+            if user_data.principalCellphone is not None: 
+                user_instance.principalCellphone=user_data.principalCellphone
             if user_data.auxiliarCellphone is not None: 
                 user_instance.auxiliarCellphone=user_data.auxiliarCellphone
             user_instance.save()
@@ -381,6 +381,20 @@ class DeletePet(graphene.Mutation):
         Pet.objects.delete(pk=id)
         return None
 
+
+class Login(graphene.Mutation):
+    verified = graphene.Boolean()
+
+    class Input:
+        email = graphene.String()
+        password = graphene.String()
+    @staticmethod
+    def mutate(root,info,email,password):
+        user_instance = User.objects.filter(email=email,password=password)
+        if user_instance:
+            return Login(verified=True)
+        return Login(verified=False)    
+
 class Mutation(graphene.AbstractType):
     create_module = CreateModule.Field()
     update_module = UpdateModule.Field()
@@ -404,3 +418,4 @@ class Mutation(graphene.AbstractType):
     create_pet = CreatePet.Field()
     # update_pet = UpdatePet.Field()
     delete_pet = DeletePet.Field()
+    login = Login.Field()

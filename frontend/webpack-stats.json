@@ -1,0 +1,405 @@
+{
+  "status": "done",
+  "assets": {
+    "img/logo.ef0b8ca1.png": {
+      "name": "img/logo.ef0b8ca1.png",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\img\\logo.ef0b8ca1.png",
+      "publicPath": "http://localhost:8080/img/logo.ef0b8ca1.png"
+    },
+    "img/logo1.96251c86.png": {
+      "name": "img/logo1.96251c86.png",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\img\\logo1.96251c86.png",
+      "publicPath": "http://localhost:8080/img/logo1.96251c86.png"
+    },
+    "js/about.js": {
+      "name": "js/about.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\about.js",
+      "publicPath": "http://localhost:8080/js/about.js"
+    },
+    "js/app.js": {
+      "name": "js/app.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\app.js",
+      "publicPath": "http://localhost:8080/js/app.js"
+    },
+    "js/chunk-vendors.js": {
+      "name": "js/chunk-vendors.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\js\\chunk-vendors.js",
+      "publicPath": "http://localhost:8080/js/chunk-vendors.js"
+    },
+    "app.0fb745e2f76258100cf1.hot-update.js": {
+      "name": "app.0fb745e2f76258100cf1.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.0fb745e2f76258100cf1.hot-update.js",
+      "publicPath": "http://localhost:8080/app.0fb745e2f76258100cf1.hot-update.js"
+    },
+    "0fb745e2f76258100cf1.hot-update.json": {
+      "name": "0fb745e2f76258100cf1.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\0fb745e2f76258100cf1.hot-update.json",
+      "publicPath": "http://localhost:8080/0fb745e2f76258100cf1.hot-update.json"
+    },
+    "index.html": {
+      "name": "index.html",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\index.html",
+      "publicPath": "http://localhost:8080/index.html"
+    },
+    "app.b17cce3e6356a77a99ab.hot-update.js": {
+      "name": "app.b17cce3e6356a77a99ab.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.b17cce3e6356a77a99ab.hot-update.js",
+      "publicPath": "http://localhost:8080/app.b17cce3e6356a77a99ab.hot-update.js"
+    },
+    "chunk-vendors.b17cce3e6356a77a99ab.hot-update.js": {
+      "name": "chunk-vendors.b17cce3e6356a77a99ab.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\chunk-vendors.b17cce3e6356a77a99ab.hot-update.js",
+      "publicPath": "http://localhost:8080/chunk-vendors.b17cce3e6356a77a99ab.hot-update.js"
+    },
+    "b17cce3e6356a77a99ab.hot-update.json": {
+      "name": "b17cce3e6356a77a99ab.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\b17cce3e6356a77a99ab.hot-update.json",
+      "publicPath": "http://localhost:8080/b17cce3e6356a77a99ab.hot-update.json"
+    },
+    "app.301ef4a9a46c5af67655.hot-update.js": {
+      "name": "app.301ef4a9a46c5af67655.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.301ef4a9a46c5af67655.hot-update.js",
+      "publicPath": "http://localhost:8080/app.301ef4a9a46c5af67655.hot-update.js"
+    },
+    "301ef4a9a46c5af67655.hot-update.json": {
+      "name": "301ef4a9a46c5af67655.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\301ef4a9a46c5af67655.hot-update.json",
+      "publicPath": "http://localhost:8080/301ef4a9a46c5af67655.hot-update.json"
+    },
+    "2f08ea66364f2670c205.hot-update.json": {
+      "name": "2f08ea66364f2670c205.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\2f08ea66364f2670c205.hot-update.json",
+      "publicPath": "http://localhost:8080/2f08ea66364f2670c205.hot-update.json"
+    },
+    "app.c6e4a58c4606b20acf24.hot-update.js": {
+      "name": "app.c6e4a58c4606b20acf24.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.c6e4a58c4606b20acf24.hot-update.js",
+      "publicPath": "http://localhost:8080/app.c6e4a58c4606b20acf24.hot-update.js"
+    },
+    "c6e4a58c4606b20acf24.hot-update.json": {
+      "name": "c6e4a58c4606b20acf24.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\c6e4a58c4606b20acf24.hot-update.json",
+      "publicPath": "http://localhost:8080/c6e4a58c4606b20acf24.hot-update.json"
+    },
+    "app.80a762e99f1858bb0fea.hot-update.js": {
+      "name": "app.80a762e99f1858bb0fea.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.80a762e99f1858bb0fea.hot-update.js",
+      "publicPath": "http://localhost:8080/app.80a762e99f1858bb0fea.hot-update.js"
+    },
+    "80a762e99f1858bb0fea.hot-update.json": {
+      "name": "80a762e99f1858bb0fea.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\80a762e99f1858bb0fea.hot-update.json",
+      "publicPath": "http://localhost:8080/80a762e99f1858bb0fea.hot-update.json"
+    },
+    "app.1c7f311d2ba98fb0e4f8.hot-update.js": {
+      "name": "app.1c7f311d2ba98fb0e4f8.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.1c7f311d2ba98fb0e4f8.hot-update.js",
+      "publicPath": "http://localhost:8080/app.1c7f311d2ba98fb0e4f8.hot-update.js"
+    },
+    "1c7f311d2ba98fb0e4f8.hot-update.json": {
+      "name": "1c7f311d2ba98fb0e4f8.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\1c7f311d2ba98fb0e4f8.hot-update.json",
+      "publicPath": "http://localhost:8080/1c7f311d2ba98fb0e4f8.hot-update.json"
+    },
+    "app.fcbbea8ec7cb7fca3684.hot-update.js": {
+      "name": "app.fcbbea8ec7cb7fca3684.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.fcbbea8ec7cb7fca3684.hot-update.js",
+      "publicPath": "http://localhost:8080/app.fcbbea8ec7cb7fca3684.hot-update.js"
+    },
+    "fcbbea8ec7cb7fca3684.hot-update.json": {
+      "name": "fcbbea8ec7cb7fca3684.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\fcbbea8ec7cb7fca3684.hot-update.json",
+      "publicPath": "http://localhost:8080/fcbbea8ec7cb7fca3684.hot-update.json"
+    },
+    "app.97677f518ab89f50e274.hot-update.js": {
+      "name": "app.97677f518ab89f50e274.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.97677f518ab89f50e274.hot-update.js",
+      "publicPath": "http://localhost:8080/app.97677f518ab89f50e274.hot-update.js"
+    },
+    "97677f518ab89f50e274.hot-update.json": {
+      "name": "97677f518ab89f50e274.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\97677f518ab89f50e274.hot-update.json",
+      "publicPath": "http://localhost:8080/97677f518ab89f50e274.hot-update.json"
+    },
+    "app.5625b3c0b13bba4b56ec.hot-update.js": {
+      "name": "app.5625b3c0b13bba4b56ec.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.5625b3c0b13bba4b56ec.hot-update.js",
+      "publicPath": "http://localhost:8080/app.5625b3c0b13bba4b56ec.hot-update.js"
+    },
+    "5625b3c0b13bba4b56ec.hot-update.json": {
+      "name": "5625b3c0b13bba4b56ec.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\5625b3c0b13bba4b56ec.hot-update.json",
+      "publicPath": "http://localhost:8080/5625b3c0b13bba4b56ec.hot-update.json"
+    },
+    "app.bde0d82c06fd88066315.hot-update.js": {
+      "name": "app.bde0d82c06fd88066315.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.bde0d82c06fd88066315.hot-update.js",
+      "publicPath": "http://localhost:8080/app.bde0d82c06fd88066315.hot-update.js"
+    },
+    "bde0d82c06fd88066315.hot-update.json": {
+      "name": "bde0d82c06fd88066315.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\bde0d82c06fd88066315.hot-update.json",
+      "publicPath": "http://localhost:8080/bde0d82c06fd88066315.hot-update.json"
+    },
+    "app.73f460902439b1a13dd2.hot-update.js": {
+      "name": "app.73f460902439b1a13dd2.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.73f460902439b1a13dd2.hot-update.js",
+      "publicPath": "http://localhost:8080/app.73f460902439b1a13dd2.hot-update.js"
+    },
+    "73f460902439b1a13dd2.hot-update.json": {
+      "name": "73f460902439b1a13dd2.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\73f460902439b1a13dd2.hot-update.json",
+      "publicPath": "http://localhost:8080/73f460902439b1a13dd2.hot-update.json"
+    },
+    "app.72282bd50286bec31a26.hot-update.js": {
+      "name": "app.72282bd50286bec31a26.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.72282bd50286bec31a26.hot-update.js",
+      "publicPath": "http://localhost:8080/app.72282bd50286bec31a26.hot-update.js"
+    },
+    "72282bd50286bec31a26.hot-update.json": {
+      "name": "72282bd50286bec31a26.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\72282bd50286bec31a26.hot-update.json",
+      "publicPath": "http://localhost:8080/72282bd50286bec31a26.hot-update.json"
+    },
+    "app.93b709189dc17675eed6.hot-update.js": {
+      "name": "app.93b709189dc17675eed6.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.93b709189dc17675eed6.hot-update.js",
+      "publicPath": "http://localhost:8080/app.93b709189dc17675eed6.hot-update.js"
+    },
+    "93b709189dc17675eed6.hot-update.json": {
+      "name": "93b709189dc17675eed6.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\93b709189dc17675eed6.hot-update.json",
+      "publicPath": "http://localhost:8080/93b709189dc17675eed6.hot-update.json"
+    },
+    "app.782f25baa6802ba8c887.hot-update.js": {
+      "name": "app.782f25baa6802ba8c887.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.782f25baa6802ba8c887.hot-update.js",
+      "publicPath": "http://localhost:8080/app.782f25baa6802ba8c887.hot-update.js"
+    },
+    "782f25baa6802ba8c887.hot-update.json": {
+      "name": "782f25baa6802ba8c887.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\782f25baa6802ba8c887.hot-update.json",
+      "publicPath": "http://localhost:8080/782f25baa6802ba8c887.hot-update.json"
+    },
+    "app.6e968e98ecf9f140208d.hot-update.js": {
+      "name": "app.6e968e98ecf9f140208d.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.6e968e98ecf9f140208d.hot-update.js",
+      "publicPath": "http://localhost:8080/app.6e968e98ecf9f140208d.hot-update.js"
+    },
+    "6e968e98ecf9f140208d.hot-update.json": {
+      "name": "6e968e98ecf9f140208d.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\6e968e98ecf9f140208d.hot-update.json",
+      "publicPath": "http://localhost:8080/6e968e98ecf9f140208d.hot-update.json"
+    },
+    "app.17a34ffa4e970ed157d9.hot-update.js": {
+      "name": "app.17a34ffa4e970ed157d9.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.17a34ffa4e970ed157d9.hot-update.js",
+      "publicPath": "http://localhost:8080/app.17a34ffa4e970ed157d9.hot-update.js"
+    },
+    "17a34ffa4e970ed157d9.hot-update.json": {
+      "name": "17a34ffa4e970ed157d9.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\17a34ffa4e970ed157d9.hot-update.json",
+      "publicPath": "http://localhost:8080/17a34ffa4e970ed157d9.hot-update.json"
+    },
+    "c906129164cc0d92799d.hot-update.json": {
+      "name": "c906129164cc0d92799d.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\c906129164cc0d92799d.hot-update.json",
+      "publicPath": "http://localhost:8080/c906129164cc0d92799d.hot-update.json"
+    },
+    "app.de6d0032a9d6018a44f4.hot-update.js": {
+      "name": "app.de6d0032a9d6018a44f4.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.de6d0032a9d6018a44f4.hot-update.js",
+      "publicPath": "http://localhost:8080/app.de6d0032a9d6018a44f4.hot-update.js"
+    },
+    "de6d0032a9d6018a44f4.hot-update.json": {
+      "name": "de6d0032a9d6018a44f4.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\de6d0032a9d6018a44f4.hot-update.json",
+      "publicPath": "http://localhost:8080/de6d0032a9d6018a44f4.hot-update.json"
+    },
+    "88af962be07650bed67f.hot-update.json": {
+      "name": "88af962be07650bed67f.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\88af962be07650bed67f.hot-update.json",
+      "publicPath": "http://localhost:8080/88af962be07650bed67f.hot-update.json"
+    },
+    "app.8e377306b58dffddb0a7.hot-update.js": {
+      "name": "app.8e377306b58dffddb0a7.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.8e377306b58dffddb0a7.hot-update.js",
+      "publicPath": "http://localhost:8080/app.8e377306b58dffddb0a7.hot-update.js"
+    },
+    "8e377306b58dffddb0a7.hot-update.json": {
+      "name": "8e377306b58dffddb0a7.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\8e377306b58dffddb0a7.hot-update.json",
+      "publicPath": "http://localhost:8080/8e377306b58dffddb0a7.hot-update.json"
+    },
+    "app.01e83375cf9e2dc82d1f.hot-update.js": {
+      "name": "app.01e83375cf9e2dc82d1f.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.01e83375cf9e2dc82d1f.hot-update.js",
+      "publicPath": "http://localhost:8080/app.01e83375cf9e2dc82d1f.hot-update.js"
+    },
+    "01e83375cf9e2dc82d1f.hot-update.json": {
+      "name": "01e83375cf9e2dc82d1f.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\01e83375cf9e2dc82d1f.hot-update.json",
+      "publicPath": "http://localhost:8080/01e83375cf9e2dc82d1f.hot-update.json"
+    },
+    "app.0816903a77299282991b.hot-update.js": {
+      "name": "app.0816903a77299282991b.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.0816903a77299282991b.hot-update.js",
+      "publicPath": "http://localhost:8080/app.0816903a77299282991b.hot-update.js"
+    },
+    "0816903a77299282991b.hot-update.json": {
+      "name": "0816903a77299282991b.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\0816903a77299282991b.hot-update.json",
+      "publicPath": "http://localhost:8080/0816903a77299282991b.hot-update.json"
+    },
+    "app.c80f4a6bb6440f57a4fd.hot-update.js": {
+      "name": "app.c80f4a6bb6440f57a4fd.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.c80f4a6bb6440f57a4fd.hot-update.js",
+      "publicPath": "http://localhost:8080/app.c80f4a6bb6440f57a4fd.hot-update.js"
+    },
+    "c80f4a6bb6440f57a4fd.hot-update.json": {
+      "name": "c80f4a6bb6440f57a4fd.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\c80f4a6bb6440f57a4fd.hot-update.json",
+      "publicPath": "http://localhost:8080/c80f4a6bb6440f57a4fd.hot-update.json"
+    },
+    "app.90e0951821166ffe4952.hot-update.js": {
+      "name": "app.90e0951821166ffe4952.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.90e0951821166ffe4952.hot-update.js",
+      "publicPath": "http://localhost:8080/app.90e0951821166ffe4952.hot-update.js"
+    },
+    "90e0951821166ffe4952.hot-update.json": {
+      "name": "90e0951821166ffe4952.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\90e0951821166ffe4952.hot-update.json",
+      "publicPath": "http://localhost:8080/90e0951821166ffe4952.hot-update.json"
+    },
+    "app.2e3c1f4d8b542468342f.hot-update.js": {
+      "name": "app.2e3c1f4d8b542468342f.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.2e3c1f4d8b542468342f.hot-update.js",
+      "publicPath": "http://localhost:8080/app.2e3c1f4d8b542468342f.hot-update.js"
+    },
+    "2e3c1f4d8b542468342f.hot-update.json": {
+      "name": "2e3c1f4d8b542468342f.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\2e3c1f4d8b542468342f.hot-update.json",
+      "publicPath": "http://localhost:8080/2e3c1f4d8b542468342f.hot-update.json"
+    },
+    "app.56cdbe948d4c7b16a767.hot-update.js": {
+      "name": "app.56cdbe948d4c7b16a767.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.56cdbe948d4c7b16a767.hot-update.js",
+      "publicPath": "http://localhost:8080/app.56cdbe948d4c7b16a767.hot-update.js"
+    },
+    "56cdbe948d4c7b16a767.hot-update.json": {
+      "name": "56cdbe948d4c7b16a767.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\56cdbe948d4c7b16a767.hot-update.json",
+      "publicPath": "http://localhost:8080/56cdbe948d4c7b16a767.hot-update.json"
+    },
+    "app.6727c15243271ebf6ec3.hot-update.js": {
+      "name": "app.6727c15243271ebf6ec3.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.6727c15243271ebf6ec3.hot-update.js",
+      "publicPath": "http://localhost:8080/app.6727c15243271ebf6ec3.hot-update.js"
+    },
+    "6727c15243271ebf6ec3.hot-update.json": {
+      "name": "6727c15243271ebf6ec3.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\6727c15243271ebf6ec3.hot-update.json",
+      "publicPath": "http://localhost:8080/6727c15243271ebf6ec3.hot-update.json"
+    },
+    "23ef9d556a9eb0af5db0.hot-update.json": {
+      "name": "23ef9d556a9eb0af5db0.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\23ef9d556a9eb0af5db0.hot-update.json",
+      "publicPath": "http://localhost:8080/23ef9d556a9eb0af5db0.hot-update.json"
+    },
+    "app.eb8056d66d6ca495d89b.hot-update.js": {
+      "name": "app.eb8056d66d6ca495d89b.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.eb8056d66d6ca495d89b.hot-update.js",
+      "publicPath": "http://localhost:8080/app.eb8056d66d6ca495d89b.hot-update.js"
+    },
+    "eb8056d66d6ca495d89b.hot-update.json": {
+      "name": "eb8056d66d6ca495d89b.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\eb8056d66d6ca495d89b.hot-update.json",
+      "publicPath": "http://localhost:8080/eb8056d66d6ca495d89b.hot-update.json"
+    },
+    "app.3e1b46113354700e9ece.hot-update.js": {
+      "name": "app.3e1b46113354700e9ece.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.3e1b46113354700e9ece.hot-update.js",
+      "publicPath": "http://localhost:8080/app.3e1b46113354700e9ece.hot-update.js"
+    },
+    "3e1b46113354700e9ece.hot-update.json": {
+      "name": "3e1b46113354700e9ece.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\3e1b46113354700e9ece.hot-update.json",
+      "publicPath": "http://localhost:8080/3e1b46113354700e9ece.hot-update.json"
+    },
+    "app.495e1395e193405e16a8.hot-update.js": {
+      "name": "app.495e1395e193405e16a8.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.495e1395e193405e16a8.hot-update.js",
+      "publicPath": "http://localhost:8080/app.495e1395e193405e16a8.hot-update.js"
+    },
+    "495e1395e193405e16a8.hot-update.json": {
+      "name": "495e1395e193405e16a8.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\495e1395e193405e16a8.hot-update.json",
+      "publicPath": "http://localhost:8080/495e1395e193405e16a8.hot-update.json"
+    },
+    "app.7443dd849a7bf07ed71f.hot-update.js": {
+      "name": "app.7443dd849a7bf07ed71f.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.7443dd849a7bf07ed71f.hot-update.js",
+      "publicPath": "http://localhost:8080/app.7443dd849a7bf07ed71f.hot-update.js"
+    },
+    "7443dd849a7bf07ed71f.hot-update.json": {
+      "name": "7443dd849a7bf07ed71f.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\7443dd849a7bf07ed71f.hot-update.json",
+      "publicPath": "http://localhost:8080/7443dd849a7bf07ed71f.hot-update.json"
+    },
+    "4708850ac62fe6088c88.hot-update.json": {
+      "name": "4708850ac62fe6088c88.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\4708850ac62fe6088c88.hot-update.json",
+      "publicPath": "http://localhost:8080/4708850ac62fe6088c88.hot-update.json"
+    },
+    "app.0879de15c18d18d19e4d.hot-update.js": {
+      "name": "app.0879de15c18d18d19e4d.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.0879de15c18d18d19e4d.hot-update.js",
+      "publicPath": "http://localhost:8080/app.0879de15c18d18d19e4d.hot-update.js"
+    },
+    "0879de15c18d18d19e4d.hot-update.json": {
+      "name": "0879de15c18d18d19e4d.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\0879de15c18d18d19e4d.hot-update.json",
+      "publicPath": "http://localhost:8080/0879de15c18d18d19e4d.hot-update.json"
+    },
+    "app.bf4240a4edfb2f948ee4.hot-update.js": {
+      "name": "app.bf4240a4edfb2f948ee4.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.bf4240a4edfb2f948ee4.hot-update.js",
+      "publicPath": "http://localhost:8080/app.bf4240a4edfb2f948ee4.hot-update.js"
+    },
+    "bf4240a4edfb2f948ee4.hot-update.json": {
+      "name": "bf4240a4edfb2f948ee4.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\bf4240a4edfb2f948ee4.hot-update.json",
+      "publicPath": "http://localhost:8080/bf4240a4edfb2f948ee4.hot-update.json"
+    },
+    "app.e30e80b9bb6d8f93febd.hot-update.js": {
+      "name": "app.e30e80b9bb6d8f93febd.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.e30e80b9bb6d8f93febd.hot-update.js",
+      "publicPath": "http://localhost:8080/app.e30e80b9bb6d8f93febd.hot-update.js"
+    },
+    "e30e80b9bb6d8f93febd.hot-update.json": {
+      "name": "e30e80b9bb6d8f93febd.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\e30e80b9bb6d8f93febd.hot-update.json",
+      "publicPath": "http://localhost:8080/e30e80b9bb6d8f93febd.hot-update.json"
+    },
+    "app.540017f406972fcd448f.hot-update.js": {
+      "name": "app.540017f406972fcd448f.hot-update.js",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\app.540017f406972fcd448f.hot-update.js",
+      "publicPath": "http://localhost:8080/app.540017f406972fcd448f.hot-update.js"
+    },
+    "540017f406972fcd448f.hot-update.json": {
+      "name": "540017f406972fcd448f.hot-update.json",
+      "path": "C:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\static\\540017f406972fcd448f.hot-update.json",
+      "publicPath": "http://localhost:8080/540017f406972fcd448f.hot-update.json"
+    }
+  },
+  "chunks": {
+    "app": [
+      "js/chunk-vendors.js",
+      "js/app.js",
+      "app.540017f406972fcd448f.hot-update.js"
+    ]
+  },
+  "publicPath": "http://localhost:8080/",
+  "error": "ModuleError",
+  "message": "Module Error (from ./node_modules/eslint-loader/index.js):\n\nC:\\Users\\ZSystems_Allan\\Documents\\UNAH\\2021_IIIPAC\\Ing_Software\\Peluditos\\frontend\\src\\views\\Login.vue\n  57:18  error  Empty block statement  no-empty\n\n✖ 1 problem (1 error, 0 warnings)\n"
+}
