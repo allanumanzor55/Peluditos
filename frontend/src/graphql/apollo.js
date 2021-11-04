@@ -6,7 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 
 const httpLink = new HttpLink({
-    uri: 'http://127.0.0.1:8081/graphql/'
+    uri: 'http://127.0.0.1:8000/graphql/'
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

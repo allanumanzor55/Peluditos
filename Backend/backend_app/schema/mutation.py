@@ -108,14 +108,14 @@ class CreateProfileType(graphene.Mutation):
         return CreateProfileType(profileType=profileType_instance)
 
 class DeleteProfileType(graphene.Mutation):
-    ProfileType = graphene.Field(ProfileTypeNode)
+    profileType = graphene.Field(ProfileTypeNode)
 
     class Input:
         id = graphene.ID()
 
     @staticmethod
     def mutate(root,info,id):
-        ProfileType.object.get(pk=id).delete()
+        ProfileType.objects.get(pk=id).delete()
         return None
 
 #Mutations de Permisos
@@ -403,6 +403,7 @@ class Mutation(graphene.AbstractType):
     update_role = UpdateRole.Field()
     delete_role = DeleteRole.Field()
     create_profile_type = CreateProfileType.Field()
+    delete_profile_type = DeleteProfileType.Field()
     create_permissions = CreatePermissions.Field()
     update_permissions = UpdatePermission.Field()
     delete_permissions = DeletePermission.Field()
