@@ -12,7 +12,8 @@ Vue.use(IconsPlugin)
 Vue.use(VueAxios,axios)
 import 'materialize-css/dist/css/materialize.css'
 import 'materialize-css/dist/js/materialize.js'
-
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 new Vue({
   router,
