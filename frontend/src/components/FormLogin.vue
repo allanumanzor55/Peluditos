@@ -1,0 +1,98 @@
+<template>
+  <div class="cuad to">
+        <h1>¡Bienvenido!</h1>
+        <span>Ingresa tus credenciales</span>
+        <form>
+            <br>
+        <div class="form-floating mb-3">
+        <input  class="form-control" id="celular" placeholder="name@example.com">
+        <label for="floatingInput">Celular</label>
+        </div>
+        <div class="form-floating">
+        <input type="password" class="form-control" id="password" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+        </div>
+        <b-link href="#foo" class="txtr">¿Olvidaste tu contraseña?</b-link><br><br>
+        <button type="button" class="btn colorbtn btn-lg">Ingresar</button>
+    </form>
+    <div><br><br>
+    <span class="txt13">¿Aun no tienes una cuenta?</span> <br>
+    <button type="button" class="btn colorbtn btn-sm">Registrate</button>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        form: {
+          celular: '',
+          password: ''
+        },
+        
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(event) {
+        event.preventDefault()
+        alert(JSON.stringify(this.form))
+      },
+      onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.form.celular = ''
+        this.form.password = ''
+ 
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
+    }
+  }
+</script>
+
+<style scoped>
+.cuad{
+    width: 30%;
+    height: 67%;
+    background-color: #FFC581;
+    padding: 20px;
+    border-radius: 60px;
+}
+
+.to{
+    margin-left: 55%;
+    margin-top: 7%;
+}
+
+.txtr{
+    margin-left:55%;
+    color: rgb(103, 103, 104);
+    font-size: 13px;
+}
+.txtl{
+    text-align: left;
+}
+
+.quince{
+    font-size: 15px;
+}
+.txt13{
+    font-size: 13px;
+}
+
+.tit{
+    font-size: 50px;
+}
+
+.colorbtn{
+    background: #FF9922!important;
+}
+.colorbtn:hover{
+    background-color: #f8a94e!important;
+}
+</style>
