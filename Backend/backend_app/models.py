@@ -18,6 +18,12 @@ class Permissions (models.Model):
     delete = models.BooleanField(null=False,default=False)
 
 #Historia 2 - Usuarios
+class ProfileType(models.Model):
+    profileName = models.CharField(max_length=40)
+    description = models.CharField(max_length=100)
+
+
+
 class Address(models.Model):
     department = models.CharField(max_length=40)
     city = models.CharField(max_length=40)
@@ -25,10 +31,6 @@ class Address(models.Model):
     street = models.CharField(max_length=40)
     residence = models.CharField(max_length=40)
     reference = models.CharField(max_length=250)
-
-class ProfileType(models.Model):
-    profileName = models.CharField(max_length=40)
-    description = models.CharField(max_length=100)
 
 class User(models.Model):
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
