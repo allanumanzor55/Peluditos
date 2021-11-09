@@ -14,3 +14,14 @@ export const LOGIN_USER = gql`
             verified
         }
     }`
+
+export const CREATE_USER = gql`
+    mutation ($userData:UserInput!){
+        createUser(userData:$userData){
+            user{
+                firstName
+                lastName
+            }
+        }
+    }
+`

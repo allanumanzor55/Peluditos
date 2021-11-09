@@ -4,8 +4,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/home',
+    name:'Home',
+    component: ()=> import('../views/Home-A.vue')
+  },
+  {
     path: '/',
-    name: 'Home',
+    name: 'Index',
     component: () => import('../components/Navbar.vue')
   },
   {
@@ -28,30 +33,7 @@ const routes = [
     name: 'Mascota',
     component: () => import('../views/Mascota.vue')
   },
-  {
-    path: '/configuracion/perfil',
-      name: 'Perfil',
-      component: () => import( '../views/Settings/Perfil.vue')
-    },
-    {
-    path: '/configuracion/vacunas',
-      name: 'Vacunas',
-      component: () => import( '../views/Settings/Vacunas.vue')
-    },
-    {
-    path: '/configuracion/razas',
-      name: 'Razas',
-      component: () => import( '../views/Settings/Razas.vue')
-    },
-    {
-    path: '/configuracion/departamentos',
-      name: 'Departamentos',
-      component: () => import( '../views/Settings/Departamentos.vue')
-    },
-    {path: '/configuracion',
-    name: 'Configuracion',
-    component: () => import( '../views/Settings/Settings.vue')
-    }
+  
 ]
 
 const router = new VueRouter({

@@ -1,51 +1,48 @@
 <template>
 	<div class="fondo">
-
         <div class="rec">
             <FormLogin/>
         </div>
-        
         <div class="semi">
             <img alt="logo" class="imglg" src="../assets/logo.png">
         </div>
         
     </div>
 </template>
-
 <script>
 import FormLogin from '@/components/FormLogin.vue'
-import {LOGIN_USER} from '@/graphql/queries/userQueries'
+////import {LOGIN_USER} from '@/graphql/queries/userQueries'
 export default {
 	name: "Login",
 	components: {FormLogin},
-	data () {
-        return {
-			id:0,
-            email:'',
-			login: false,
-			password:''
-        }
-    },
-	methods:{
-		async login_user(){
-			const {data} = await this.$apollo.mutate({
-				mutation: LOGIN_USER,
-				variables:{
-					email:this.email,
-					password:this.password
-				}
-			})
-			this.login = data.login.verified
-			if(this.login){
-				this.$router.push('/')
-			}
-		}
-	}
-	// async mounted () {
-    //     this.loading = true
-    //     this.users = await this.$apollo.query({ query: GET_ALL_USERS_QUERY })
-    //     this.loading = false
-    // }
+	// data () {
+    //     return {
+	// 		id:0,
+    //         email:'',
+	// 		login: false,
+	// 		password:''
+    //     }
+    // },
+	// // methods:{
+	// // 	async login_user(){
+	// // 		const {data} = await this.$apollo.mutate({
+	// // 			mutation: LOGIN_USER,
+	// // 			variables:{
+	// // 				email:this.email,
+	// // 				password:this.password
+	// // 			}
+	// // 		})
+	// // 		this.login = data.login.verified
+	// // 		if(this.login){
+	// // 			this.$router.push('/')
+	// // 		}
+	// // 	}
+	// // }
+	// // async mounted () {
+    // //     this.loading = true
+    // //     this.users = await this.$apollo.query({ query: GET_ALL_USERS_QUERY })
+    // //     this.loading = false
+    // // }
 };
 </script>
 

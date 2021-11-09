@@ -5,101 +5,168 @@
             <h4>Registro de Usuario</h4>
         </div>
         <div class="cuerpo">
+          <form id="registerForm">
             <b-container class="bv-example-row">
             <b-row>
                 <b-col>
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-nombre" >
-                <label for="r-nombre">Nombre</label>  
-                </form> 
+                  <div class="form-floating">
+                    <input type="email" class="form-control" id="r-email" v-model="registerInfo.email">
+                    <label for="r-email">Email</label>  
+                  </div> 
 
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-edad" >
-                <label for="r-edad">Edad</label>
-                </form>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-nombre" v-model="registerInfo.firstName">
+                    <label for="r-nombre">Nombres</label>  
+                  </div> 
 
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-celularp" >
-                <label for="r-celularp">Numero Celular</label>
-                </form>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-edad" v-model="registerInfo.age">
+                    <label for="r-edad">Edad</label>
+                  </div>
+
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-celularp" v-model="registerInfo.principalCellphone">
+                    <label for="r-celularp">Numero Celular</label>
+                  </div>
                 </b-col>
 
                 <b-col>
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-apellido" >
-                <label for="r-apellido">Apellido</label>
-                </form>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="r-password" v-model="registerInfo.password">
+                    <label for="r-password">Contraseña</label>  
+                  </div> 
 
-                <form class="form-floating"> 
-                <input type="text" class="form-control" id="r-id" >
-                <label for="r-id">DNI</label>
-                </form>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-apellido" v-model="registerInfo.lastName">
+                    <label for="r-apellido">Apellidos</label>
+                  </div>
 
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-ccelularax" >
-                <label for="r-ccelularax">Numero Celular Auxiliar</label>
-                </form>
+                  <div class="form-floating"> 
+                    <input type="text" class="form-control" id="r-id" v-model="registerInfo.dni">
+                    <label for="r-id">DNI</label>
+                  </div>
+
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
+                    <label for="r-ccelularax">Numero Celular Auxiliar</label>
+                  </div>
                 </b-col>
             </b-row>
             </b-container>
-            <span>Datos Recidenciales</span>
-            
+            <b-row class="justify-content-center">
+              <div class="mb-3">Datos Residenciales</div>
+            </b-row>
             <b-container class="bv-example-row">
             <b-row>
-                <b-col>1 of 3
-                 <b-form-select v-model="selectedDepa" :options="optionsDepa" class="form-select"></b-form-select>
-                 <div class="mt-3">Selected: <strong>{{ selectedDepa }}</strong></div>
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-calle" >
-                <label for="r-calle">Calle Principal o de Referencia</label>
-                </form>
-                 
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-sub" >
-                <label for="r-sub">Sub</label>
-                </form>
-
-                
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-contra" >
-                <label for="r-contra">Contraseña</label>
-                </form>
-
-
+                <b-col>
+                  <b-form-select v-model="registerInfo.address.department" :options="optionsDepa" class="form-select mb-4"></b-form-select>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-colonia" v-model="registerInfo.address.suburb" >
+                    <label for="r-colonia">Colonia</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-residencia" v-model="registerInfo.address.residence">
+                    <label for="r-residencia">Residencia</label>
+                  </div>
                 </b-col>
-                <b-col>2 of 3
-                <b-form-select v-model="selectedCity" :options="optionsCity" class="form-select"></b-form-select>
-                 <div class="mt-3">Selected: <strong>{{ selectedCity }}</strong></div>
+                <b-col>
+                  <b-form-select v-model="registerInfo.address.city" :options="optionsCity" class="form-select mb-4"></b-form-select>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-calle" v-model="registerInfo.address.street">
+                    <label for="r-calle">Calle de referencia</label>
+                  </div>
 
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-colonia" >
-                <label for="r-colonia">Colonia</label>
-                </form>
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-refenncia" >
-                <label for="r-refenncia">Referencias</label>
-                </form>
-
-                <form class="form-floating">
-                <input type="text" class="form-control" id="r-ccontra" >
-                <label for="r-ccontra">Confirmar Contraseña</label>
-                </form>
-                
-
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="r-referencia" v-model="registerInfo.address.reference">
+                    <label for="r-refenncia">Otras referencias</label>
+                  </div>
+                  
                 </b-col>
             </b-row>
             </b-container>
-            <button type="button" class="btn colorbtn btn-lg">Registrarme</button>
-
-           
+            <button type="button" class="btn colorbtn btn-lg" @click="register()">Registrarme</button>
+          </form>
         </div>
     </div>
 </template>
+
+
+<script>
+  import {CREATE_USER} from '@/graphql/queries/userQueries.js'
+  export default {
+    data() {
+      return {
+        registerInfo:{
+          firstName:'',
+          lastName:'',
+          age:'',
+          dni:'',
+          principalCellphone:'',
+          auxiliarCellphone:'',
+          address:{
+            department:null,
+            city:null,
+            suburb:'',
+            residence:'',
+            reference:''
+          }
+        },
+        optionsDepa: [
+          { value: null, text: 'Departamento' },
+          { value: 'Atlántida' ,text: 'Atlántida' },
+          { value: 'Colón' ,text: 'Colón' },
+          { value: 'Comayagua' ,text: 'Comayagua' },
+          { value: 'Copán' ,text: 'Copán' },
+          { value: 'Cortés' ,text: 'Cortés' },
+          { value: 'Choluteca' ,text: 'Choluteca' },
+          { value: 'El Paraíso' ,text: 'El Paraíso' },
+          { value: 'Francisco Morazán' ,text: 'Francisco Morazán' },
+          { value: 'Gracias a Dios' ,text: 'Gracias a Dios' },
+          { value:  'Intibucá' , text: 'Intibucá' },
+          { value:  'Islas de la Bahía' , text: 'Islas de la Bahía' },
+          { value:  'La Paz' , text: 'La Paz' },
+          { value:  'Lempira' , text: 'Lempira' },
+          { value:  'Ocotepeque' , text: 'Ocotepeque' },
+          { value:  'Olancho' , text: 'Olancho' },
+          { value:  'Santa Bárbara' , text: 'Santa Bárbara' },
+          { value:  'Valle' , text: 'Valle' },
+          { value:  'Yoro', text: 'Yoro', disabled: true }
+        ],
+        optionsCity: [
+            {value: null, text: 'Ciudad' },
+            {value:'Tegucigalpa', text:'Tegucigalpa'},
+            {value:'Comayaguela', text:'Comayaguela'},
+            {value:'San Pedro Sula', text:'San Pedro Sula'},
+            {value:'Choloma', text:'Choloma'},
+            {value:'Valle De Angeles', text:'Valle De Angeles'},
+            {value:'El Progreso', text:'El Progreso'},
+            {value:'Villanueva', text:'Villanueva'},
+            {value:'Comayagua', text:'Comayagua'},
+            {value:'Choluteca', text:'Choluteca'},
+            {value:'Puerto Cortés', text:'Puerto Cortés'},
+            {value:'Danlí', text:'Danlí'},
+            {value:'Siguatepeque', text:'Siguatepeque'},
+            {value:'Juticalpa', text:'Juticalpa', disabled: true}
+        ]
+      }
+    },
+    methods:{
+      async register(){
+        await this.$apollo.mutate({
+            mutation: CREATE_USER,
+            variables:{userData:this.registerInfo}
+          })
+        this.$swal({
+              icon:'success',
+              title:'Registro exitoso',
+              text:'Bienvenido a Peluditos',
+            }).then(()=>{
+              this.$router.push('/')
+            })
+      }
+    }
+  }
+</script>
 
 <style scoped>
 .titulo{
@@ -147,52 +214,3 @@ select{
     background-repeat: no-repeat;
 }
 </style>
-
-
-<script>
-  export default {
-    data() {
-      return {
-        selectedDepa: null,
-        optionsDepa: [
-          { value: null, text: 'Departamento' },
-          { value: 1, text: 'Atlántida' },
-          { value: 2, text: 'Colón' },
-          { value: 3, text: 'Comayagua' },
-          { value: 4, text: 'Copán' },
-          { value: 5, text: 'Cortés' },
-          { value: 6, text: 'Choluteca' },
-          { value: 7, text: 'El Paraíso' },
-          { value: 8, text: 'Francisco Morazán' },
-          { value: 9, text: 'Gracias a Dios' },
-          { value: 10, text: 'Intibucá' },
-          { value: 11, text: 'Islas de la Bahía' },
-          { value: 12, text: 'La Paz' },
-          { value: 13, text: 'Lempira' },
-          { value: 14, text: 'Ocotepeque' },
-          { value: 15, text: 'Olancho' },
-          { value: 16, text: 'Santa Bárbara' },
-          { value: 17, text: 'Valle' },
-          { value: 18, text: 'Yoro', disabled: true }
-        ],
-        selectedCity:null,
-        optionsCity: [
-            {value: null, text: 'Ciudad' },
-            {value:1, nombre:'Tegucigalpa'},
-            {value:2, nombre:'Comayaguela'},
-            {value:3, nombre:'San Pedro Sula'},
-            {value:4, nombre:'Choloma'},
-            {value:5, nombre:'La Ceiba'},
-            {value:6, nombre:'El Progreso'},
-            {value:7, nombre:'Villanueva'},
-            {value:8, nombre:'Comayagua'},
-            {value:9, nombre:'Choluteca'},
-            {value:10, nombre:'Puerto Cortés'},
-            {value:11, nombre:'Danlí'},
-            {value:12, nombre:'Siguatepeque'},
-            {value:13, nombre:'Juticalpa', disabled: true}
-        ]
-      }
-    }
-  }
-</script>
