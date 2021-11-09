@@ -6,12 +6,17 @@
       <br />
       <div class="form-floating mb-3">
         <input
+          type="email"
           class="form-control"
           id="email"
-          placeholder="name@example.com"
           v-model="form.email"
+          :state="emailState()"
+          placeholder="example@example.com"
         />
         <label for="floatingInput">Email</label>
+        <b-form-invalid-feedback id="input-live-feedback">
+          Ingrese una direccion de correo valida
+        </b-form-invalid-feedback>
       </div>
       <div class="form-floating">
         <input
@@ -41,12 +46,19 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
   export default {
     data() {
       return {
+        emailRegex : /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
         form: {
           email: '',
           password: ''
         },
         show: true
       }
+    },
+    computed:{
+        emailState(){
+          return this.emailRegex.test(this.form.email)?true:false
+        }
+
     },
     methods:{
       async login_user(){
