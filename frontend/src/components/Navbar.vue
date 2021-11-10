@@ -14,7 +14,7 @@
                         <b-collapse id="nav-collapse" is-nav align="inicio">
                         <b-navbar-nav>
                             <b-nav-item :to="{name: 'Mascota'}">Mascotas</b-nav-item>
-                            <b-nav-item href="#">Disabled</b-nav-item>
+                            <b-nav-item :to="{name: 'homeusuario'}">Home Usuario</b-nav-item>
                         </b-navbar-nav>
 
                         <!-- Right aligned nav items -->

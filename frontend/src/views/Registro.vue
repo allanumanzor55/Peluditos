@@ -8,9 +8,6 @@
 
             <FormRegistro/>
         </div>
-        
-        
-        
     </div>
 </template>
 

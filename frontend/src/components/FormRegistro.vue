@@ -193,14 +193,14 @@
 }
 
 .form-floating>input{
-  width: 400px!important;
+  width: 100%!important;
   margin-bottom: 5%!important;
    box-sizing: border-box!important; 
 
 }
 
 select{
-    width: 400px!important;
+    width: 100%!important;
 }
 
 .colorbtn{

@@ -4,14 +4,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
-    name:'Home',
-    component: ()=> import('../views/Home-A.vue')
-  },
-  {
     path: '/',
-    name: 'Index',
-    component: () => import('../components/Navbar.vue')
+    name:'Home',
+    component: ()=> import('../views/Home.vue')
   },
   {
     path: '/about',
@@ -33,6 +28,11 @@ const routes = [
     name: 'Mascota',
     component: () => import('../views/Mascota.vue')
   },
+  {
+    path: '/HomeUsuario',
+    name: 'homeusuario',
+    component: () => import('../views/HomeUsuario.vue')
+  }
   
 ]
 
