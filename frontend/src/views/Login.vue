@@ -15,34 +15,6 @@ import FormLogin from '@/components/FormLogin.vue'
 export default {
 	name: "Login",
 	components: {FormLogin},
-	// data () {
-    //     return {
-	// 		id:0,
-    //         email:'',
-	// 		login: false,
-	// 		password:''
-    //     }
-    // },
-	// // methods:{
-	// // 	async login_user(){
-	// // 		const {data} = await this.$apollo.mutate({
-	// // 			mutation: LOGIN_USER,
-	// // 			variables:{
-	// // 				email:this.email,
-	// // 				password:this.password
-	// // 			}
-	// // 		})
-	// // 		this.login = data.login.verified
-	// // 		if(this.login){
-	// // 			this.$router.push('/')
-	// // 		}
-	// // 	}
-	// // }
-	// // async mounted () {
-    // //     this.loading = true
-    // //     this.users = await this.$apollo.query({ query: GET_ALL_USERS_QUERY })
-    // //     this.loading = false
-    // // }
 };
 </script>
 
