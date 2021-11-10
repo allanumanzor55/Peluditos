@@ -89,7 +89,7 @@ export default {
   height: 100px;
   width: 100px;
   margin-left: 100%;
-  margin-top: 20%;
+  margin-top: 5%;
 }
 .im{
     height: 100%;
