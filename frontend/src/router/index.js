@@ -29,9 +29,14 @@ const routes = [
     component: () => import('../views/Mascota.vue')
   },
   {
-    path: '/HomeUsuario',
-    name: 'homeusuario',
+    path: '/Home',
+    name: 'HomeUsuario',
     component: () => import('../views/HomeUsuario.vue')
+  },
+  {
+    path: '/Perfil',
+    name: 'PerfilUsuario',
+    component: () => import('../views/Perfil.vue')
   }
   
 ]

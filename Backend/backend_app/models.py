@@ -44,6 +44,7 @@ class User(models.Model):
     age = models.CharField(max_length=3)
     principalCellphone = models.CharField(max_length=10)
     auxiliarCellphone = models.CharField(max_length=10)
+    verified = models.BooleanField(null=False,default=False)
 
 class Vaccine(models.Model):
     name = models.CharField(max_length=50)

@@ -1,19 +1,19 @@
 <template>
     <div>
-        <Navbar/>
+        <NavbarHome/>
         <VerMascotas/>
     </div>
 </template>
 
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarHome from '@/components/NavbarHome.vue'
 import VerMascotas from '@/components/VerMascotas.vue'
 
 export default {
   name: 'VerMascota',
   components: {
-    Navbar,
+    NavbarHome,
     VerMascotas
   }
 }

@@ -1,72 +1,69 @@
 <template>
-    <div>
+    <div style="background:#D8DBF0;">
         <div>
-          <NavbarHome/>
+          <NavbarHome />
         </div>
-        
         <div class="im"> 
-      
-      <b-container>
-        
-        <b-row>
-          <b-col class="wrapper">
-            <div>
-            <b-card
-              title="Card Title"
-              img-src="https://picsum.photos/600/300/?image=25"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-              </b-card-text>
+      <b-container align-v="center" class="" fluid>
+        <b-card-group deck>
+          <b-col cols="2" class="mb-0">
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Mascotas adoptadas</h4></b-card-text>
+                  <h5>0</h5>
               </b-card>
-            </div>
-            <div>
-            <b-card
-              title="Card Title"
-              img-src="https://picsum.photos/600/300/?image=25"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-              </b-card-text>
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Mascotas en adopcion</h4>
+                  <h5>0</h5>
+
+                </b-card-text>
               </b-card>
-            </div>
-            <div>
-            <b-card
-              title="Card Title"
-              img-src="https://picsum.photos/600/300/?image=25"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-              </b-card-text>
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Solicitudes enviadas</h4></b-card-text>
+                  <h5>0</h5>
               </b-card>
-            </div>
-        </b-col>
-        </b-row>
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Solicitudes pendientes</h4></b-card-text>
+                  <h5>0</h5>
+              </b-card>
+          </b-col>
+          <b-col cols="8">
+            <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:620px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                </b-card-text>
+              </b-card>
+          </b-col>
+        </b-card-group>
       </b-container>
       
       <b-container class="bv-example-row">
-  <b-row>
-    <b-col><img src="../assets/fondohomeuser.jpg" alt="" class="img"></b-col>
-    
-  </b-row>
+  <!--b-row>
+    <b-col class="float-top"><img src="../assets/fondohomeuser.jpg" alt="" class="img"></b-col>
+  </b-row-->
 </b-container>
-
-
         </div>
     </div>
 </template>
@@ -75,16 +72,47 @@
 
 <script>
 import NavbarHome from '@/components/NavbarHome.vue'
-
+import {GET_USER_INFO} from '@/graphql/queries/userQueries.js'
 export default {
-  name: 'navbahome',
+  name: 'home',
   components: {
     NavbarHome
+  },
+  data(){
+    return{
+      emailVerified:false
+    }
+  },
+
+  methods:{
+    async confirmVerifiedEmail(){
+      const {data} = await this.$apollo.query({
+            query: GET_USER_INFO,
+            variables:{id:2}
+          })
+          this.emailVerified = data.user.verified
+
+          console.log(this.emailVerified)
+    },
+    makeToast(append = false) {
+        this.toastCount++
+        this.$bvToast.toast(`Recuerda confirmar tu correo electronico para eliminar este mensaje flotante`, {
+          title: 'Confirmacion de email',
+          autoHideDelay: 5000,
+          appendToast: append
+        })
+      }
+  },
+  async mounted(){
+    await this.confirmVerifiedEmail()
+    if(!this.emailVerified){
+      this.makeToast()
+    }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .img{
   height: 100px;
   width: 100px;
@@ -102,4 +130,13 @@ export default {
   grid-gap: 10px;
   margin-top: 20%;
 }
+::-webkit-scrollbar {
+    display: none;
+}
+
+.card-dashboard:hover{
+  border-color:orange !important;
+  color:orange !important;
+}
+
 </style>

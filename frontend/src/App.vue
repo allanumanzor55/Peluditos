@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/"></router-link>
-    </div>
+    <router-link to="/"></router-link>
     <router-view/>
   </div>
 </template>
 
-<style>
-#app {
-  text-align: center;
-  color: #2c3e50;
+<script>
 
-}
+export default {
+  name: 'App',
 
-</style>
+  data: () => ({
+    
+  }),
+};
+</script>

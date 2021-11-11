@@ -8,6 +8,18 @@ export const GET_ALL_USERS_QUERY = gql`
         }
     }`
 
+export const GET_USER_INFO = gql`
+    query($id: Int!){
+        user(id:$id){
+            firstName
+            lastName
+            email
+            password
+            verified
+        }
+    }
+`
+
 export const LOGIN_USER = gql`
     mutation ($email:String!,$password:String!){
         login(email: $email, password: $password){

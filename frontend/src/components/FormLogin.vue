@@ -1,66 +1,83 @@
 <template>
-  <div class="cuad to">
-    <h1>¡Bienvenido!</h1>
-    <span>Ingresa tus credenciales</span>
-    <form>
-      <br />
-      <div class="form-floating mb-3">
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          v-model="form.email"
-          :state="emailState()"
-          placeholder="example@example.com"
-        />
-        <label for="floatingInput">Email</label>
-        <b-form-invalid-feedback id="input-live-feedback">
-          Ingrese una direccion de correo valida
-        </b-form-invalid-feedback>
+  <b-container class="cuad to">
+    <b-row align-v="center" align-h="center">
+      <b-col class="text-center">
+        <div class="mb-5">
+          <h1>¡Bienvenido!</h1>
+          <span>Ingresa tus credenciales</span>
+        </div>
+      <v-form ref="formLogin" v-model="valid" lazy-validation>
+        <div class="mb-3">
+            <v-text-field
+            v-model="form.email"
+            :rules="[rules[0].required,rules[0].email.valid]"
+            label="E-mail"
+            required
+            >
+            </v-text-field>
+        </div>
+        <div class="mb-3">
+            <v-text-field
+            
+              color="primary"
+              v-model="form.password"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[rules[0].required]"
+              :type="show1 ? 'text' : 'password'"
+              label="Password"
+              counter
+              @click:append="show1 = !show1"
+            ></v-text-field>
+        </div>
+        <div class="text-right mb-3">
+          <b-link class="txtr">¿Olvidaste tu contraseña?</b-link>
+        </div>
+      </v-form>
+      <b-button class="colorbtn"
+        :disabled="!valid"
+        @click="validate()"
+      >
+        Ingresar
+      </b-button>
+      <div class="mt-4">
+        <span class="txt13">¿Aun no tienes una cuenta?</span> <br />
+        <a href="/#/Registro" type="button" class="btn colorbtn btn-sm">Registrate</a>
       </div>
-      <div class="form-floating">
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Password"
-          v-model="form.password"
-        />
-        <label for="floatingPassword">Password</label>
-      </div>
-      <b-link href="#foo" class="txtr">¿Olvidaste tu contraseña?</b-link
-      ><br /><br />
-      <button type="button" class="btn colorbtn btn-lg"  @click="login_user()" >Ingresar</button>
-    </form>
-    <div>
-      <br /><br />
-      <span class="txt13">¿Aun no tienes una cuenta?</span> <br />
-      <button type="button" class="btn colorbtn btn-sm">Registrate</button>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+    
+  </b-container>
 </template>
-
 <script>
 //import {mapState} from 'vuex'
 import {LOGIN_USER} from '@/graphql/queries/userQueries'
   export default {
     data() {
       return {
-        emailRegex : /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
+        valid: true,
+        show1: false,
+        password: '',
+        rules: 
+            [
+              {
+                required: value => !!value || 'Campo requerido',
+                email:{
+                  valid: v => /.+@.+\..+/.test(v) || 'Ingrese un e-mail valido',
+                }
+              }
+            ],
         form: {
           email: '',
           password: ''
         },
-        show: true
       }
     },
-    computed:{
-        emailState(){
-          return this.emailRegex.test(this.form.email)?true:false
-        }
-
-    },
     methods:{
+      validate () {
+        if(this.$refs.formLogin.validate()){
+          this.login_user()
+        }
+      },
       async login_user(){
         const {data} = await this.$apollo.mutate({
             mutation: LOGIN_USER,
@@ -72,7 +89,7 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
               icon:'success',
               title:'bienvenido'
             }).then(()=>{
-              this.$router.push('/')
+              this.$router.push('/Home')
             })
           }else{
             this.$swal({
@@ -102,9 +119,10 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
 </script>
 
 <style scoped>
+
 .cuad {
   width: 30%;
-  height: 67%;
+  min-height: 67%;
   background-color: #ffc581;
   padding: 20px;
   border-radius: 60px;
@@ -116,7 +134,6 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
 }
 
 .txtr {
-  margin-left: 55%;
   color: rgb(103, 103, 104);
   font-size: 13px;
 }
@@ -137,6 +154,7 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
 
 .colorbtn {
   background: #ff9922 !important;
+  border-color: #ff9922 !important;
 }
 .colorbtn:hover {
   background-color: #f8a94e !important;

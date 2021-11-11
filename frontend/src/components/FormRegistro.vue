@@ -10,45 +10,37 @@
             <b-row>
                 <b-col>
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="r-email" v-model="registerInfo.email">
-                    <label for="r-email">Email</label>  
+                    <input placeholder="Email" type="email" class="form-control" id="r-email" v-model="registerInfo.email">
                   </div> 
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-nombre" v-model="registerInfo.firstName">
-                    <label for="r-nombre">Nombres</label>  
+                    <input placeholder="Nombres" type="text" class="form-control" id="r-nombre" v-model="registerInfo.firstName">
                   </div> 
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-edad" v-model="registerInfo.age">
-                    <label for="r-edad">Edad</label>
+                    <input placeholder="Edad" type="text" class="form-control" id="r-edad" v-model="registerInfo.age">
                   </div>
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-celularp" v-model="registerInfo.principalCellphone">
-                    <label for="r-celularp">Numero Celular</label>
+                    <input placeholder="Celular principal" type="text" class="form-control" id="r-celularp" v-model="registerInfo.principalCellphone">
                   </div>
                 </b-col>
 
                 <b-col>
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="r-password" v-model="registerInfo.password">
-                    <label for="r-password">Contraseña</label>  
+                    <input placeholder="Contraseña" type="password" class="form-control" id="r-password" v-model="registerInfo.password">
                   </div> 
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-apellido" v-model="registerInfo.lastName">
-                    <label for="r-apellido">Apellidos</label>
+                    <input placeholder="Primer apellido" type="text" class="form-control" id="r-apellido" v-model="registerInfo.lastName">
                   </div>
 
                   <div class="form-floating"> 
-                    <input type="text" class="form-control" id="r-id" v-model="registerInfo.dni">
-                    <label for="r-id">DNI</label>
+                    <input placeholder="DNI" type="text" class="form-control" id="r-id" v-model="registerInfo.dni">
                   </div>
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
-                    <label for="r-ccelularax">Numero Celular Auxiliar</label>
+                    <input placeholder="Celular auxiliar" type="text" class="form-control" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
                   </div>
                 </b-col>
             </b-row>
@@ -61,24 +53,20 @@
                 <b-col>
                   <b-form-select v-model="registerInfo.address.department" :options="optionsDepa" class="form-select mb-4"></b-form-select>
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-colonia" v-model="registerInfo.address.suburb" >
-                    <label for="r-colonia">Colonia</label>
+                    <input placeholder="Colonia" type="text" class="form-control" id="r-colonia" v-model="registerInfo.address.suburb" >
                   </div>
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-residencia" v-model="registerInfo.address.residence">
-                    <label for="r-residencia">Residencia</label>
+                    <input placeholder="Residencia" type="text" class="form-control" id="r-residencia" v-model="registerInfo.address.residence">
                   </div>
                 </b-col>
                 <b-col>
                   <b-form-select v-model="registerInfo.address.city" :options="optionsCity" class="form-select mb-4"></b-form-select>
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-calle" v-model="registerInfo.address.street">
-                    <label for="r-calle">Calle de referencia</label>
+                    <input placeholder="Calle" type="text" class="form-control" id="r-calle" v-model="registerInfo.address.street">
                   </div>
 
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="r-referencia" v-model="registerInfo.address.reference">
-                    <label for="r-refenncia">Otras referencias</label>
+                    <input placeholder="Referencia" type="text" class="form-control" id="r-referencia" v-model="registerInfo.address.reference">
                   </div>
                   
                 </b-col>
@@ -156,12 +144,13 @@
             mutation: CREATE_USER,
             variables:{userData:this.registerInfo}
           })
+        
         this.$swal({
               icon:'success',
               title:'Registro exitoso',
               text:'Bienvenido a Peluditos',
             }).then(()=>{
-              this.$router.push('/')
+              this.$router.push('/Home')
             })
       }
     }
@@ -212,5 +201,17 @@ select{
 .im{
     background-image: url(../assets/huella.png)!important;
     background-repeat: no-repeat;
+}
+input{
+  border-style: none;
+  border-bottom:#87878a 0.2px solid;
+  border-radius: 0px!important;
+}
+input::placeholder {
+  font-size: 12px!important;
+}
+
+::-webkit-scrollbar{
+  display: none !important;
 }
 </style>

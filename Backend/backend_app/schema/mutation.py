@@ -1,5 +1,5 @@
 import graphene
-
+from http import cookies
 from backend_app.models import *
 from .types import *
 
@@ -195,6 +195,7 @@ class UserInput(graphene.InputObjectType):
     principalCellphone = graphene.String()
     auxiliarCellphone = graphene.String()
     address = AddressInput(required=True)
+    verified = graphene.Boolean()
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserNode)
@@ -223,7 +224,8 @@ class CreateUser(graphene.Mutation):
             dni=user_data.dni,
             age=user_data.age,
             principalCellphone=user_data.principalCellphone,
-            auxiliarCellphone=user_data.auxiliarCellphone
+            auxiliarCellphone=user_data.auxiliarCellphone,
+            verified = user_data.verified
         )
         return CreateUser(user=user_instance)
 
@@ -246,6 +248,7 @@ class UpdateUser(graphene.Mutation):
                 user_instance.principalCellphone=user_data.principalCellphone
             if user_data.auxiliarCellphone is not None: 
                 user_instance.auxiliarCellphone=user_data.auxiliarCellphone
+            if user_data.verified is not None: user_instance.verified=user_data.verified
             user_instance.save()
             return UpdateUser(user=user_instance)
         return UpdateUser(user=None)
@@ -384,7 +387,6 @@ class DeletePet(graphene.Mutation):
 
 class Login(graphene.Mutation):
     verified = graphene.Boolean()
-
     class Input:
         email = graphene.String()
         password = graphene.String()

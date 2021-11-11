@@ -9,7 +9,6 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import Carusel from '@/components/Carusel.vue'
-
 export default {
   name: 'landing',
   components: {
@@ -18,3 +17,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
