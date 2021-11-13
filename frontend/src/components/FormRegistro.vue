@@ -1,79 +1,78 @@
 <template>
     <div class="im">
-
         <div class="titulo">
             <h4>Registro de Usuario</h4>
         </div>
         <div class="cuerpo">
-          <form id="registerForm">
-            <b-container class="bv-example-row">
-            <b-row>
-                <b-col>
-                  <div class="form-floating">
-                    <input placeholder="Email" type="email" class="form-control" id="r-email" v-model="registerInfo.email">
-                  </div> 
-
-                  <div class="form-floating">
-                    <input placeholder="Nombres" type="text" class="form-control" id="r-nombre" v-model="registerInfo.firstName">
-                  </div> 
-
-                  <div class="form-floating">
-                    <input placeholder="Edad" type="text" class="form-control" id="r-edad" v-model="registerInfo.age">
-                  </div>
-
-                  <div class="form-floating">
-                    <input placeholder="Celular principal" type="text" class="form-control" id="r-celularp" v-model="registerInfo.principalCellphone">
-                  </div>
-                </b-col>
-
-                <b-col>
-                  <div class="form-floating">
-                    <input placeholder="Contraseña" type="password" class="form-control" id="r-password" v-model="registerInfo.password">
-                  </div> 
-
-                  <div class="form-floating">
-                    <input placeholder="Primer apellido" type="text" class="form-control" id="r-apellido" v-model="registerInfo.lastName">
-                  </div>
-
-                  <div class="form-floating"> 
-                    <input placeholder="DNI" type="text" class="form-control" id="r-id" v-model="registerInfo.dni">
-                  </div>
-
-                  <div class="form-floating">
-                    <input placeholder="Celular auxiliar" type="text" class="form-control" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
-                  </div>
-                </b-col>
-            </b-row>
-            </b-container>
-            <b-row class="justify-content-center">
-              <div class="mb-3">Datos Residenciales</div>
-            </b-row>
-            <b-container class="bv-example-row">
-            <b-row>
-                <b-col>
-                  <b-form-select v-model="registerInfo.address.department" :options="optionsDepa" class="form-select mb-4"></b-form-select>
-                  <div class="form-floating">
-                    <input placeholder="Colonia" type="text" class="form-control" id="r-colonia" v-model="registerInfo.address.suburb" >
-                  </div>
-                  <div class="form-floating">
-                    <input placeholder="Residencia" type="text" class="form-control" id="r-residencia" v-model="registerInfo.address.residence">
-                  </div>
-                </b-col>
-                <b-col>
-                  <b-form-select v-model="registerInfo.address.city" :options="optionsCity" class="form-select mb-4"></b-form-select>
-                  <div class="form-floating">
-                    <input placeholder="Calle" type="text" class="form-control" id="r-calle" v-model="registerInfo.address.street">
-                  </div>
-
-                  <div class="form-floating">
-                    <input placeholder="Referencia" type="text" class="form-control" id="r-referencia" v-model="registerInfo.address.reference">
-                  </div>
-                  
-                </b-col>
-            </b-row>
-            </b-container>
-            <button type="button" class="btn colorbtn btn-lg" @click="register()">Registrarme</button>
-          </form>
+          <div class="mb-3">Datos personales</div>
+          <v-divider inset></v-divider>
+          <v-form ref="registerForm">
+            <v-container class="bv-example-row">
+              <v-row>
+                <v-col>
+                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-email" v-model="registerInfo.email"
+                    >                      
+                    </v-text-field>
+                    <v-text-field label="Nombres" color="orange darken-3"  type="text" id="r-nombre" v-model="registerInfo.firstName">
+                    </v-text-field>
+                    <v-text-field label="Edad" color="orange darken-3"  type="text" id="r-edad" v-model="registerInfo.age">
+                    </v-text-field>
+                    <v-text-field label=" Celular principal" color="orange darken-3" type="text" id="r-celularp" v-model="registerInfo.principalCellphone">
+                    </v-text-field>
+                </v-col>
+                <v-col>
+                  <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-password" v-model="registerInfo.password">
+                  </v-text-field>
+                  <v-text-field label="Primer apellido" color="orange darken-3"  type="text" id="r-apellido" v-model="registerInfo.lastName">
+                  </v-text-field>
+                  <v-text-field label="DNI" color="orange darken-3"  type="text" id="r-id" v-model="registerInfo.dni">
+                  </v-text-field>
+                  <v-text-field label="Celular auxiliar" color="orange darken-3" type="text" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
+                  </v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+            <div class="mb-3">Datos residenciales</div>
+            <v-divider inset></v-divider>
+            <v-lazy
+            :options="{threshold: .5}"
+            min-height="200"
+            >
+              <v-container class="bv-example-row">
+                <v-row>
+                  <v-col>
+                    <v-combobox
+                      clearable
+                      v-model="registerInfo.address.department"
+                      :items="optionsDepa"
+                      label="Departamento"
+                      color="orange darken-3"
+                    ></v-combobox>
+                    <v-text-field label="Colonia" color="orange darken-3"  type="text" id="r-colonia" v-model="registerInfo.address.suburb" >
+                    </v-text-field>
+                    <v-text-field label="Residencia" color="orange darken-3"  type="text" id="r-residencia" v-model="registerInfo.address.residence">
+                    </v-text-field>
+                  </v-col>
+                  <v-col>
+                    <v-combobox
+                      clearable
+                      label="Ciudad"
+                      v-model="registerInfo.address.city"
+                      :items="optionsCity"
+                      color="orange darken-3"
+                    ></v-combobox>
+                    <v-text-field label="Calle" color="orange darken-3"  type="text" id="r-calle" v-model="registerInfo.address.street">
+                    </v-text-field>
+                    <v-text-field label="Referencia" color="orange darken-3"  type="text" id="r-referencia" v-model="registerInfo.address.reference">
+                    </v-text-field>
+                                      
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-lazy>
+            
+              <v-btn class="orange darken-2 white--text" @click="register()">Registrarme</v-btn>
+          </v-form>
         </div>
     </div>
 </template>
@@ -201,11 +200,6 @@ select{
 .im{
     background-image: url(../assets/huella.png)!important;
     background-repeat: no-repeat;
-}
-input{
-  border-style: none;
-  border-bottom:#87878a 0.2px solid;
-  border-radius: 0px!important;
 }
 input::placeholder {
   font-size: 12px!important;

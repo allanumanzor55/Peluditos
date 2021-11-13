@@ -1,5 +1,5 @@
 <template>
-    <div class="fondo">
+    <div class="fondo-registro">
         <div class="ima">
 
         </div>
@@ -25,14 +25,14 @@ export default {
 
 
 
-<style scoped>
-.fondo{
-   position: absolute;
-width: 100%;
-height: 120%;
-left: 0px;
-top: 0px;
-background: #FF9922;
+<style>
+.fondo-registro{
+  position: absolute;
+  width: 100%;
+  height: 137%;
+  left: 0px;
+  top: 0px;
+  background: #FF9922;
 
 
 }
@@ -46,5 +46,7 @@ display: inline-block;
 background: #FFAD4D;
 border-radius: 0px 0px 512px 0px;
 }
-
+::-webkit-scrollbar{
+  display: none !important;
+}
 </style>

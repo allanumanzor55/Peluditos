@@ -1,9 +1,13 @@
 <template>
   <div>
-    <b-navbar style="background: #ff9922">
-      <b-navbar-nav>
-        <b-nav-item v-b-toggle.sidebar-1>
-          <b-icon icon="justify"> </b-icon>
+    <b-navbar style="background: #ff9922" class="py-0">
+      <b-navbar-nav class="pl-2 py-0">
+        <b-nav-item v-b-toggle.sidebar-1 class="my-0 py-0">
+          <v-avatar
+            color="white"
+            size="40"
+            class="orange--text"
+          >AA</v-avatar>
         </b-nav-item>
         <b-sidebar id="sidebar-1" backdrop shadow class="mx-0 px-0">
           <template #footer="{ hide }">

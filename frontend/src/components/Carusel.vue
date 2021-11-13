@@ -1,15 +1,15 @@
 <template>
   <div>
     <main role="main">
-      <v-carousel>
-        <v-carousel-item
-          v-for="(item,i) in items"
-          :key="i"
-          :src="item.src"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-        ></v-carousel-item>
-      </v-carousel>
+        <v-carousel
+          cycle
+          height="580"
+          hide-delimiter-background
+          show-arrows-on-hover
+        >
+          <v-carousel-item v-for="(slide, i) in slides" :key="i" :src="items[i]">
+          </v-carousel-item>
+        </v-carousel>
       <!-- <b-carousel
         id="carousel-1"
         :interval="4000"
@@ -55,7 +55,9 @@
               img-top
             >
               <b-card-text>
-                Querido michi, que cruzas el puente arcoíris, sigue tu camino. Sé que ahora estás bien y eso de alguna manera, un día, me dará consuelo.
+                Querido michi, que cruzas el puente arcoíris, sigue tu camino.
+                Sé que ahora estás bien y eso de alguna manera, un día, me dará
+                consuelo.
               </b-card-text>
             </b-card>
 
@@ -78,21 +80,26 @@
               img-top
             >
               <b-card-text>
-                Para ti tal ves solo sea un perro, para mi, lo es todo: mi amigo,
-                mi familia, mi hermano
+                Para ti tal ves solo sea un perro, para mi, lo es todo: mi
+                amigo, mi familia, mi hermano
               </b-card-text>
               <b-card-text class="small text-muted">Ritchie Mountz</b-card-text>
             </b-card>
-            
-            <b-card border-variant="warning" header-bg-variant="transparent" align="center">
+
+            <b-card
+              border-variant="warning"
+              header-bg-variant="transparent"
+              align="center"
+            >
               <blockquote class="card-blockquote">
-                <span style="color:orange;">
+                <span style="color: orange">
                   Hasta que no hayas amado a un animal
                 </span>
                 Una parte de ti seguira dormida
                 <footer>
                   <small>
-                    <cite title="Source Title">Anatole France</cite></small>
+                    <cite title="Source Title">Anatole France</cite></small
+                  >
                 </footer>
               </blockquote>
             </b-card>
@@ -102,8 +109,7 @@
               <b-card-text>
                 Ellos no podran hablar, pero si acompañar tu silencio
               </b-card-text>
-              <b-card-text class="small text-muted">Peluditoshn'</b-card-text
-              >
+              <b-card-text class="small text-muted">Peluditoshn'</b-card-text>
             </b-card>
 
             <b-card
@@ -119,17 +125,19 @@
             >
               <b-card-text>
                 <span class="text-muted">
-                  Los perros, nos miran como sus dioses, los caballos como sus iguales, <br>
+                  Los perros, nos miran como sus dioses, los caballos como sus
+                  iguales, <br />
                 </span>
                 pero unicamente los gatos nos miran como subditos
               </b-card-text>
               <template #footer>
-                <small class="text-muted">A todos los que amamos los michis</small>
+                <small class="text-muted"
+                  >A todos los que amamos los michis</small
+                >
               </template>
             </b-card>
           </b-card-group>
         </div>
-
 
         <hr class="featurette-divider" />
 
@@ -208,7 +216,6 @@
         </div>
 
         <hr class="featurette-divider" />
-
       </div>
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
@@ -222,19 +229,26 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       items: [
-          {src: 'https://placekitten.com/1024/450',},
-          {src: 'https://placedog.net/1024/480/s',},
-          {src: 'https://placekitten.com/1024/480',},
-          {src: 'https://placedog.net/1024/489/s',},
+        { src: "https://placekitten.com/1024/530" },
+        { src: "https://placedog.net/1024/480/s" },
+        { src: "https://placekitten.com/1024/600" },
+        { src: "https://placedog.net/1024/489/s" },
+      ],
+      slides: [
+          'First',
+          'Second',
+          'Third',
+          'Fourth',
+          'Fifth',
         ],
-    }
-  }
-}
+    };
+  },
+};
 </script>
-<style>
+<style scoped>
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -332,6 +346,6 @@ body {
   }
 }
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 </style>
