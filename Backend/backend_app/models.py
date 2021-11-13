@@ -52,6 +52,8 @@ class Vaccine(models.Model):
 class PetCategory(models.Model):
     name = models.CharField(max_length=50)
     
+class Breed(models.Model):
+    name = models.CharField(max_length=50)
 
 class Pet(models.Model):
     name = models.CharField(max_length=70)
