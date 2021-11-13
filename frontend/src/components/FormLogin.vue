@@ -1,7 +1,7 @@
 <template>
-  <b-container class="cuad to">
-    <b-row align-v="center" align-h="center">
-      <b-col class="text-center">
+  <v-container class="cuad to">
+    <v-row :align="center" :justify="center">
+      <v-col class="text-center">
         <div class="mb-5">
           <h1>¡Bienvenido!</h1>
           <span>Ingresa tus credenciales</span>
@@ -30,23 +30,23 @@
             ></v-text-field>
         </div>
         <div class="text-right mb-3">
-          <b-link class="txtr">¿Olvidaste tu contraseña?</b-link>
+          <!-- <link class="txtr">¿Olvidaste tu contraseña?</link> -->
         </div>
       </v-form>
-      <b-button class="colorbtn"
+      <v-btn 
+        color="orange darken-4https://vuetifyjs.com/en/styles/colors/#material-colors"
         :disabled="!valid"
-        @click="validate()"
+        @click="validate"
       >
         Ingresar
-      </b-button>
+      </v-btn>
       <div class="mt-4">
         <span class="txt13">¿Aun no tienes una cuenta?</span> <br />
-        <a href="/#/Registro" type="button" class="btn colorbtn btn-sm">Registrate</a>
+        <a href="/#/Registro" type="button" class="btn colorbtn btn-sm white--text">Registrate</a>
       </div>
-      </b-col>
-    </b-row>
-    
-  </b-container>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 //import {mapState} from 'vuex'
@@ -54,6 +54,7 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
   export default {
     data() {
       return {
+        center:'center',
         valid: true,
         show1: false,
         password: '',
@@ -90,8 +91,10 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
               title:'bienvenido'
             }).then(()=>{
               this.$router.push('/Home')
+
             })
           }else{
+            console.log('Error')
             this.$swal({
               icon:'error',
               title:'credenciales incorrectas'

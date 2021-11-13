@@ -1,7 +1,16 @@
 <template>
   <div>
     <main role="main">
-      <b-carousel
+      <v-carousel>
+        <v-carousel-item
+          v-for="(item,i) in items"
+          :key="i"
+          :src="item.src"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+        ></v-carousel-item>
+      </v-carousel>
+      <!-- <b-carousel
         id="carousel-1"
         :interval="4000"
         controls
@@ -11,24 +20,19 @@
         img-height="480"
         style="text-shadow: 1px 1px 2px #333"
       >
-        <!-- Text slides with image -->
         <b-carousel-slide
           caption="First slide"
           text="Nulla vitae elit libero, a pharetra augue mollis interdum."
           img-src="https://placekitten.com/1024/490"
         ></b-carousel-slide>
 
-        <!-- Slides with custom text -->
         <b-carousel-slide img-src="https://placedog.net/1024/480/s">
         </b-carousel-slide>
 
-        <!-- Slides with image only -->
         <b-carousel-slide
           img-src="https://placedog.net/1024/480?random"
         ></b-carousel-slide>
 
-        <!-- Slides with img slot -->
-        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
         <b-carousel-slide>
           <template #img>
             <img
@@ -40,7 +44,7 @@
             />
           </template>
         </b-carousel-slide>
-      </b-carousel>
+      </b-carousel> -->
       <div class="container marketing">
         <div>
           <b-card-group columns>
@@ -126,7 +130,6 @@
           </b-card-group>
         </div>
 
-        <!-- START THE FEATURETTES -->
 
         <hr class="featurette-divider" />
 
@@ -206,9 +209,7 @@
 
         <hr class="featurette-divider" />
 
-        <!-- /END THE FEATURETTES -->
       </div>
-      <!-- /.container -->
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
         <p>
@@ -219,7 +220,20 @@
     </main>
   </div>
 </template>
-
+<script>
+export default {
+  data(){
+    return{
+      items: [
+          {src: 'https://placekitten.com/1024/450',},
+          {src: 'https://placedog.net/1024/480/s',},
+          {src: 'https://placekitten.com/1024/480',},
+          {src: 'https://placedog.net/1024/489/s',},
+        ],
+    }
+  }
+}
+</script>
 <style>
 .bd-placeholder-img {
   font-size: 1.125rem;

@@ -387,6 +387,7 @@ class DeletePet(graphene.Mutation):
 
 class Login(graphene.Mutation):
     verified = graphene.Boolean()
+    userType = graphene.String()
     class Input:
         email = graphene.String()
         password = graphene.String()
@@ -394,7 +395,7 @@ class Login(graphene.Mutation):
     def mutate(root,info,email,password):
         user_instance = User.objects.filter(email=email,password=password)
         if user_instance:
-            return Login(verified=True)
+            return Login(verified=True,userType=user_instance.profileType)
         return Login(verified=False)    
 
 class Mutation(graphene.AbstractType):
