@@ -232,17 +232,16 @@ export default {
   data() {
     return {
       items: [
-        { src: "https://placekitten.com/1024/530" },
+        { src: "https://placekitten.com/g/1024/530" },
         { src: "https://placedog.net/1024/480/s" },
-        { src: "https://placekitten.com/1024/600" },
+        { src: "https://placekitten.com/g/1024/600" },
         { src: "https://placedog.net/1024/489/s" },
       ],
       slides: [
           'First',
           'Second',
           'Third',
-          'Fourth',
-          'Fifth',
+          'Fourth'
         ],
     };
   },

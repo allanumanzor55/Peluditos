@@ -45,7 +45,10 @@ class PetNode(DjangoObjectType):
         model = Pet
         interface = (relay.Node,)
 
-
+class AdoptionRequestNode(DjangoObjectType):
+    class Meta:
+        model = AdoptionRequest
+        interface = (relay.Node,)
 """
     La clase "Query" definida es la que realizara todo tipo de consultas por cada
     atributo creado se creara un "resolve" que es un metodo que definira la consulta
@@ -120,7 +123,10 @@ class Query(graphene.ObjectType):
         dni=kwargs.get('dni')
         cellphone=kwargs.get('cellphone')
         if idUser is not None:
-            return User.objects.get(pk=idUser)
+            try:
+                return User.objects.get(pk=idUser)
+            except:
+                return None
         elif firstName is not None:
             return User.objects.get(firstName=firstName)
         elif lastName is not None:
@@ -135,8 +141,12 @@ class Query(graphene.ObjectType):
     def resolve_get_users(self,info,**kwargs):
         firstName = kwargs.get('firstName')
         lastName = kwargs.get('lastName')
-        if firstName and lastName is not None:
-            return User.objects.filter(firstName__icontains=firstName)
+        if firstName is not None and lastName is not None:
+            return User.objects.filter(firstName__icontains=firstName).filter(lastName__icontains=lastName)
+        elif firstName is not None:
+            if firstName!='':
+                return User.objects.filter(firstName__icontains=firstName)
+            return User.objects.all()
         elif lastName is not None:
             return User.objects.filter(lastName__icontains=lastName)
 

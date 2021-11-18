@@ -1,6 +1,6 @@
 <template>
     <div>
-         <v-card class="color">
+      <v-card class="color">
     <v-card-title class="text-center justify-center py-6">
       <img src="../assets/banner.png" alt="" class="banner">
     </v-card-title>
@@ -13,12 +13,11 @@
     >
       
       <v-tab
-        v-for="item in items"
-        :key="item"
+        v-for="(item,i) in items"
+        :key="i"
       >
 
-        <font-awesome-icon
-        :icon="item.icono" />
+        <font-awesome-icon :icon="item.icono" class="mx-3" />
         {{ item.nombre }}
         
       </v-tab>
@@ -27,8 +26,8 @@
     
     <v-tabs-items v-model="tab">
       <v-tab-item
-        v-for="item in items"
-        :key="item"
+        v-for="(item,i) in items"
+        :key="i"
       >
         <v-card
           color="basil"

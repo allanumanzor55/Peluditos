@@ -43,7 +43,13 @@ class User(models.Model):
     age = models.CharField(max_length=3,blank=False,null=False,default="N/D")
     principalCellphone = models.CharField(max_length=10,blank=False,null=False,default="N/D")
     auxiliarCellphone = models.CharField(max_length=10,blank=False,null=False,default="N/D")
+    motto = models.CharField(max_length=300, blank=False,null=False,default="N/D")
+    biography = models.CharField(max_length=1000,blank=False,null=False,default="N/D")
     verified = models.BooleanField(null=False,default=False)
+    active = models.BooleanField(null=False,default=True)
+    secureQuestion = models.CharField(max_length=300,blank=False,null=False,default="N/D")
+    secureAnswer = models.CharField(max_length=100,blank=False,null=False,default="N/D")
+
 
 class Vaccine(models.Model):
     name = models.CharField(max_length=50,blank=False,null=False,default="N/D")
@@ -68,5 +74,10 @@ class Pet(models.Model):
     vaccines = models.ManyToManyField(Vaccine)
     
 
+class AdoptionRequest(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    pet = models.ForeignKey(Pet,on_delete=models.CASCADE)
+    date = models.DateField(auto_now=True)
+    accepted = models.BooleanField(null=False,default=False)
 
 
