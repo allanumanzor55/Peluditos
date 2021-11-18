@@ -13,8 +13,8 @@
     >
       
       <v-tab
-        v-for="item in items"
-        :key="item"
+        v-for="(item,i) in items"
+        :key="i"
       >
 
         <font-awesome-icon
@@ -27,8 +27,8 @@
     
     <v-tabs-items v-model="tab">
       <v-tab-item
-        v-for="item in items"
-        :key="item"
+        v-for="(item,i) in items"
+        :key="i"
       >
         <v-card
           color="basil"
