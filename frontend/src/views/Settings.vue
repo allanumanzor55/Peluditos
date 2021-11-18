@@ -1,6 +1,6 @@
 <template>
     <div>
-         <v-card class="color">
+      <v-card class="color">
     <v-card-title class="text-center justify-center py-6">
       <img src="../assets/banner.png" alt="" class="banner">
     </v-card-title>
@@ -17,8 +17,7 @@
         :key="i"
       >
 
-        <font-awesome-icon
-        :icon="item.icono" />
+        <font-awesome-icon :icon="item.icono" class="mx-3" />
         {{ item.nombre }}
         
       </v-tab>

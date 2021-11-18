@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/Opciones',
     name: 'Opciones',
-    component: () => import('../components/OpcionesSetting.vue')
+    component: () => import('../views/Settings.vue')
   }
   
 ]
