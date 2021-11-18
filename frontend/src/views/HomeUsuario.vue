@@ -17,7 +17,7 @@
             Mascotas Adoptadas
           </v-card-title>
           <v-card-subtitle>
-            0
+            1
           </v-card-subtitle>
         </v-card>
         </div>

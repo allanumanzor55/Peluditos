@@ -4,7 +4,7 @@
     <v-card-title class="text-center justify-center py-6">
       <img src="../assets/banner.png" alt="" class="banner">
     </v-card-title>
-
+    <div></div>
     <v-tabs
       v-model="tab"
       background-color="transparent"

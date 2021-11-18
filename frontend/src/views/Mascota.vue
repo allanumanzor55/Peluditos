@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div></div>
         <NavbarHome/>
         <VerMascotas/>
     </div>

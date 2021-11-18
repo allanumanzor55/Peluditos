@@ -45,7 +45,7 @@ const routes = [
   },
   {
     path: '/Opciones',
-    name: 'opciones',
+    name: 'Opciones',
     component: () => import('../components/OpcionesSetting.vue')
   }
   

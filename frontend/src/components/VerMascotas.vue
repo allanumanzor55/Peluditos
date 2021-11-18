@@ -6,6 +6,7 @@
                 <b-list-group>
                 <b-list-group-item button>
                     <div>
+                        <div></div>
                     <b-button v-b-toggle.collapse-1 class="m-1" variant="light">Categorias</b-button>
                     <b-collapse visible id="collapse-1">
                         <b-form-checkbox>Perros</b-form-checkbox>
