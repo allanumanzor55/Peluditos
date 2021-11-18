@@ -1,5 +1,6 @@
 <template>
   <div class="fondo">
+    <div></div>
     <div class="rec">
       <FormLogin />
     </div>

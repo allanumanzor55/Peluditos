@@ -1,5 +1,6 @@
 <template>
     <div class="fondo-registro">
+        <div></div>
         <div class="ima">
 
         </div>

@@ -3,6 +3,7 @@
         <div>
             <NavbarHome/>
         </div>
+        <div></div>
         <div class="mt">
             <v-container>
                 <v-row no-gutters>
