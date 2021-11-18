@@ -37,18 +37,7 @@ const routes = [
     path: '/Perfil',
     name: 'PerfilUsuario',
     component: () => import('../views/Perfil.vue')
-  },
-  {
-    path: '/HomeAdmin',
-    name: 'HomeAdmin',
-    component: () => import('../views/HomeAdmin.vue')
-  },
-  {
-    path: '/Opciones',
-    name: 'opciones',
-    component: () => import('../components/OpcionesSetting.vue')
   }
-  
   
 ]
 

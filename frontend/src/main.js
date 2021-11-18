@@ -10,25 +10,15 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { apolloClient, apolloProvider } from './graphql/apollo'
 import vuetify from './plugins/vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(PortalVue)
 Vue.use(VueSweetalert2)
 Vue.use(apolloClient)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-library.add(fas)
 new Vue({
   router,
   apolloProvider,
   vuetify,
-  icons: {
-    iconfont: 'faSvg',
-  },
   render: h => h(App)
 }).$mount('#app')
