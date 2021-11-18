@@ -26,8 +26,8 @@
             <b-nav vertical class="w-100 text-center">
               <b-nav-item class="btn-sidebar" :to="{name:'HomeUsuario'}">Inicio</b-nav-item>
               <b-nav-item class="btn-sidebar" :to="{name:'PerfilUsuario'}">Mi perfil</b-nav-item>
-              <b-nav-item class="btn-sidebar" >Mis Mascotas</b-nav-item>
-              <b-nav-item class="btn-sidebar" :to="{name:'Mascota'}">Adoptar</b-nav-item>
+              <b-nav-item class="btn-sidebar" :to="{name:'Mascota'}">Mascotas en adopcion</b-nav-item>
+              <b-nav-item class="btn-sidebar" >Solicitudes pendientes</b-nav-item>
             </b-nav>
           </b-row>
         </b-sidebar>
