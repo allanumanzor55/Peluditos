@@ -41,7 +41,7 @@
           </v-card-subtitle>
         </v-card>
         </div>
-
+      </b-container>
                 </b-card-text>
               </b-card>
               <b-card
