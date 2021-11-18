@@ -4,6 +4,26 @@
           <NavbarHome />
         </div>
         <div class="im"> 
+      <b-container align-v="center" class="" fluid>
+        <b-card-group deck>
+          <b-col cols="2" class="mb-0">
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Mascotas adoptadas</h4></b-card-text>
+                  <h5>0</h5>
+              </b-card>
+              <b-card
+              header-text-variant="white"
+              align="center"
+              style="height:150px;"
+              class="mb-2 card-dashboard">
+                <b-card-text> 
+                  <h4> Mascotas en adopcion</h4>
+                  <h5>0</h5>
       <b-container align-v="center" class="wrapper" fluid>
         <div>
         <v-card
