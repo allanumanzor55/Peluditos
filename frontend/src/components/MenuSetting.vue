@@ -7,7 +7,7 @@
             <v-container>
                 <v-row no-gutters>
                 <v-col order="1">
-                     <v-card
+                    <v-card
                     class="mx-auto"
                     max-width="344"
                     >
