@@ -194,8 +194,13 @@ class UserInput(graphene.InputObjectType):
     age = graphene.String()
     principalCellphone = graphene.String()
     auxiliarCellphone = graphene.String()
+    biography = graphene.String()
+    motto = graphene.String()
     address = AddressInput(required=True)
     verified = graphene.Boolean()
+    active = graphene.Boolean()
+    secureQuestion = graphene.String()
+    secureAnswer = graphene.String()
 
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserNode)
@@ -224,8 +229,7 @@ class CreateUser(graphene.Mutation):
             dni=user_data.dni,
             age=user_data.age,
             principalCellphone=user_data.principalCellphone,
-            auxiliarCellphone=user_data.auxiliarCellphone,
-            verified = user_data.verified
+            auxiliarCellphone=user_data.auxiliarCellphone
         )
         return CreateUser(user=user_instance)
 
@@ -249,6 +253,7 @@ class UpdateUser(graphene.Mutation):
             if user_data.auxiliarCellphone is not None: 
                 user_instance.auxiliarCellphone=user_data.auxiliarCellphone
             if user_data.verified is not None: user_instance.verified=user_data.verified
+            if user_data.active is not None: user_instance.active = user_data.active
             user_instance.save()
             return UpdateUser(user=user_instance)
         return UpdateUser(user=None)
@@ -387,6 +392,7 @@ class DeletePet(graphene.Mutation):
 
 class Login(graphene.Mutation):
     verified = graphene.Boolean()
+    active = graphene.Boolean()
     userType = graphene.String()
     class Input:
         email = graphene.String()
@@ -395,8 +401,63 @@ class Login(graphene.Mutation):
     def mutate(root,info,email,password):
         user_instance = User.objects.filter(email=email,password=password)
         if user_instance:
-            return Login(verified=True,userType=user_instance.profileType)
-        return Login(verified=False)    
+            if user_instance.active:
+                return Login(verified=True,userType=user_instance.profileType)
+            return Login(verified=False,active=False)
+        return Login(verified=False,active=True)    
+
+class Register(graphene.Mutation):
+    register = graphene.Boolean()
+
+    class Input:
+        user_data = UserInput(required=True)
+
+    @staticmethod
+    def mutate(root,info,user_data=None):
+        address_instance = Address.objects.create(
+            department=user_data.address.department,
+            city=user_data.address.city,
+            suburb=user_data.address.suburb,
+            street=user_data.address.street,
+            residence=user_data.address.residence,
+            reference=user_data.address.reference
+        )
+        user_instance = User.objects.create(
+            role_id = user_data.role_id,
+            profileType_id= 2,
+            address = address_instance,
+            email=user_data.email,
+            password=user_data.password,
+            firstName=user_data.firstName,
+            lastName=user_data.lastName,
+            dni=user_data.dni,
+            age=user_data.age,
+            principalCellphone=user_data.principalCellphone,
+            auxiliarCellphone=user_data.auxiliarCellphone,
+            verified = False,
+            secureQuestion = user_data.secureQuestion,
+            secureAnswer = user_data.secureAnswer
+        )
+        if user_instance:
+            return Register(register=True)
+        return Register(register=False)
+
+class UserInfo(graphene.Mutation):
+    adoptedPets = graphene.Int()
+    adoptionPets = graphene.Int()
+    requestsSent = graphene.Int()
+    requestsAwait = graphene.Int()
+    class Input:
+        id = graphene.Int()
+    
+    @staticmethod
+    def mutate(root,info,id):
+        adoptedPets = Pet.objects.filter(owner_id=id).filter(isAdopted__icontains=True).count()
+        adoptionPets = Pet.objects.filter(owner_id=id).filter(isAdopted__icontains=False).count()
+        requestSent = AdoptionRequest.objects.filter(user_id=id).count()
+        requestAwait = AdoptionRequest.objects.filter(user_id=id).filter(accepted__icontains=False).count()
+        return UserInfo(adoptedPets=adoptedPets,adoptionPets=adoptionPets,requestsSent=requestSent,requestsAwait=requestAwait)
+
 
 class Mutation(graphene.AbstractType):
     create_module = CreateModule.Field()
@@ -423,3 +484,5 @@ class Mutation(graphene.AbstractType):
     # update_pet = UpdatePet.Field()
     delete_pet = DeletePet.Field()
     login = Login.Field()
+    register = Register.Field()
+    user_info = UserInfo.Field()

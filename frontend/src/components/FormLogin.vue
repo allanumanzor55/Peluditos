@@ -34,7 +34,7 @@
         </div>
       </v-form>
       <v-btn 
-        color="orange darken-4https://vuetifyjs.com/en/styles/colors/#material-colors"
+        color="orange darken-4 white--text"
         :disabled="!valid"
         @click="validate"
       >
@@ -64,6 +64,7 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
                 required: value => !!value || 'Campo requerido',
                 email:{
                   valid: v => /.+@.+\..+/.test(v) || 'Ingrese un e-mail valido',
+
                 }
               }
             ],
