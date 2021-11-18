@@ -1,8 +1,8 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="vacunas"
-    sort-by="nombre"
+    :items="setting"
+    sort-by="name"
     class="elevation-1"
     :search="search"
   >
@@ -11,7 +11,7 @@
           v-model="search"
           label="Buscar por ID"
           class="mx-4"
-        ></v-text-field>
+      ></v-text-field>
       <v-toolbar
         flat
       >
@@ -54,7 +54,7 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.nombre"
+                      v-model="editedItem.name"
                       label="Nombre"
                     ></v-text-field>
                   </v-col>
@@ -128,6 +128,11 @@
 </template>
 
 <script>
+  import {
+    GET_ALL_VACCINES,GET_ALL_PET_CATEGORY,GET_ALL_PROFILE_TYPE,GET_ALL_BREED,
+    CREATE_VACCINE,CREATE_PET_CATEGORY,CREATE_BREED,
+    UPDATE_VACCINE,UPDATE_PET_CATEGORY,UPDATE_BREED,
+    DELETE_VACCINE,DELETE_PET_CATEGORY,DELETE_BREED} from '@/graphql/queries/settingsQueries'
   export default {
     data: () => ({
       search: '',
@@ -140,19 +145,19 @@
           sortable: false,
           value: 'id',
         },
-        { text: 'Nombre', value: 'nombre'
+        { text: 'Nombre', value: 'name'
             },
         { text: 'Acciones', value: 'actions', sortable: false }
       ],
-      vacunas: [],
-      editedIndex: -1,
+      setting: [],
+      editedIndex: false,
       editedItem: {
         id: 0,
-        nombre: ''
+        name: ''
       },
       defaultItem: {
         id: 0,
-        nombre: ''
+        name: ''
       },
     }),
 
@@ -171,38 +176,85 @@
       },
     },
 
-    created () {
-      this.initialize()
+    async created () {
+      await this.initialize()
     },
 
     methods: {
-      initialize () {
-        this.vacunas = [
-          {
-            id: 1,
-            nombre: 'lorem ipsum'
-          },
-          {
-            id: 2,
-            nombre: 'lorem ipsum'
-          }
-        ]
+      async getData(){
+        if(this.settingType=='Vacunas'){
+          return (await this.$apollo.query({query:GET_ALL_VACCINES})).data.allVaccines
+        }else if(this.settingType=='Categorias'){
+          return (await this.$apollo.query({query:GET_ALL_PET_CATEGORY})).data.allPetCategories
+        }else if(this.settingType=='Perfiles'){
+          return (await this.$apollo.query({query:GET_ALL_PROFILE_TYPE})).data.allProfileTypes
+        }else if(this.settingType=='Raza'){
+          return (await this.$apollo.query({query:GET_ALL_BREED})).data.allBreeds
+        }
+      },
+      async saveData(){
+        if(this.settingType=='Vacunas'){
+          return (await this.$apollo.mutate({mutation:CREATE_VACCINE,
+          variables:{name:this.editedItem.name}})).data.createVaccine
+        }else if(this.settingType=='Categorias'){
+          return (await this.$apollo.mutate({mutation:CREATE_PET_CATEGORY,
+          variables:{name:this.editedItem.name}})).data.createPetCategory
+        }else if(this.settingType=='Perfiles'){
+          // return (await this.$apollo.mutate({mutation:CREATE_PROFILE_TYPE,
+          // variables:{name:this.editedItem.name,description:this.setting.description}})).data.createProfileType
+        }else if(this.settingType=='Raza'){
+          return (await this.$apollo.mutate({mutation:CREATE_BREED,
+          variables:{name:this.editedItem.name}})).data.createBreed
+        }
+      },
+      async editData(){
+        if(this.settingType=='Vacunas'){
+          return (await this.$apollo.mutate({mutation:UPDATE_VACCINE,
+          variables:{id:this.editedItem.id,name:this.editedItem.name}})).data.updateVaccine
+        }else if(this.settingType=='Categorias'){
+          return (await this.$apollo.mutate({mutation:UPDATE_PET_CATEGORY,
+          variables:{id:this.editedItem.id,name:this.editedItem.name}})).data.updatePetCategory
+        }else if(this.settingType=='Perfiles'){
+          // return (await this.$apollo.mutate({mutation:UPDATE_PROFILE_TYPE,
+          // variables:{id:this.editedItem.id,name:this.editedItem.name,description:this.setting.description}})).data.updateProfileType
+        }else if(this.settingType=='Raza'){
+          return (await this.$apollo.mutate({mutation:UPDATE_BREED,
+          variables:{id:this.editedItem.id,name:this.editedItem.name}})).data.updateBreed
+        }
+      },
+
+      async deleteData(){
+        if(this.settingType=='Vacunas'){
+          return (await this.$apollo.mutate({mutation:DELETE_VACCINE,
+          variables:{id:this.editedItem.id}})).data.updateVaccine
+        }else if(this.settingType=='Categorias'){
+          return (await this.$apollo.mutate({mutation:DELETE_PET_CATEGORY,
+          variables:{id:this.editedItem.id}})).data.updatePetCategory
+        }else if(this.settingType=='Perfiles'){
+          // return (await this.$apollo.mutate({mutation:DELETE_PROFILE_TYPE,
+          // variables:{id:this.editedItem.id}})).data.updateProfileType
+        }else if(this.settingType=='Raza'){
+          return (await this.$apollo.mutate({mutation:DELETE_BREED,
+          variables:{id:this.editedItem.id}})).data.updateBreed
+        }
+      },
+      async initialize () {
+        this.setting = await this.getData()
       },
 
       editItem (item) {
-        this.editedIndex = this.vacunas.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        this.editedIndex=true
+        this.editedItem = item
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.vacunas.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        this.editedItem = item
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.vacunas.splice(this.editedIndex, 1)
+        this.deleteData()
         this.closeDelete()
       },
 
@@ -222,14 +274,20 @@
         })
       },
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.vacunas[this.editedIndex], this.editedItem)
-        } else {
-          this.vacunas.push(this.editedItem)
+      async save () {
+        if(!this.editedIndex){
+          await this.saveData()
+          this.close()
+        }else{
+          await this.editData()
+          this.editedIndex=false
         }
-        this.close()
+        await this.initialize()
       },
     },
+
+    props:{
+      settingType:String
+    }
   }
 </script>

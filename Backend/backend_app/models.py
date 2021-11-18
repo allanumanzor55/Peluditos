@@ -18,7 +18,7 @@ class Permissions (models.Model):
 
 #Historia 2 - Usuarios
 class ProfileType(models.Model):
-    profileName = models.CharField(max_length=40,blank=False,null=False,default="N/D")
+    name = models.CharField(max_length=40,blank=False,null=False,default="N/D")
     description = models.CharField(max_length=100,blank=False,null=False,default="N/D")
 
 

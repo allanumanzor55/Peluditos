@@ -35,7 +35,7 @@
         >
           <v-card-text>
             <div class="cuad ">
-                <TablaSetting/>
+                <TablaSetting :settingType="item.nombre"/>
             </div>
             </v-card-text>
         </v-card>
@@ -59,7 +59,7 @@ export default {
           {nombre:'Vacunas',icono:'medkit'}, 
           {nombre:'Raza',icono:'bone'}, 
           {nombre:'Categorias',icono:'layer-group'}, 
-          {nombre:'Usuarios',icono:'users'}
+          {nombre:'Perfiles',icono:'users'}
         ]
       }
     },

@@ -99,12 +99,12 @@ class ProfileTypeInput(graphene.InputObjectType):
 class CreateProfileType(graphene.Mutation):
     profileType = graphene.Field(ProfileTypeNode)
     class Input:
-        profile_type_data= ProfileTypeInput(required=True)
+        name = graphene.String()
+        description = graphene.String()
         
     @staticmethod
-    def mutate(root,info,profile_type_data=None):
-        profileType_instance = ProfileType.objects.create(
-            profileName=profile_type_data.name,description=profile_type_data.description)
+    def mutate(root,info,name,description):
+        profileType_instance = ProfileType.objects.create(name=name,description=description)
         return CreateProfileType(profileType=profileType_instance)
 
 class DeleteProfileType(graphene.Mutation):
@@ -300,7 +300,7 @@ class DeletePetCategory(graphene.Mutation):
 
     @staticmethod
     def mutate(root,info,id):
-        PetCategory.objects.delete(pk=id)
+        PetCategory.objects.get(pk=id).delete()
         return None
 
 #Mutations de Vacunas de mascotas
@@ -325,6 +325,7 @@ class UpdateVaccine(graphene.Mutation):
         vaccine_instance = Vaccine.objects.get(pk=id)
         if vaccine_instance:
             if name is not None: vaccine_instance.name = name
+            vaccine_instance.save()
             return UpdateVaccine(vaccine=vaccine_instance)
         return UpdateVaccine(vaccine=None)
 
@@ -335,7 +336,42 @@ class DeleteVaccine(graphene.Mutation):
 
     @staticmethod
     def mutate(root,info,id):
-        Vaccine.objects.delete(pk=id)
+        Vaccine.objects.get(pk=id).delete()
+        return None
+
+#Mutations de razas de mascotas
+
+class CreateBreed(graphene.Mutation):
+    breed = graphene.Field(BreedNode)
+    class Input:
+        name = graphene.String()
+    
+    @staticmethod
+    def mutate(root,info,name):
+        breed_instance = Breed.objects.create(name=name)
+        return CreateBreed(breed=breed_instance)
+
+class UpdateBreed(graphene.Mutation):
+    breed = graphene.Field(BreedNode)
+    class Input:
+        id = graphene.ID()
+        name = graphene.String()
+    
+    @staticmethod
+    def mutate(root,info,id,name):
+        breed_instance = Breed.objects.get(pk=id)
+        breed_instance.name = name
+        breed_instance.save()
+        return UpdateBreed(breed=breed_instance)
+
+class DeleteBreed(graphene.Mutation):
+    breed = graphene.Field(BreedNode)
+    class Input:
+        id = graphene.ID()
+    
+    @staticmethod
+    def mutate(root,info,id):
+        Breed.objects.get(pk=id).delete()
         return None
 
 #Mutations de Mascotas

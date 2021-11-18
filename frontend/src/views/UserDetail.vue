@@ -288,7 +288,7 @@ export default {
     this.userInfo.id = this.idUser
     this.userInfo.active = this.user.active
     //Json para datos principales
-    this.firstInfo.perfil = this.user.profileType.profileName;
+    this.firstInfo.perfil = this.user.profileType.name;
     this.firstInfo.identidad = this.user.dni;
     this.firstInfo.edad = this.user.age;
     this.firstInfo.email = this.user.email;

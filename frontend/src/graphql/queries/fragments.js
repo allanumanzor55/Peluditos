@@ -23,7 +23,7 @@ export const ADDRESS_FRAGMENT_FIELDS = gql`
 export const PROFILE_FRAGMENTS_FIELDS = gql`
     fragment ProfileFields on ProfileTypeNode{
         id
-        profileName
+        name
         description
     }
 `
