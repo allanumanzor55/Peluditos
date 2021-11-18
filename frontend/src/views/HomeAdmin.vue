@@ -8,10 +8,9 @@
 <script>
 import MenuSetting from '@/components/MenuSetting.vue'
 export default {
-     name: 'menustting',
+  name: 'HomeAdmin',
    components: {
      MenuSetting
-   }
 }
 </script>
 
