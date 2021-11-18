@@ -1,5 +1,6 @@
 <template>
   <div>
+    Uy
     <Navbar/>
     <Carusel/>
   </div>
