@@ -9,9 +9,14 @@
 
 export default {
   name: 'App',
-
-  data: () => ({
-    
-  }),
+  async created(){
+    this.$store.commit('setData')
+    await this.$store.dispatch('verifyLogin')
+  },
+  async updated(){
+    this.$store.commit('setData')
+    await this.$store.dispatch('verifyLogin')
+    console.log(this.$store.state.verify)
+  }
 };
 </script>

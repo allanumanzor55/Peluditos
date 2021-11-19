@@ -1,22 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store/index'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name:'Home',
-    component: ()=> import('../views/Home.vue')
+    component: ()=> import('../views/Home.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/Users',
     name: 'Users',
-    component: () => import('../views/Users.vue')
+    component: () => import('../views/Users.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path:'/Users/UserDetail/:id',
     name:'UserDetail',
-    component: () => import('../views/UserDetail.vue')
+    component: () => import('../views/UserDetail.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/Login',
@@ -31,7 +41,10 @@ const routes = [
   {
     path: '/Mascota',
     name: 'Mascota',
-    component: () => import('../views/Mascota.vue')
+    component: () => import('../views/Mascota.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/Home',
@@ -41,23 +54,45 @@ const routes = [
   {
     path: '/Perfil',
     name: 'PerfilUsuario',
-    component: () => import('../views/Perfil.vue')
+    component: () => import('../views/Perfil.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/HomeAdmin',
     name: 'HomeAdmin',
-    component: () => import('../views/HomeAdmin.vue')
+    component: () => import('../views/HomeAdmin.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/Opciones',
     name: 'Opciones',
-    component: () => import('../views/Settings.vue')
+    component: () => import('../views/Settings.vue'),
+    meta:{
+      requiresAuth:true
+    }
   }
   
 ]
 
+
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.state.verify) {
+      next();
+    } else {
+      next({ name: "Login" });
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

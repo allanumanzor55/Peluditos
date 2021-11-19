@@ -13,7 +13,7 @@ import 'vuetify/dist/vuetify.min.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-
+import store from '@/store/index'
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
@@ -27,6 +27,7 @@ new Vue({
   router,
   apolloProvider,
   vuetify,
+  store,
   icons: {
     iconfont: 'faSvg',
   },

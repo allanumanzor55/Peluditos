@@ -107,6 +107,7 @@
 
 <script>
   import {REGISTER_USER} from '@/graphql/queries/userQueries.js'
+  import Cookies from 'js-cookie'
   export default {
     data() {
       return {
@@ -197,13 +198,18 @@
             mutation: REGISTER_USER,
             variables:{userData:this.registerInfo}
           })
-          console.log(data.register.register)
           if(data.register.register){
             this.$swal({
               icon:'success',
               title:'Registro exitoso',
               text:'Bienvenido a Peluditos',
             }).then(()=>{
+              Cookies.set("token", data.register.user.token);
+              Cookies.set("firstName", data.register.user.firstName);
+              Cookies.set("lastName", data.register.user.lastName);
+              Cookies.set("id", data.register.user.id);
+              Cookies.set("verifiedEmail", data.register.user.verified);
+              Cookies.set("profileName", data.register.user.profileType.name);
               this.$router.push('/Home')
             })
           }else{

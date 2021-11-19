@@ -43,16 +43,36 @@ export const USER_N_INFO = gql`
 `
 
 export const LOGIN_USER = gql`
+    ${USER_FRAGMENT_FIELDS}
     mutation ($email:String!,$password:String!){
         login(email: $email, password: $password){
             verified
+            user{
+                verified
+                active
+                token
+                profileType{
+                    name
+                }
+                ...UserFields
+            }
         }
     }`
 
 export const REGISTER_USER = gql`
+    ${USER_FRAGMENT_FIELDS}
     mutation ($userData:UserInput!){
         register(userData:$userData){
             register
+            user{
+                verified
+                active
+                token
+                profileType{
+                    name
+                }
+                ...UserFields
+            }
         }
     }
 `
@@ -82,6 +102,22 @@ export const SEARCH_USER  = gql`
     query($firstName:String!){
         getUsers(firstName:$firstName){
             ...UserFields
+        }
+    }
+`
+
+export const AUTHENTICATE_USER = gql`
+    mutation($token:String,$id:ID!){
+        verifyLogin(token:$token,id:$id){
+            verified
+        }
+    }
+`
+
+export const LOGOUT = gql`
+    mutation($token:String!){
+        logout(token:$token){
+            verified
         }
     }
 `

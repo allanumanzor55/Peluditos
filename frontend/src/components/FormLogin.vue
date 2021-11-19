@@ -51,6 +51,7 @@
 <script>
 //import {mapState} from 'vuex'
 import {LOGIN_USER} from '@/graphql/queries/userQueries'
+import Cookies from "js-cookie";
   export default {
     data() {
       return {
@@ -81,27 +82,27 @@ import {LOGIN_USER} from '@/graphql/queries/userQueries'
         }
       },
       async login_user(){
-        const {data} = await this.$apollo.mutate({
-            mutation: LOGIN_USER,
-            variables:{email:this.form.email,password:this.form.password}
+        const {data} = await this.$apollo.mutate({mutation: LOGIN_USER,variables:{email:this.form.email,password:this.form.password}})
+        this.login = data.login
+        if(this.login.verified){
+          this.$swal({icon:'success',title:'bienvenido'})
+          .then(()=>{
+            this.$router.push('/Home')
+            Cookies.set("token", this.login.user.token);
+            Cookies.set("firstName", this.login.user.firstName);
+            Cookies.set("lastName", this.login.user.lastName);
+            Cookies.set("id", this.login.user.id);
+            Cookies.set("verifiedEmail", this.login.user.verified);
+            Cookies.set("profileName", this.login.user.profileType.name);
           })
-          this.login = data.login.verified
-          if(this.login){
-            this.$swal({
-              icon:'success',
-              title:'bienvenido'
-            }).then(()=>{
-              this.$router.push('/Home')
-
-            })
+        }else{
+          if(!this.login.user.active){
+            this.$swal({icon:'info',title:'Su perfil ha sido desactivado, espere hasta que un administrador lo desbloquee'})
           }else{
-            console.log('Error')
-            this.$swal({
-              icon:'error',
-              title:'credenciales incorrectas'
-            })
+            this.$swal({icon:'error',title:'credenciales incorrectas'})
           }
-        },
+        }
+      },
         onSubmit(event) {
           event.preventDefault()
           alert(JSON.stringify(this.form))

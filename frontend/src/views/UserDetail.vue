@@ -24,13 +24,13 @@
         <v-row class="white--text rotulo-opciones" justify="center">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn class="ma-2 gray lighten-3" fab title="Deshabilitar" v-bind="attrs" v-on="on"
+              <v-btn class="ma-2 gray lighten-3" fab v-bind="attrs" v-on="on"
               @click="disableProfile">
                 <v-icon v-if="user.active">mdi-cancel</v-icon>
                 <v-icon v-else>mdi-checkbox-marked-circle-outline</v-icon>
               </v-btn>
             </template>
-            <span>Deshabilitar</span>
+            <span>{{activeText}}</span>
           </v-tooltip>
           <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
@@ -213,6 +213,7 @@ export default {
   name: "UserDetail",
   data() {
     return {
+      activeText:'',
       idUser: 0,
       user: {},
       userInfo:{id:0,active:true,address:{}},
@@ -246,6 +247,7 @@ export default {
         variables:{userData:this.userInfo}
       })
       this.user.active = data.updateUser.user.active
+      this.activeText = this.user.active?'Deshabilitar':'Habilitar'
     },
     async deleteProfile(){
       let result = await this.$swal({
@@ -287,6 +289,7 @@ export default {
     }
     this.userInfo.id = this.idUser
     this.userInfo.active = this.user.active
+    this.activeText = this.user.active?'Deshabilitar':'Habilitar'
     //Json para datos principales
     this.firstInfo.perfil = this.user.profileType.name;
     this.firstInfo.identidad = this.user.dni;

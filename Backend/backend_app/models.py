@@ -49,6 +49,7 @@ class User(models.Model):
     active = models.BooleanField(null=False,default=True)
     secureQuestion = models.CharField(max_length=300,blank=False,null=False,default="N/D")
     secureAnswer = models.CharField(max_length=100,blank=False,null=False,default="N/D")
+    token = models.CharField(max_length=2024,blank=False,null=False,default="N/D")
 
 
 class Vaccine(models.Model):

@@ -2,6 +2,7 @@ import graphene
 from http import cookies
 from backend_app.models import *
 from .types import *
+from uuid import uuid4
 
 #Mutations de Modulos
 class ModuleInput(graphene.InputObjectType):
@@ -38,7 +39,6 @@ class UpdateModule(graphene.Mutation):
 
 class DeleteModule(graphene.Mutation):
     module = graphene.Field(ModuleNode)
-
     class Input:
         id =graphene.ID()
 
@@ -46,7 +46,6 @@ class DeleteModule(graphene.Mutation):
     def mutate(root,info,id):
         Module.objects.get(pk=id).delete()
         return None
-
 
 #Mutations de Roles
 class RoleInput(graphene.InputObjectType):
@@ -290,6 +289,7 @@ class UpdatePetCategory(graphene.Mutation):
         petCategory_instance = PetCategory.objects.get(pk=id)
         if petCategory_instance:
             if name is not None: petCategory_instance.name = name
+            petCategory_instance.save()
             return UpdatePetCategory(petCategory=petCategory_instance)
         return UpdatePetCategory(petCategory=None)
 
@@ -428,21 +428,54 @@ class DeletePet(graphene.Mutation):
 
 class Login(graphene.Mutation):
     verified = graphene.Boolean()
-    active = graphene.Boolean()
-    userType = graphene.String()
+    user = graphene.Field(UserNode)
     class Input:
         email = graphene.String()
         password = graphene.String()
     @staticmethod
     def mutate(root,info,email,password):
-        user_instance = User.objects.filter(email=email,password=password)
+        user_instance = User.objects.get(email=email,password=password)
         if user_instance:
             if user_instance.active:
-                return Login(verified=True,userType=user_instance.profileType)
+                token = uuid4()
+                user_instance.token=token
+                user_instance.save()
+                return Login(verified=True,user=user_instance)
             return Login(verified=False,active=False)
         return Login(verified=False,active=True)    
 
+
+class VerifyLogin(graphene.Mutation):
+    verified = graphene.Boolean()
+    class Input:
+        token = graphene.String()
+        id=graphene.ID()
+    @staticmethod
+    def mutate(root,info,token,id):
+        try:
+            user_instance = User.objects.get(token__exact=token,pk=id)
+            if user_instance:
+                return VerifyLogin(verified=True)
+            return VerifyLogin(verified=False)
+        except:
+            return VerifyLogin(verified=False)
+        
+
+class Logout(graphene.Mutation):
+    verified=graphene.Boolean()
+    class Input:
+        token = graphene.String()
+    def mutate(root,info,token):
+        user_instance = User.objects.get(token=token)
+        if user_instance:
+            user_instance.token=""
+            user_instance.save()
+            return Logout(verified=True)
+        return Logout(verified=False)
+
+
 class Register(graphene.Mutation):
+    user = graphene.Field(UserNode)
     register = graphene.Boolean()
 
     class Input:
@@ -472,10 +505,11 @@ class Register(graphene.Mutation):
             auxiliarCellphone=user_data.auxiliarCellphone,
             verified = False,
             secureQuestion = user_data.secureQuestion,
-            secureAnswer = user_data.secureAnswer
+            secureAnswer = user_data.secureAnswer,
+            token = uuid4()
         )
         if user_instance:
-            return Register(register=True)
+            return Register(user=user_instance,register=True)
         return Register(register=False)
 
 class UserInfo(graphene.Mutation):
@@ -516,9 +550,14 @@ class Mutation(graphene.AbstractType):
     create_vaccine = CreateVaccine.Field()
     update_vaccine = UpdateVaccine.Field()
     delete_vaccine = DeleteVaccine.Field()
+    create_breed = CreateBreed.Field()
+    update_breed = UpdateBreed.Field()
+    delete_breed = DeleteBreed.Field()
     create_pet = CreatePet.Field()
     # update_pet = UpdatePet.Field()
     delete_pet = DeletePet.Field()
     login = Login.Field()
     register = Register.Field()
     user_info = UserInfo.Field()
+    verify_login = VerifyLogin.Field()
+    logout = Logout().Field()

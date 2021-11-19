@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div></div>
     <Navbar/>
     <Carusel/>
   </div>
@@ -15,6 +14,13 @@ export default {
   components: {
     Navbar,
     Carusel
+  },
+  data(){
+    return{
+    }
+  },
+  created(){
+    
   }
 }
 </script>
