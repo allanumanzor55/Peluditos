@@ -78,8 +78,17 @@ const routes = [
     path:'/RestorePassword',
     name:'RestorePassword',
     component: ()=>import('../views/RestorePassword.vue')
+  },
+  {
+    path: '/Detalle',
+    name: 'detalle',
+    component: () => import('../views/DetalleMascota.vue')
+  },
+  {
+    path: '/PerfilUsuario',
+    name: 'PerfilUsuario',
+    component: () => import('../views/PerfilUsuario.vue')
   }
-  
 ]
 
 

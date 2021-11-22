@@ -1,20 +1,25 @@
 <template>
     <div>
-        <div></div>
-        <NavbarHome/>
+        <div>
+        <Navbar/>
+        </div>
+        <br>
+        <div>
         <VerMascotas/>
+        </div>
+        
     </div>
 </template>
 
 
 <script>
-import NavbarHome from '@/components/NavbarHome.vue'
+import Navbar from '@/components/Navbar.vue'
 import VerMascotas from '@/components/VerMascotas.vue'
 
 export default {
   name: 'VerMascota',
   components: {
-    NavbarHome,
+    Navbar,
     VerMascotas
   }
 }
