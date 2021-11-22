@@ -2,7 +2,9 @@
   <div class="fondo">
     <div></div>
     <div class="rec">
-      <FormLogin />
+      <div class="in-rec">
+        <FormLogin />
+      </div>
     </div>
     <div class="semi">
       <img alt="logo" class="imglg" src="../assets/logo.png" />
@@ -11,10 +13,19 @@
 </template>
 <script>
 import FormLogin from "@/components/FormLogin.vue";
-////import {LOGIN_USER} from '@/graphql/queries/userQueries'
+// import FormPassword from '@/components/FormPassword.vue'
 export default {
   name: "Login",
-  components: { FormLogin },
+  components: { FormLogin, },
+  data(){
+    return{
+      centinelPassword:false,
+      
+    }
+  },
+  created(){
+
+  }
 };
 </script>
 
@@ -22,7 +33,7 @@ export default {
 .fondo {
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   left: 0px;
   top: 0px;
 
@@ -30,19 +41,24 @@ export default {
   border-radius: 0px;
 }
 .rec {
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 625px;
   left: 0px;
-  top: 0px;
+  top: 0;
   display: inline-block;
   background: #ffad4d;
   border-radius: 0px 0px 512px 0px;
 }
 
+.in-rec{
+  position:relative;
+  bottom:5%;
+}
+
 .semi {
   position: absolute;
-  width: 500px;
+  width: 38%;
   height: 100%;
   left: 0px;
   top: 0px;
@@ -54,5 +70,13 @@ export default {
   height: 28%;
   margin-top: 45%;
   margin-left: 25%;
+}
+
+@media (min-width:700px) and (max-width: 1080) {
+  .imglg{
+    width:80%;
+    margin: 80%;
+    margin: 25%;
+  }
 }
 </style>

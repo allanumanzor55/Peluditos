@@ -16,7 +16,6 @@ export default {
   async updated(){
     this.$store.commit('setData')
     await this.$store.dispatch('verifyLogin')
-    console.log(this.$store.state.verify)
   }
 };
 </script>

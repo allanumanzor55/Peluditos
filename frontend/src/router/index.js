@@ -8,9 +8,6 @@ const routes = [
     path: '/',
     name:'Home',
     component: ()=> import('../views/Home.vue'),
-    meta:{
-      requiresAuth:true
-    }
   },
   {
     path: '/Users',
@@ -49,7 +46,10 @@ const routes = [
   {
     path: '/Home',
     name: 'HomeUsuario',
-    component: () => import('../views/HomeUsuario.vue')
+    component: () => import('../views/HomeUsuario.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/Perfil',
@@ -74,6 +74,10 @@ const routes = [
     meta:{
       requiresAuth:true
     }
+  },{
+    path:'/RestorePassword',
+    name:'RestorePassword',
+    component: ()=>import('../views/RestorePassword.vue')
   }
   
 ]

@@ -13,7 +13,8 @@ export default new Vuex.Store({
     id:0,
     verifiedEmail:'',
     profileName:'',
-    verify:false
+    verify:false,
+    restorePassword:false
   },
   mutations: {
     setData(state){
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     setVerify(state){
       state.verify=true
+    },
+    setRestorePassword(state){
+      state.restorePassword=!state.restorePassword
     }
 ,
     noSetVerify(state){
