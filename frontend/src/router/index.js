@@ -39,11 +39,6 @@ const routes = [
     component: () => import('../views/HomeUsuario.vue')
   },
   {
-    path: '/Perfil',
-    name: 'PerfilUsuario',
-    component: () => import('../views/Perfil.vue')
-  },
-  {
     path: '/HomeAdmin',
     name: 'HomeAdmin',
     component: () => import('../views/HomeAdmin.vue')
@@ -52,8 +47,17 @@ const routes = [
     path: '/Opciones',
     name: 'Opciones',
     component: () => import('../views/Settings.vue')
+  },
+  {
+    path: '/Detalle',
+    name: 'detalle',
+    component: () => import('../views/DetalleMascota.vue')
+  },
+  {
+    path: '/PerfilUsuario',
+    name: 'PerfilUsuario',
+    component: () => import('../views/PerfilUsuario.vue')
   }
-  
 ]
 
 const router = new VueRouter({
