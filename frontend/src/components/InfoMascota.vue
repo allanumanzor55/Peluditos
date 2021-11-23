@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-container class="grey lighten-5">
+      <v-container>
     <v-row no-gutters>
       <v-col
         cols="12"

@@ -2,63 +2,76 @@
     <div class="mt">
         <v-container>
         <v-row no-gutters>
-            <v-col cols="3">
-                <b-list-group>
-                <b-list-group-item button>
-                    <div>
-                    <b-button v-b-toggle.collapse-1 class="m-1">Categorias</b-button>
-                    <b-collapse visible id="collapse-1">
+        <v-col
+            cols="6"
+            md="3"
+        >
+                <v-list>
+                <v-list-group>
+                    <template v-slot:activator>
+                    <v-list-item-content>
+                        <v-list-item-title>Categorias</v-list-item-title>
+                    </v-list-item-content>
+                    </template>
+                    <v-list-item-content>
                         <b-form-checkbox>Perros</b-form-checkbox>
                         <b-form-checkbox>Gatos</b-form-checkbox>
                         <b-form-checkbox>Conejos</b-form-checkbox>
                         <b-form-checkbox>Hamsters</b-form-checkbox>
-                    </b-collapse>
-                    </div>
-                </b-list-group-item>
-                <b-list-group-item button>
-                    <hr>
-                    <div>
-                    <b-button v-b-toggle.collapse-2 class="m-1">Edad</b-button>
-                    <b-collapse visible id="collapse-2">
-                        <b-input-group prepend="0" append="10" class="mt-3">
+                    </v-list-item-content>
+                </v-list-group>
+
+                    <v-list-group>
+                    <template v-slot:activator>
+                    <v-list-item-content>
+                        <v-list-item-title>Edad</v-list-item-title>
+                    </v-list-item-content>
+                    </template>
+                    <v-list-item-content>
+                    <b-input-group prepend="0" append="10" class="mt-3">
                     <b-form-input type="range" min="0" max="15"></b-form-input>
                     </b-input-group>
-                    </b-collapse>
-                    </div>
-                </b-list-group-item>
-                <b-list-group-item button>
-                    <hr>
-                    <div>
-                    <b-button v-b-toggle.collapse-3 class="m-1">Vacunacion</b-button>
-                    <b-collapse visible id="collapse-3">
+                    </v-list-item-content>
+                </v-list-group>
+
+                <v-list-group>
+                    <template v-slot:activator>
+                    <v-list-item-content>
+                        <v-list-item-title>Vacunacion</v-list-item-title>
+                    </v-list-item-content>
+                    </template>
+                    <v-list-item-content>
                         <b-form-checkbox>Todas las Vacunas</b-form-checkbox>
                         <b-form-checkbox>Vacunacion Imcompleta</b-form-checkbox>
                         <b-form-checkbox>No Vacunado</b-form-checkbox>
-                    </b-collapse>
-                    </div>
-                </b-list-group-item>
-                
-                <b-list-group-item button>
-                    <hr>
-                    <div>
-                    <b-button v-b-toggle.collapse-4 class="m-1">Ciudad</b-button>
-                    <b-collapse visible id="collapse-4">
+                    </v-list-item-content>
+                </v-list-group>
+
+
+                <v-list-group>
+                    <template v-slot:activator>
+                    <v-list-item-content>
+                        <v-list-item-title>Ciudad</v-list-item-title>
+                    </v-list-item-content>
+                    </template>
+                    <v-list-item-content> 
                         <b-form-checkbox
                         v-for="i in OptionsCity"
                         :key="i"
                         >{{i}}</b-form-checkbox>
-                    </b-collapse>
-                    </div>
-                </b-list-group-item>
-                </b-list-group>
-            </v-col>
-            
-            <v-col cols="9">
-            <CardMascota/>
-            </v-col>
-            
+                    </v-list-item-content>
+                </v-list-group>
+                </v-list>
+        </v-col>
+        <v-col
+            cols="12"
+            sm="6"
+            md="9"
+        >
+             <CardMascota/>
+        </v-col>
         </v-row>
-        </v-container>
+    </v-container>
     </div>
 </template>
 
@@ -84,7 +97,9 @@ button:hover{
 button:focus{
     border-color: white!important;
 }
-
+.v-application .primary--text {
+    color:black !important;
+}
 </style>
 
 <script>
@@ -105,7 +120,34 @@ export default {
             'Danlí', 
             'Siguatepeque', 
             'Juticalpa', 
-        ]
+        ],
+        items: [
+        {
+          action: 'mdi-ticket',
+          items: [{ title: 'List Item' }],
+          title: 'Categoria',
+        },
+        {
+          action: 'mdi-silverware-fork-knife',
+          active: true,
+          items: [
+            { title: 'Breakfast & brunch' },
+            { title: 'New American' },
+            { title: 'Sushi' },
+          ],
+          title: 'Edad',
+        },
+        {
+          action: 'mdi-school',
+          items: [{ title: 'List Item' }],
+          title: 'Vacunación',
+        },
+        {
+          action: 'mdi-run',
+          items: [{ title: 'List Item' }],
+          title: 'Ciudad',
+        }
+      ]
     }),
     components:{
         CardMascota

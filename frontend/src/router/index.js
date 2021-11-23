@@ -88,6 +88,11 @@ const routes = [
     meta:{
       requiresAuth:true
     }
+  },
+  {
+    path: '/MascotaUsuario',
+    name: 'MascotaUsuario',
+    component: () => import('../views/MascotaUsuario.vue')
   }
 ]
 
