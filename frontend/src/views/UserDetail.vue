@@ -224,17 +224,17 @@ export default {
         {
           text: "Inicio",
           disabled: false,
-          href: "#/Home/",
+          href: "#/inicio/",
         },
         {
           text: "Usuarios",
           disabled: false,
-          href: "#/Users",
+          href: "#/usuarios",
         },
         {
           text: "Detalle de usuario",
           disabled: true,
-          href: "#/Users/UserDetail",
+          href: "#/usuarios/detalle",
         },
       ],
     };

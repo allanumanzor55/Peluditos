@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-        <Navbar/>
+        <NavbarHome />
         </div>
        
         <div class="mt">
@@ -13,10 +13,10 @@
 
 <script>
 import PerUsuario from '@/components/PerUsuario.vue'
-import Navbar from '@/components/Navbar.vue'
+import NavbarHome from '@/components/NavbarHome.vue'
 export default {
     components:{
-        Navbar,
+        NavbarHome,
         PerUsuario
     }
 }

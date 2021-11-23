@@ -3,7 +3,8 @@
     <div></div>
     <div class="rec">
       <div class="in-rec">
-        <FormLogin />
+        <FormLogin v-if="!changeComponent" />
+        <FormPassword v-else />
       </div>
     </div>
     <div class="semi">
@@ -13,18 +14,24 @@
 </template>
 <script>
 import FormLogin from "@/components/FormLogin.vue";
-// import FormPassword from '@/components/FormPassword.vue'
+import FormPassword from '@/components/FormPassword.vue'
 export default {
   name: "Login",
-  components: { FormLogin, },
+  components: { FormLogin, FormPassword},
   data(){
     return{
       centinelPassword:false,
-      
     }
   },
-  created(){
-
+  computed:{
+    changeComponent:function(){
+      return this.$store.state.restorePassword
+    }
+  },
+  mounted(){
+    if(this.$store.state.verify){
+      this.$router.push('/inicio')
+    }
   }
 };
 </script>

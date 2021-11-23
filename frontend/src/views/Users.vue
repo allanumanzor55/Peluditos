@@ -53,12 +53,12 @@ export default {
         {
           text: "Inicio",
           disabled: false,
-          href: "#/Home/",
+          href: "#/inicio/",
         },
         {
           text: "Usuarios",
           disabled: true,
-          href: "#/Users",
+          href: "#/usuarios",
         }
       ],
     };

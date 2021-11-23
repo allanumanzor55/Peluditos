@@ -13,6 +13,7 @@
             :rules="[rules[0].required,rules[0].email.valid]"
             label="E-mail"
             required
+            v-on:keyup.enter="validate"
             >
             </v-text-field>
         </div>
@@ -27,10 +28,11 @@
               label="Password"
               counter
               @click:append="show1 = !show1"
+              v-on:keyup.enter="validate"
             ></v-text-field>
         </div>
         <div class="text-right mb-3">
-          <a class="txtr">¿Olvidaste tu contraseña?</a>
+          <a class="txtr" @click="showPasswordComponent">¿Olvidaste tu contraseña?</a>
         </div>
       </v-form>
       <v-btn 
@@ -42,7 +44,7 @@
       </v-btn>
       <div class="mt-4">
         <span class="txt13">¿Aun no tienes una cuenta?</span> <br />
-        <a href="/#/Registro" type="button" class="btn colorbtn btn-sm white--text">Registrate</a>
+        <a href="/#/registro" type="button" class="btn colorbtn btn-sm white--text">Registrate</a>
       </div>
       </v-col>
     </v-row>
@@ -95,35 +97,24 @@ import Cookies from "js-cookie";
             Cookies.set("profileName", this.login.user.profileType.name);
             await this.$store.commit('setData')
             await this.$store.dispatch('verifyLogin')
-            this.$router.push('/Home')
+            this.$router.push('/inicio')
           }
           
         }else{
-          if(!this.login.user.active){
-            this.$swal({icon:'info',title:'Su perfil ha sido desactivado, espere hasta que un administrador lo desbloquee'})
+          if(this.login.user===null){
+            this.$swal({icon:'error',title:'credenciales incorrectas'})            
           }else{
-            this.$swal({icon:'error',title:'credenciales incorrectas'})
+            if(!this.login.user.active){
+              this.$swal({icon:'info',title:'Su perfil ha sido desactivado, espere hasta que un administrador lo desbloquee'})
+            }
           }
         }
       },
-        onSubmit(event) {
-          event.preventDefault()
-          alert(JSON.stringify(this.form))
-        },
-        onReset(event) {
-          event.preventDefault()
-          // Reset our form values
-          this.form.celular = ''
-          this.form.password = ''
-
-          // Trick to reset/clear native browser form validation state
-          this.show = false
-          this.$nextTick(() => {
-            this.show = true
-          })
-        }
+      showPasswordComponent(){
+        this.$store.commit('setRestorePassword')
       }
     }
+  }
 </script>
 
 <style scoped>

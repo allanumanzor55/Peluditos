@@ -1,8 +1,10 @@
 import graphene
-from http import cookies
+from smtplib import SMTP
+from email.mime.text import MIMEText
 from backend_app.models import *
 from .types import *
 from uuid import uuid4
+
 
 #Mutations de Modulos
 class ModuleInput(graphene.InputObjectType):
@@ -434,15 +436,17 @@ class Login(graphene.Mutation):
         password = graphene.String()
     @staticmethod
     def mutate(root,info,email,password):
-        user_instance = User.objects.get(email=email,password=password)
+        try:
+            user_instance = User.objects.get(email=email,password=password)
+        except:
+            return Login(verified=False,user=None)
         if user_instance:
             if user_instance.active:
                 token = uuid4()
                 user_instance.token=token
                 user_instance.save()
                 return Login(verified=True,user=user_instance)
-            return Login(verified=False,active=False)
-        return Login(verified=False,active=True)    
+            return Login(verified=False,user=user_instance)
 
 
 class VerifyLogin(graphene.Mutation):
@@ -528,7 +532,43 @@ class UserInfo(graphene.Mutation):
         requestAwait = AdoptionRequest.objects.filter(user_id=id).filter(accepted__icontains=False).count()
         return UserInfo(adoptedPets=adoptedPets,adoptionPets=adoptionPets,requestsSent=requestSent,requestsAwait=requestAwait)
 
-
+class restorePassword(graphene.Mutation):
+    verified = graphene.Boolean()
+    msg = graphene.String()
+    class Input:
+        email = graphene.String()
+        dni = graphene.String()
+        answer = graphene.String()
+    
+    @staticmethod
+    def mutate(root,info,email,dni,answer):
+        try:
+            us_ins = User.objects.get(email=email,dni=dni)
+        except:
+            return restorePassword(verified=False,msg="Datos incorrectos")
+        if us_ins:
+            if us_ins.secureAnswer == answer:
+                try:
+                    remitente = "allanalvarez55@gmail.com"
+                    destinatario = us_ins.email
+                    asunto="Envio de contraseña por email"
+                    mensaje="""
+                        Hola! %s %s <br/>
+                        Te enviamos tu contraseña: <b> %s </b>
+                    """%(us_ins.firstName,us_ins.lastName,us_ins.password)
+                    mail = MIMEText(mensaje, "html",_charset="utf-8")
+                    mail["From"] = remitente
+                    mail["To"] = destinatario
+                    mail["Subject"] = asunto
+                    smtp = SMTP("smtp.gmail.com")
+                    smtp.starttls()
+                    smtp.login(remitente,"Condemilenario")
+                    smtp.sendmail(remitente, destinatario, mail.as_string())
+                    smtp.quit()
+                    return restorePassword(verified=True,msg="Verificacion correcta, se envio la contraseña a tu correo")
+                except Exception  as ex:
+                    return restorePassword(verified=False,msg=ex)
+            return restorePassword(verified=False,msg="Alguno de los datos ingresados estan incorrectos")
 class Mutation(graphene.AbstractType):
     create_module = CreateModule.Field()
     update_module = UpdateModule.Field()
@@ -560,4 +600,5 @@ class Mutation(graphene.AbstractType):
     register = Register.Field()
     user_info = UserInfo.Field()
     verify_login = VerifyLogin.Field()
-    logout = Logout().Field()
+    logout = Logout.Field()
+    restore_password = restorePassword.Field()

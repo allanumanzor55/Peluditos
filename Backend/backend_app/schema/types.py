@@ -165,10 +165,13 @@ class Query(graphene.ObjectType):
     def resolve_pet(self,info,**kwargs):
         idPet = kwargs.get('id')
         petName = kwargs.get('name')
-        if idPet is not None:
-            return Pet.objects.get(pk=idPet)
-        elif petName is not None:
-            return Pet.objects.get(name=petName)
+        try:
+            if idPet is not None:
+                return Pet.objects.get(pk=idPet)
+            elif petName is not None:
+                return Pet.objects.get(name=petName)
+        except:
+            return None
     
     def resolve_owner_pets(self,info,**kwargs):
         idOwner = kwargs.get('ownerId')

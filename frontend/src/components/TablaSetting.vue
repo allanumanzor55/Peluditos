@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavbarHome />
     <v-data-table
       :headers="headers"
       :items="setting"
@@ -126,14 +125,14 @@
 </template>
 
 <script>
-  import NavbarHome from '@/components/NavbarHome.vue'
+
   import {
     GET_ALL_VACCINES,GET_ALL_PET_CATEGORY,GET_ALL_PROFILE_TYPE,GET_ALL_BREED,
     CREATE_VACCINE,CREATE_PET_CATEGORY,CREATE_BREED,
     UPDATE_VACCINE,UPDATE_PET_CATEGORY,UPDATE_BREED,
     DELETE_VACCINE,DELETE_PET_CATEGORY,DELETE_BREED} from '@/graphql/queries/settingsQueries'
   export default {
-    components:{NavbarHome},
+    components:{},
     data: () => ({
       search: '',
       dialog: false,

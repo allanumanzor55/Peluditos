@@ -3,8 +3,8 @@
     <v-row :align="center" :justify="center">
       <v-col class="text-center">
         <div class="mb-5">
-          <h1>Restauracion de contraseña</h1>
-          <span>Sigue las indicaciones!</span>
+          <h2>Recuperacion de contraseña</h2>
+          <span>Ingresa los datos que se te solicitan para enviar la contraseña por correo</span>
         </div>
         <v-form ref="formLogin" v-model="valid" lazy-validation>
           <div class="mb-0">
@@ -26,8 +26,7 @@
             ></v-text-field>
           </div>
           <v-divider></v-divider>
-          <div class="mb-3">
-            Responda la pregunta de seguridad que proveyo
+          <div class="">
             <v-text-field
               color="primary"
               v-model="answer"
@@ -35,18 +34,17 @@
               :label="question"
             ></v-text-field>
           </div>
-          <div class="text-right mb-3">
-            <!-- <link class="txtr">¿Olvidaste tu contraseña?</link> -->
-          </div>
         </v-form>
         <v-btn
           color="orange darken-4 white--text"
-          :disabled="!valid"
+          :disabled="!valid || loading"
+          @click="restorePassword"
+          :loading="loading"
         >
           Restaurar
         </v-btn>
-        <div class="mt-4">
-          <a href="/#/Login" type="button" class="btn colorbtn btn-sm white--text">
+        <div class="mt-3">
+          <a href="/#/login" type="button" class="btn colorbtn btn-sm white--text" @click="showPasswordComponent">
             Volver
           </a>
         </div>
@@ -55,6 +53,7 @@
   </v-container>
 </template>
 <script>
+import {RESTORE_PASSWORD} from '@/graphql/queries/userQueries'
 export default {
   name: "FormPassword",
   data(){
@@ -62,10 +61,11 @@ export default {
       center:'center',
         valid: true,
         show1: false,
-        email:'',
-        dni:'',
-        asnwer:'',
-        question:'¿?',
+        loader:null,
+        loading:false,
+        showLoadingB:false,
+        email:'',dni:'',answer:'',
+        question:'Respuesta de seguridad',
         rules: 
             [
               {
@@ -76,10 +76,27 @@ export default {
                 }
               }
             ],
-        form: {
-          email: '',
-          password: ''
-        },
+    }
+  },
+  watch:{
+  },
+  methods:{
+    showPasswordComponent(){
+        this.$store.commit('setRestorePassword')
+    },
+    async restorePassword(){
+      this.loading=true
+      const {data} = await this.$apollo.mutate({
+      mutation:RESTORE_PASSWORD,
+      variables:{email:this.email,dni:this.dni,answer:this.answer}})
+      this.loading=false
+      if(data.restorePassword.verified){
+        
+        this.$swal({icon:'success',title:'Confirmacion exitosa',text:data.restorePassword.msg}) 
+        this.showPasswordComponent()          
+      }else{
+        this.$swal({icon:'error',title:'Error',text:data.restorePassword.msg})            
+      }
     }
   }
 };

@@ -64,7 +64,7 @@
 
 <style scoped>
 .mt{
-    margin-top: 3%;
+    margin-top: 6%;
 }
 button{
     background-color: white!important;

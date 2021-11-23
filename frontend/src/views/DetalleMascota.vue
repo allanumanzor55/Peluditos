@@ -1,23 +1,17 @@
 <template>
   <div>
-      <div>
-    <Navbar/>
-      </div>
-<br><br><br><br>
-      <div>
-        <InfoMascota/>
-      </div>
-
+    <NavbarHome class="mb-3"/>
+    <InfoMascota/>
   </div>
 </template>
 
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarHome from '@/components/NavbarHome.vue'
 import InfoMascota from '@/components/InfoMascota.vue'
 export default {
   components: {
-    Navbar,
+    NavbarHome,
     InfoMascota
   }
 }

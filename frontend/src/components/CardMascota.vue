@@ -4,26 +4,32 @@
         v-for="(item,i) in mascota"
         :key="i"
         class="mx-auto"
-        max-width="420"
-    >
-        <v-img
-        class="white--text align-end"
-        height="300px"
-        :src="item.imgn"
-        >
-        </v-img>
+        max-width="420">
+        <v-hover>
+    <template v-slot:default="{ hover }">
+      <v-card class="mx-auto" max-width="344">
+        <v-img :src="item.imgn"></v-img>
+        <v-fade-transition>
+          <v-overlay
+            v-if="hover"
+            absolute
+            color="#000"
+          >
+            <v-btn>Mas detalles...</v-btn>
+          </v-overlay>
+        </v-fade-transition>
+      </v-card>
+    </template>
+  </v-hover>
         <v-card-title>{{item.nombre}}</v-card-title>
         <v-card-subtitle class="pb-0">
         {{item.lugar}}
         </v-card-subtitle>
         <v-card-actions>
-        <v-btn
-            color="orange"
-            text
-            :to="{name:'detalle'}"
-        >
-            Ver más
-        </v-btn>
+          <v-spacer></v-spacer>
+            <v-btn icon @click="item.isLike=!item.isLike" :key="i">
+              <v-icon :class="{'red--text':item.isLike}">mdi-heart</v-icon>
+            </v-btn>
         </v-card-actions>
     </v-card>
     </div>
@@ -36,31 +42,36 @@ export default {
             id: 1,
             nombre: 'lorem ipsum',
             imgn:'https://picsum.photos/600/300/?image=25',            
-            lugar:'Tegucigalpa'
+            lugar:'Tegucigalpa',
+            isLike:false
           },
           {
             id: 2,
             nombre: 'lorem ipsum2'
             ,imgn:'https://picsum.photos/600/300/?image=25',
-            lugar:'Tegucigalpa'
+            lugar:'Tegucigalpa',
+            isLike:false
           },
           {
-            id: 2,
+            id: 3,
             nombre: 'lorem ipsum3'
             ,imgn:'https://picsum.photos/600/300/?image=25',
-            lugar:'Tegucigalpa'
+            lugar:'Tegucigalpa',
+            isLike:false
           },
           {
-            id: 2,
+            id: 4,
             nombre: 'lorem ipsum4'
             ,imgn:'https://picsum.photos/600/300/?image=25',
-            lugar:'Tegucigalpa'
+            lugar:'Tegucigalpa',
+            isLike:false
           },
           {
-            id: 2,
+            id: 5,
             nombre: 'lorem ipsum5'
             ,imgn:'https://picsum.photos/600/300/?image=25',
-            lugar:'Tegucigalpa'
+            lugar:'Tegucigalpa',
+            isLike:false
           }],
         orden:[1,2,3]
     })

@@ -12,7 +12,7 @@ export default {
                 icon: 'success',
                 title: 'bienvenido'
             }).then(() => {
-                this.$router.push('/Home')
+                this.$router.push('/inicio')
                 Cookies.set("token", login.token);
             })
         } else {
@@ -40,7 +40,7 @@ export default {
                 title: 'Registro exitoso',
                 text: 'Bienvenido a Peluditos',
             }).then(() => {
-                this.$router.push('/Home')
+                this.$router.push('/inicio')
             })
         } else {
             this.$swal({

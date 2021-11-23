@@ -10,7 +10,7 @@ const routes = [
     component: ()=> import('../views/Home.vue'),
   },
   {
-    path: '/Users',
+    path: '/usuarios',
     name: 'Users',
     component: () => import('../views/Users.vue'),
     meta:{
@@ -18,7 +18,7 @@ const routes = [
     }
   },
   {
-    path:'/Users/UserDetail/:id',
+    path:'/usuarios/detalle/:id',
     name:'UserDetail',
     component: () => import('../views/UserDetail.vue'),
     meta:{
@@ -26,25 +26,25 @@ const routes = [
     }
   },
   {
-    path: '/Login',
+    path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/Registro',
+    path: '/registro',
     name: 'Registro',
     component: () => import('../views/Registro.vue')
   },
   {
-    path: '/Mascota',
-    name: 'Mascota',
-    component: () => import('../views/Mascota.vue'),
+    path: '/adoptar',
+    name: 'Adoptar',
+    component: () => import('../views/Adoptar.vue'),
     meta:{
       requiresAuth:true
     }
   },
   {
-    path: '/Home',
+    path: '/inicio',
     name: 'HomeUsuario',
     component: () => import('../views/HomeUsuario.vue'),
     meta:{
@@ -52,15 +52,7 @@ const routes = [
     }
   },
   {
-    path: '/Perfil',
-    name: 'PerfilUsuario',
-    component: () => import('../views/Perfil.vue'),
-    meta:{
-      requiresAuth:true
-    }
-  },
-  {
-    path: '/HomeAdmin',
+    path: '/inicioAdmin',
     name: 'HomeAdmin',
     component: () => import('../views/HomeAdmin.vue'),
     meta:{
@@ -68,26 +60,34 @@ const routes = [
     }
   },
   {
-    path: '/Opciones',
+    path: '/opciones',
     name: 'Opciones',
     component: () => import('../views/Settings.vue'),
     meta:{
       requiresAuth:true
     }
   },{
-    path:'/RestorePassword',
+    path:'/recuperarcontra',
     name:'RestorePassword',
     component: ()=>import('../views/RestorePassword.vue')
   },
   {
-    path: '/Detalle',
-    name: 'detalle',
+    path: '/mascotas/detalle',
+    name: 'DetalleMascota',
     component: () => import('../views/DetalleMascota.vue')
   },
   {
-    path: '/PerfilUsuario',
+    path: '/mascotas/mismascotas',
+    name: 'MisMascotas',
+    component: () => import('../views/Mascotas.vue')
+  },
+  {
+    path: '/perfilusuario',
     name: 'PerfilUsuario',
-    component: () => import('../views/PerfilUsuario.vue')
+    component: () => import('../views/PerfilUsuario.vue'),
+    meta:{
+      requiresAuth:true
+    }
   }
 ]
 

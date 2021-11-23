@@ -121,3 +121,12 @@ export const LOGOUT = gql`
         }
     }
 `
+
+export const RESTORE_PASSWORD = gql`
+    mutation($email:String!,$dni:String!,$answer:String!){
+        restorePassword(email:$email,dni:$dni,answer:$answer){
+            verified
+            msg
+        }
+    }
+`

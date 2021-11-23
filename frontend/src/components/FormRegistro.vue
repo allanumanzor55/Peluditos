@@ -210,7 +210,7 @@
               Cookies.set("id", data.register.user.id);
               Cookies.set("verifiedEmail", data.register.user.verified);
               Cookies.set("profileName", data.register.user.profileType.name);
-              this.$router.push('/Home')
+              this.$router.push('/inicio')
             })
           }else{
             this.$swal({

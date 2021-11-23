@@ -223,7 +223,7 @@
               title:'Registro exitoso',
               text:'Bienvenido a Peluditos',
             }).then(()=>{
-              this.$router.push('/Home')
+              this.$router.push('/inicio')
             })
           }else{
             this.$swal({

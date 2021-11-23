@@ -1,9 +1,7 @@
 <template>
     <div>
-        <div>
-          <NavbarHome/>
-        </div>
-        <div class="im"> 
+        <NavbarHome/>
+        <div class="im mt-7"> 
           <Dashboard :user="userType"/>
         </div>
     </div>
@@ -14,7 +12,6 @@
 <script>
 import NavbarHome from '@/components/NavbarHome.vue'
 import Dashboard from '@/components/Dashboard.vue'
-import {GET_USER_INFO} from '@/graphql/queries/userQueries.js'
 export default {
   name: 'home',
   components: {
@@ -22,21 +19,11 @@ export default {
   },
   data(){
     return{
-      emailVerified:false,
       userType:'adopter'
     }
   },
 
   methods:{
-    async confirmVerifiedEmail(){
-      const {data} = await this.$apollo.query({
-            query: GET_USER_INFO,
-            variables:{id:2}
-          })
-          this.emailVerified = data.user.verified
-
-          console.log(this.emailVerified)
-    },
     makeToast(append = false) {
         this.toastCount++
         this.$bvToast.toast(`Recuerda confirmar tu correo electronico para eliminar este mensaje flotante`, {
@@ -47,8 +34,7 @@ export default {
       }
   },
   async mounted(){
-    await this.confirmVerifiedEmail()
-    if(!this.emailVerified){
+    if(!this.$store.state.emailVerified){
       this.makeToast()
     }
   }
@@ -60,10 +46,6 @@ export default {
     height: 100%;
     width: 100%!important;
     display: inline-block;
-}
-
-::-webkit-scrollbar {
-    display: none;
 }
 
 .v-card:hover{
