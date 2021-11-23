@@ -1,5 +1,11 @@
 <template>
-<v-container>
+  <div>
+     <div class="titulo">
+            <h4>¡Bienvenido a tu Perfil!</h4>
+        </div>
+    <div>
+      <v-container class="mt">
+        <hr>
     <v-row no-gutters>
       <v-col
         cols="12"
@@ -11,9 +17,15 @@
     <v-tabs vertical>
       <v-tab>
         <v-icon left>
-          mdi-account
+          mdi-pencil
         </v-icon>
         Editar
+      </v-tab>
+      <v-tab>
+        <v-icon left>
+          mdi-book
+        </v-icon>
+        Biografía
       </v-tab>
       <v-tab>
         <v-icon left>
@@ -21,19 +33,11 @@
         </v-icon>
         Seguridad
       </v-tab>
-      <v-tab>
-        <v-icon left>
-          mdi-access-point
-        </v-icon>
-        Option 3
-      </v-tab>
 
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            <p>
               <FormEdit/>
-            </p>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -41,7 +45,7 @@
         <v-card flat>
           <v-card-text>
             <p>
-              Morbi nec metus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nunc sed turpis.
+              <BioUsuario/>
             </p>
           </v-card-text>
         </v-card>
@@ -49,9 +53,7 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            <p>
-              Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
-            </p>
+            <FormEditSeguridad/>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -86,6 +88,8 @@
       </v-col>
     </v-row>
   </v-container>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -100,13 +104,32 @@ div{
     border-radius: 100%!important;
 }
 
+.titulo{
+  width: 400px;
+  height:50px;
+  background-color: #fdcc8d;
+  text-align: center;
+  margin: auto!important;
+  top: 15px!important;
+  position: relative;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 3px 10px 0 rgba(0,0,0,.12)!important;
+  padding: 10px;
+  color: black;
+}
+.mt{
+  margin-top: 2%;
+}
 </style>
 
 <script>
-import FormEdit from '@/components/FormEdit'
+import FormEdit from '@/components/FormEdit.vue'
+import FormEditSeguridad from '@/components/FormEditSeguridad.vue'
+import BioUsuario from '@/components/BioUsuario.vue'
 export default {
     components:{
-        FormEdit
+        FormEdit,
+        FormEditSeguridad,
+        BioUsuario
     }
 }
 </script>

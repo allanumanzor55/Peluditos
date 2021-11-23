@@ -1,5 +1,7 @@
 <template>
-    <div>
+
+  <div>
+        <div>
         <h4 class="text-center">Datos personales</h4>
           <v-divider inset></v-divider>
         <div class="pad">
@@ -7,11 +9,6 @@
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-email" v-model="registerInfo.email"
-                    :rules="[rules[0].required,rules[0].valid.email]"
-                    required
-                    >                      
-                    </v-text-field>
                     <v-text-field label="Nombres" color="orange darken-3"  type="text" id="r-nombre" v-model="registerInfo.firstName"
                     :rules="[rules[0].required]"
                     >
@@ -24,9 +21,6 @@
                     </v-text-field>
                 </v-col>
                 <v-col>
-                  <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-password" v-model="registerInfo.password"
-                  :rules="[rules[0].required]">
-                  </v-text-field>
                   <v-text-field label="Primer apellido" color="orange darken-3"  type="text" id="r-apellido" v-model="registerInfo.lastName"
                   :rules="[rules[0].required]">
                   </v-text-field>
@@ -99,21 +93,11 @@
           </v-form>
         </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
-.titulo{
-  width: 500px;
-  height:70px;
-  background-color: #f7f388;
-  text-align: center;
-  margin: auto!important;
-  top: 10px!important;
-  position: relative;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 3px 10px 0 rgba(0,0,0,.12)!important;
-  padding: 10px;
-  color: black;
-}
+
 
 .pad{
     padding: 2%;
@@ -121,6 +105,10 @@
 
 .col-md-8{
     font-size: 12px!important;
+}
+
+.mt{
+  margin-top: 15%!important;
 }
 </style>
 
@@ -151,7 +139,6 @@
           {
             required: value=>!!value  || 'Campo requerido',
             valid:{
-              email: v => /.+@.+\..+/.test(v) || 'Ingrese un e-mail valido',
               number:v => /^([0-9]){8}$/.test(v) || 'Ingrese un numero de telefono valido',
               dni : v=> /^([0-9]){13}$/.test(v) || 'Ingrese un dni valido',
               onlyText: v=> /^([A-Za-z0-9]*)+$/.test(v) || 'No se permiten numeros',
@@ -220,8 +207,8 @@
           if(data.register.register){
             this.$swal({
               icon:'success',
-              title:'Registro exitoso',
-              text:'Bienvenido a Peluditos',
+              title:'Peluditos',
+              text:'Los datos se actualizarón correctamente',
             }).then(()=>{
               this.$router.push('/Home')
             })
@@ -229,7 +216,7 @@
             this.$swal({
               icon:'error',
               title:'Algo salio mal',
-              text:'Intentalo de nuevo'
+              text:'Verifica los campos e intentalo de nuevo'
             })
           }
         }
