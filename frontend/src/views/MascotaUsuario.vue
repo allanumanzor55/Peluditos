@@ -1,12 +1,7 @@
 <template>
     <div>
-        <div>
             <NavbarHome/>
-        </div>
-
-        <div>
-            <PerMascota/>
-        </div>
+            <PerMascota class="mt-9"/>
     </div>
 </template>
 
