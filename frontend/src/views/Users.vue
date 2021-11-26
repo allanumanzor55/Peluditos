@@ -27,8 +27,8 @@
           <h3 class="white--text">Usuarios registrados</h3>
         </v-row>
         <v-row justify="start" align="start" class="mt-8">
-          <v-col style="max-width:20%" v-for="us in users" :key="us.id">
-            <UserCard :userData="us"></UserCard>
+          <v-col style="max-width:20%" v-for="(us,i) in users" :key="us.id">
+            <UserCard :userData="us" :id="i"></UserCard>
           </v-col>
         </v-row>
       </v-container>

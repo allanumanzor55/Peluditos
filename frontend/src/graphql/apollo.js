@@ -19,10 +19,13 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
+const defaultOptions = { watchQuery: { fetchPolicy: 'no-cache', errorPolicy: 'ignore', }, query: { fetchPolicy: 'no-cache', errorPolicy: 'all', }, }
+
+
 export const apolloClient = new ApolloClient({
     link: errorLink.concat(httpLink),
     cache: new InMemoryCache(),
-    connectToDevTools: true
+    defaultOptions:defaultOptions
 })
 
 Vue.use(VueApollo)

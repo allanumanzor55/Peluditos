@@ -48,7 +48,7 @@
             <v-container class="orange lighten-4 b-radius">
               <v-card>
                 <v-img
-                  src="https://placedog.net/350/450"
+                  :src="'http://lorempixel.com/400/200/people/'+idUser+'/'"
                   class="white--text align-end"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                   height="200px"

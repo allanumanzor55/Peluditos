@@ -1,6 +1,6 @@
 <template>
   <div>
-     <div class="titulo">
+     <div class="titulo text--white">
             <h4>¡Bienvenido a tu Perfil!</h4>
         </div>
     <div>
@@ -76,7 +76,7 @@
     <v-img
       class="align-end"
       height="380px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="'http://lorempixel.com/400/200/people/'+getUserId"
 
     >
     </v-img>
@@ -92,6 +92,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  computed:{
+    getUserId(){
+      return this.$store.state.id
+    }
+  },
+}
+</script>
 <style scoped>
 div{
     background-color:white ;

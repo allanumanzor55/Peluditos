@@ -44,6 +44,7 @@ class PetNode(DjangoObjectType):
     class Meta:
         model = Pet
         interface = (relay.Node,)
+        
 
 class AdoptionRequestNode(DjangoObjectType):
     class Meta:
@@ -177,10 +178,13 @@ class Query(graphene.ObjectType):
         idOwner = kwargs.get('ownerId')
         ownerFirstName = kwargs.get('firstName')
         ownerFirstName = kwargs.get('firstName')
-        if idOwner is not None:
-            return Pet.objects.get(owner_id=idOwner)
-        elif ownerFirstName is not None:
-            return Pet.objects.filter(owner_firstName__icontains=ownerFirstName)
+        try:
+            if idOwner is not None:
+                return Pet.objects.filter(owner_id=idOwner)
+            elif ownerFirstName is not None:
+                return Pet.objects.filter(owner_firstName__icontains=ownerFirstName)
+        except:
+            return None
     
     def resolve_get_pets(self,info,**kwargs):
         categoryId = kwargs.get('categoryId')
@@ -206,4 +210,4 @@ class Query(graphene.ObjectType):
         elif isSterilized is not None:
             return Pet.objects.filter(isSterilized__icontains=isSterilized)    
         elif isAdopted is not None:
-            return Pet.objects.filter(isAdopted__icontains=isAdopted)    
+            return Pet.objects.filter(isAdopted=isAdopted)

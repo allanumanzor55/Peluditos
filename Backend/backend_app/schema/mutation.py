@@ -384,48 +384,79 @@ class PetInput(graphene.InputObjectType):
     category_id = graphene.Int()
     owner_id = graphene.Int()
     birthDate = graphene.String()
-    breed = graphene.String()
+    breed_id = graphene.String()
     color = graphene.String()
     size = graphene.String()
     gender = graphene.String()
-    isSterilized = graphene.String()
-    isAdopted = graphene.String()
+    isSterilized = graphene.Boolean()
+    isAdopted = graphene.Boolean()
+    vaccines = graphene.List(graphene.String)
+    description = graphene.String()
 
 class CreatePet(graphene.Mutation):
     pet = graphene.Field(PetNode)
+    verified = graphene.Boolean()
     class Input:
         pet_data = PetInput(required=True)
     
     @staticmethod
-    def mutate(root,info,**kwargs):
-        pet_instance = Pet.objects.create(
+    def mutate(root,info,pet_data):
+        try:
+            pet_instance = Pet.objects.create(
             name = pet_data.name,
             category_id=pet_data.category_id,
             owner_id=pet_data.owner_id,
             birthDate=pet_data.birthDate,
-            breed=pet_data.breed,
+            breed_id=pet_data.breed_id,
             color=pet_data.color,
             size=pet_data.size,
             gender=pet_data.gender,
             isSterilized=pet_data.isSterilized,
-            isAdopted=pet_data.isAdopted
-        )
-        return CreatePet(pet=pet_instance)
+            isAdopted=False,
+            description = pet_data.description
+            )
+            return CreatePet(pet=pet_instance,verified=True)
+        except:
+            return CreatePet(pet=None,verified=False)
 
-# class UpdatePet(graphene.Mutation):
-#     @staticmethod
-#     def mutate(root,info,**kwargs):
-#         pass
+class UpdatePet(graphene.Mutation):
+    verified=graphene.Boolean()
+    @staticmethod
+    class Input:
+        pet_data = PetInput(required=True)
+
+    def mutate(root,info,pet_data):
+        try:
+            pet_instance = Pet.objects.get(pk=pet_data.id)
+        except:
+            return UpdatePet(verified=False)
+        if pet_instance:
+            
+            if pet_data.name is not None: pet_instance.name = pet_data.name
+            if pet_data.category_id is not None: pet_instance.category_id = pet_data.category_id
+            if pet_data.birthDate is not None: pet_instance.birthDate = pet_data.birthDate
+            if pet_data.breed_id is not None: pet_instance.breed_id = pet_data.breed_id
+            if pet_data.color is not None: pet_instance.color = pet_data.color
+            if pet_data.size is not None: pet_instance.size = pet_data.size
+            if pet_data.gender is not None: pet_instance.gender = pet_data.gender
+            if pet_data.isSterilized is not None: pet_instance.isSterilized = pet_data.isSterilized
+            if pet_data.isAdopted is not None: pet_instance.isAdopted = pet_data.isAdopted
+            pet_instance.save()
+            return UpdatePet(verified=True)
 
 class DeletePet(graphene.Mutation):
-    pet = graphene.Field(PetNode)
+    verified=graphene.Boolean()
+    msg = graphene.String()
     class Input:
         id = graphene.ID()
     
     @staticmethod
     def mutate(root,info,id):
-        Pet.objects.delete(pk=id)
-        return None
+        try:
+            Pet.objects.get(pk=id).delete()
+            return DeletePet(verified=True,msg="Exito")
+        except x:
+            return DeletePet(verified=False,msg=x)
 
 
 class Login(graphene.Mutation):
@@ -594,7 +625,7 @@ class Mutation(graphene.AbstractType):
     update_breed = UpdateBreed.Field()
     delete_breed = DeleteBreed.Field()
     create_pet = CreatePet.Field()
-    # update_pet = UpdatePet.Field()
+    update_pet = UpdatePet.Field()
     delete_pet = DeletePet.Field()
     login = Login.Field()
     register = Register.Field()

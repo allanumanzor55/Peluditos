@@ -71,9 +71,11 @@ class Pet(models.Model):
     size = models.CharField(max_length=10,blank=False,null=False,default="N/D")
     gender = models.CharField(max_length=10,blank=False,null=False,default="N/D")
     isSterilized = models.BooleanField(null=False,default=False)
-    isAdopted = models.BooleanField(null=False,default=False)
+    isAdopted = models.BooleanField(null=False,default=False) 
     vaccines = models.ManyToManyField(Vaccine)
-    
+    showDetails = models.BooleanField(null=False,default=False)
+    description = models.CharField(max_length=1000,blank=False,null=False,default="N/D")
+
 
 class AdoptionRequest(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

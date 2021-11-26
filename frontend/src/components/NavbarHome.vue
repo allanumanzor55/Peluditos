@@ -1,27 +1,36 @@
 <template>
-  <div>
-    <div></div>
-    <b-navbar style="background: #ff9922" class="py-0" fixed="top">
-      <b-navbar-nav class="py-0">
-        <UserMenu />
-      </b-navbar-nav>
-      <v-spacer></v-spacer>
-      <div>
-        <b-navbar-nav>
-          <b-nav-item >
-            <v-icon class="white--text">
-            mdi-bell
-            </v-icon>
-          </b-nav-item>
-          <b-nav-item>
-            <v-icon class="white--text" @click="logout">
-            mdi-power-standby
-            </v-icon>
-          </b-nav-item>
-        </b-navbar-nav>
-      </div>
-    </b-navbar>
-  </div>
+    <div>
+    <v-app-bar
+      color="orange lighten-1"
+      dark
+    >
+    <v-avatar color="white" @click="drawer=true" style="cursor:pointer">
+      <span class="orange--text text-h5">
+        {{inicials}}
+      </span>
+    </v-avatar>
+    <v-spacer></v-spacer>
+    <v-btn class="mx-0 px-0" color="orange lighten-1" elevation="0">
+        <v-icon class="white--text" @click="logout">
+        mdi-bell
+        </v-icon>
+      </v-btn>
+      <v-btn color="orange lighten-1" elevation="0" class="px-0">
+        <v-icon class="white--text" @click="logout">
+        mdi-power-standby
+        </v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list nav dense>
+        <UserMenu/>
+      </v-list>
+    </v-navigation-drawer>
+    </div>
 </template>
 
 <script>
@@ -31,6 +40,17 @@ import Cookies from 'js-cookie'
 export default {
   name: "NavbarHome",
   components:{UserMenu},
+  data(){
+    return{
+      drawer:false,
+      group:null
+    }
+  },
+  computed:{
+    inicials:function(){
+      return this.$store.state.firstName.split('')[0].toUpperCase()+this.$store.state.lastName.split('')[0].toUpperCase()
+    }
+  },
   methods:{
     async logout(){
       let r = await this.$swal({

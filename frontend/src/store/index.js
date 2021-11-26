@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
 import {AUTHENTICATE_USER} from '@/graphql/queries/userQueries'
+import {GET_OWNER_PETS} from '@/graphql/queries/petQueries'
+
 import { apolloClient } from '../graphql/apollo'
 Vue.use(Vuex)
 
@@ -14,9 +16,17 @@ export default new Vuex.Store({
     verifiedEmail:'',
     profileName:'',
     verify:false,
-    restorePassword:false
+    restorePassword:false,
+    myPets:[],
+    updateCentinel:false,
   },
   mutations: {
+    activateUpdate(state){
+      state.updateCentinel=true
+    },
+    desactivateUpdate(state){
+      state.updateCentinel=false
+    },
     setData(state){
       if(Cookies.get('token')!==undefined){
         state.token = Cookies.get('token')
@@ -25,9 +35,7 @@ export default new Vuex.Store({
         state.id = Cookies.get('id')
         state.verifiedEmail = Cookies.get('verifiedEmail')
         state.profileName = Cookies.get('profileName')
-        console.log('1')
       }else if(Cookies.get('token')===undefined){
-        console.log('2')
         state.token=''
         state.firstName = ''
         state.lastName = ''
@@ -45,7 +53,7 @@ export default new Vuex.Store({
 ,
     noSetVerify(state){
       state.verify=false
-    }
+    },
   },
   actions: {
     async verifyLogin(context){
@@ -57,8 +65,12 @@ export default new Vuex.Store({
       }else{
         context.commit('noSetVerify')
       }
+    },
+    async updatePets(context){
+      context.state.myPets = (await apolloClient.query({
+        query: GET_OWNER_PETS,
+        variables: { ownerId: context.state.id },
+      })).data.ownerPets
     }
-  },
-  modules: {
   }
 })

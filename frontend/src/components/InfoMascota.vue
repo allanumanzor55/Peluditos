@@ -7,9 +7,9 @@
         sm="6"
         md="7"
       >
-      <h3>Mi nombre es: </h3>
+      <h3>Mi nombre es: {{petData.name}}</h3>
       <div>
-        <CarouselMascota/>
+        <CarouselMascota :id="parseInt(petData.id)" />
       </div>
 
       </v-col>
@@ -30,7 +30,7 @@
             <p>Estoy siendo dado en adopcion por: 
                 <b-link 
                 @click.stop="dialog = true"
-                >Nombre Persona</b-link>
+                >{{getName}}</b-link>
             </p>
             <div>
 
@@ -64,22 +64,19 @@
         <div >
             <h3>Acerca de mi</h3>
             <p>
-                Raza:
+                Raza: {{petData.breed.name}}
             </p>
             <p>
-                Peso:
+                Color: {{petData.breed.color}}
             </p>
             <p>
-                Color:
+                Fecha de nacimiento: {{petData.birthDate}}
             </p>
             <p>
-                Edad:
+                Tamaño: {{petData.breed.size}}
             </p>
             <p>
-                Tamaño:
-            </p>
-            <p>
-                Sexo:
+                Sexo: {{petData.breed.gender}}
             </p>
         </div>
     </v-col>
@@ -122,16 +119,33 @@
 <script>
 import CarouselMascota from '@/components/CarouselMascota.vue'
 import MostrarPerfil from '@/components/MostrarPerfil.vue'
-
+import {GET_PET_ALL_INFO} from '@/graphql/queries/petQueries'
 export default {
     data () {
       return {
+        idPet:0,
         dialog: false,
+        petData:{}
       }
     },
     components:{
         CarouselMascota,
         MostrarPerfil
+    },
+    computed:{
+      getName:function(){
+        return (this.petData.owner.firstName.split(' '))[0]+" "+(this.petData.owner.lastName.split(' '))[0]
+      }
+    },
+    methods:{
+    },
+    async created(){
+      this.idPet = this.$route.params.id;
+      try{
+        this.petData = (await this.$apollo.query({query:GET_PET_ALL_INFO,variables:{id:this.idPet}})).data.pet
+      }catch(e){
+        console.log(e.getMessage)
+      }
     }
 }
 </script>

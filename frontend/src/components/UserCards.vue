@@ -6,7 +6,7 @@
         class="mx-auto"
         max-width="344"
       >
-        <v-img src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg" style="height:225px;"></v-img>
+        <v-img :src="'http://lorempixel.com/344/255/people/'+userData.id+'/'" style="height:225px;"></v-img>
         <v-card-title class="orange--text">
           {{userData.firstName.split(" ")[0]+" "+userData.lastName.split(" ")[0]}}
         </v-card-title>
@@ -60,7 +60,8 @@ export default {
     }
   },
   props:{
-    userData: {}
+    userData: {},
+    id:Number
   }
 }
 </script>

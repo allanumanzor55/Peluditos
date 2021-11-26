@@ -6,24 +6,10 @@
     show-arrows-on-hover
   >
     <v-carousel-item
-      v-for="(slide, i) in slides"
+      v-for="(item,i) in 4"
       :key="i"
-    >
-      <v-sheet
-        :color="colors[i]"
-        height="100%"
-      >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
-          <div class="text-h2">
-            {{ slide }} Slide
-          </div>
-        </v-row>
-      </v-sheet>
-    </v-carousel-item>
+      :src="'https://placedog.net/400/200?id=' + (i+id)"
+    ></v-carousel-item>
   </v-carousel>
 </template> 
 
@@ -31,21 +17,10 @@
   export default {
     data () {
       return {
-        colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
-        slides: [
-          'First',
-          'Second',
-          'Third',
-          'Fourth',
-          'Fifth',
-        ],
       }
     },
+    props:{
+      id:Number
+    }
   }
 </script>

@@ -27,3 +27,18 @@ export const PROFILE_FRAGMENTS_FIELDS = gql`
         description
     }
 `
+
+export const PET_FRAGMENTS_FIELDS = gql`
+    fragment PetFields on PetNode{
+        id
+        name
+        category{
+            name
+            id
+        }
+        breed{
+            name
+            id
+        }
+    }
+`

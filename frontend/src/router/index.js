@@ -72,14 +72,14 @@ const routes = [
     component: ()=>import('../views/RestorePassword.vue')
   },
   {
-    path: '/mascotas/detalle',
+    path: '/adoptar/detalle/:id',
     name: 'DetalleMascota',
     component: () => import('../views/DetalleMascota.vue')
   },
   {
     path: '/mascotas/mismascotas',
     name: 'MisMascotas',
-    component: () => import('../views/Mascotas.vue')
+    component: () => import('../views/MascotaUsuario.vue')
   },
   {
     path: '/perfilusuario',
@@ -90,7 +90,7 @@ const routes = [
     }
   },
   {
-    path: '/MascotaUsuario',
+    path: '/mascotausuario',
     name: 'MascotaUsuario',
     component: () => import('../views/MascotaUsuario.vue')
   }
