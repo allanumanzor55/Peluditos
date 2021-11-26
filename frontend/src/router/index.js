@@ -69,17 +69,26 @@ const routes = [
   },{
     path:'/recuperarcontra',
     name:'RestorePassword',
-    component: ()=>import('../views/RestorePassword.vue')
+    component: ()=>import('../views/RestorePassword.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/adoptar/detalle/:id',
     name: 'DetalleMascota',
-    component: () => import('../views/DetalleMascota.vue')
+    component: () => import('../views/DetalleMascota.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/mascotas/mismascotas',
     name: 'MisMascotas',
-    component: () => import('../views/MascotaUsuario.vue')
+    component: () => import('../views/MascotaUsuario.vue'),
+    meta:{
+      requiresAuth:true
+    }
   },
   {
     path: '/perfilusuario',
@@ -92,7 +101,10 @@ const routes = [
   {
     path: '/mascotausuario',
     name: 'MascotaUsuario',
-    component: () => import('../views/MascotaUsuario.vue')
+    component: () => import('../views/MascotaUsuario.vue'),
+    meta:{
+      requiresAuth:true
+    }
   }
 ]
 
