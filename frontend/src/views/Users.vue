@@ -65,13 +65,20 @@ export default {
   },
   methods:{
     async getUsers(){
-      const { data } = await this.$apollo.query({ query: GET_ALL_USERS_QUERY });
-      return data.allUsers;
+      try {
+        const { data } = await this.$apollo.query({ query: GET_ALL_USERS_QUERY });
+        return data.allUsers;
+      } catch (error) {
+        console.error(error.message)
+      }
     },
     async filterUsers(){
-      const {data} = await this.$apollo.query({query:SEARCH_USER,variables:{firstName:this.filtro}})
-      this.users = data.getUsers
-      console.log(this.users)
+      try {
+        const {data} = await this.$apollo.query({query:SEARCH_USER,variables:{firstName:this.filtro}})
+        this.users = data.getUsers
+      } catch (error) {
+        console.error(error.message)
+      }
     }
   },
   async mounted() {

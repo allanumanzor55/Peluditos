@@ -57,20 +57,28 @@ export default new Vuex.Store({
   },
   actions: {
     async verifyLogin(context){
-      const {data} = await apolloClient.mutate(
-        {mutation:AUTHENTICATE_USER,
-        variables:{token:context.state.token,id:context.state.id}})
-      if(data.verifyLogin.verified){
-        context.commit('setVerify')
-      }else{
-        context.commit('noSetVerify')
+      try {
+        const {data} = await apolloClient.mutate(
+          {mutation:AUTHENTICATE_USER,
+          variables:{token:context.state.token,id:context.state.id}})
+        if(data.verifyLogin.verified){
+          context.commit('setVerify')
+        }else{
+          context.commit('noSetVerify')
+        }
+      } catch (error) {
+        console.error(error.message)
       }
     },
     async updatePets(context){
-      context.state.myPets = (await apolloClient.query({
-        query: GET_OWNER_PETS,
-        variables: { ownerId: context.state.id },
-      })).data.ownerPets
+      try {
+        context.state.myPets = (await apolloClient.query({
+          query: GET_OWNER_PETS,
+          variables: { ownerId: context.state.id },
+        })).data.ownerPets
+      } catch (error) {
+        console.error(error.message)
+      }
     }
   }
 })

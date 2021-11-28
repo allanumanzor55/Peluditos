@@ -303,12 +303,17 @@ export default {
     this.addressInfo.colonia = this.user.address.suburb;
     this.addressInfo.residencia = this.user.address.residence;
     this.addressInfo.referencia = this.user.address.reference;
-    const data2 = await this.$apollo.mutate({
+    try {
+      const data2 = await this.$apollo.mutate({
       mutation: USER_N_INFO,
       variables: { id: this.idUser },
-    });
-    //Json para datos numericos de mascotas
-    this.userPetInfo = data2.data.userInfo;
+      });
+      //Json para datos numericos de mascotas
+      this.userPetInfo = data2.data.userInfo;
+      
+    } catch (error) {
+      console.error(error.message)
+    }
   },
 };
 </script>

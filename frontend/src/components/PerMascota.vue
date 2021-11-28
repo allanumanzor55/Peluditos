@@ -21,7 +21,7 @@
         <v-tab-item v-for="n in 3" :key="n">
           <v-container fluid>
             <v-row v-if="!getCharge">
-                <v-col
+              <v-col
                 v-for="(item, i) in getPets"
                 :key="i"
                 cols="12"
@@ -45,11 +45,11 @@
                         <v-list dense>
                           <v-list-item-group>
                             <FormMascota type="modificar" :idPet="item.id" />
-                          <v-list-item @click="deletePet(item.id)">
-                            <v-list-item-title>
-                              <v-icon pointer>mdi-delete</v-icon>Eliminar
-                            </v-list-item-title>
-                          </v-list-item>
+                            <v-list-item @click="deletePet(item.id)">
+                              <v-list-item-title>
+                                <v-icon pointer>mdi-delete</v-icon>Eliminar
+                              </v-list-item-title>
+                            </v-list-item>
                           </v-list-item-group>
                         </v-list>
                       </v-menu>
@@ -84,24 +84,34 @@
                       class="transition-fast-in-fast-out v-card--reveal"
                       style="height: 100%"
                     >
-                      <v-card-text >
-                        <v-container class="orange lighten-5" style="border-radius:15px;">
+                      <v-card-text>
+                        <v-container
+                          class="orange lighten-5"
+                          style="border-radius: 15px"
+                        >
                           <p class="orange--text">
                             Color:
-                            <span class="black--text">{{(item.color=="")?"N/D":item.color}}</span>
+                            <span class="black--text">{{
+                              item.color == "" ? "N/D" : item.color
+                            }}</span>
                           </p>
                           <p class="orange--text">
-                            Fecha de nacimiento: 
-                            <span class="black--text">{{item.birthDate}}</span>
+                            Fecha de nacimiento:
+                            <span class="black--text">{{
+                              item.birthDate
+                            }}</span>
                           </p>
                         </v-container>
-                        <v-container class="orange lighten-4 mt-3" style="border-radius:15px; min-height:190px !important;">
-                          <p class="text-h4 orange--text">
-                            Descripcion:
-                          </p>
-                          {{item.description}}
+                        <v-container
+                          class="orange lighten-4 mt-3"
+                          style="
+                            border-radius: 15px;
+                            min-height: 190px !important;
+                          "
+                        >
+                          <p class="text-h4 orange--text">Descripcion:</p>
+                          {{ item.description }}
                         </v-container>
-                        
                       </v-card-text>
                       <v-card-actions style="margin-top: calc(100%-1rem)">
                         <v-btn
@@ -120,7 +130,6 @@
             <v-row v-else>
               <skeleton />
             </v-row>
-
           </v-container>
         </v-tab-item>
       </v-tabs>
@@ -131,63 +140,69 @@
 <script>
 import Skeleton from "@/components/Skeleton.vue";
 import FormMascota from "@/components/FormMascota.vue";
-import {DELETE_PET,/*GET_OWNER_PETS*/} from '@/graphql/queries/petQueries'
+import { DELETE_PET /*GET_OWNER_PETS*/ } from "@/graphql/queries/petQueries";
 export default {
-  components: { FormMascota,Skeleton },
+  components: { FormMascota, Skeleton },
   data() {
     return {
       myPets: [],
       type: "guardar",
-      updateActivate:true
+      updateActivate: true,
     };
   },
-  computed:{
-    getPets:function(){
-      return this.$store.state.myPets
+  computed: {
+    getPets: function () {
+      return this.$store.state.myPets;
     },
     getCharge: function () {
       return this.$store.state.updateCentinel;
     },
   },
-  methods:{
-    getMyPets(){
+  methods: {
+    getMyPets() {
       // this.myPets = (await this.$apollo.query({query: GET_OWNER_PETS,variables: { ownerId: this.$store.state.id },})).data.ownerPets
-      this.myPets = this.$store.state.myPets
+      this.myPets = this.$store.state.myPets;
     },
-    async deletePet(id){
-      const{isConfirmed}=await this.$swal({
-        title: '¿Estas seguro?',
-            text: "No podras revertir esta accion (te recomendamos deshabilitar el perfil de no estar seguro)",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#F57C00',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminalo',
-            cancelButtonText:'Cancelar'
-        })
-      if(isConfirmed){
-        this.$store.commit("activateUpdate")
-        const {data} = await this.$apollo.mutate({mutation:DELETE_PET,variables:{id:id}})
-        if(data.deletePet.verified){
-          await this.$store.dispatch("updatePets");
-          await this.$swal({title:'Registro eliminado',icon:'success'})
-          this.$store.commit("desactivateUpdate")
-        }else{
-          this.$swal({title:'Algo salio mal',icon:'error'})
+    async deletePet(id) {
+      const { isConfirmed } = await this.$swal({
+        title: "¿Estas seguro?",
+        text: "No podras revertir esta accion (te recomendamos deshabilitar el perfil de no estar seguro)",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#F57C00",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminalo",
+        cancelButtonText: "Cancelar",
+      });
+      if (isConfirmed) {
+        try {
+          this.$store.commit("activateUpdate");
+          const { data } = await this.$apollo.mutate({
+            mutation: DELETE_PET,
+            variables: { id: id },
+          });
+          if (data.deletePet.verified) {
+            await this.$store.dispatch("updatePets");
+            await this.$swal({ title: "Registro eliminado", icon: "success" });
+            this.$store.commit("desactivateUpdate");
+          } else {
+            this.$swal({ title: "Algo salio mal", icon: "error" });
+          }
+        } catch (error) {
+          console.error(error.message);
         }
       }
-    }
+    },
   },
   async mounted() {
     //await this.getMyPets()
   },
-  async created(){
-    this.$store.commit("activateUpdate")
-    await this.$store.dispatch('updatePets')
-    this.$store.commit("desactivateUpdate")
-    
-  }
-};  
+  async created() {
+    this.$store.commit("activateUpdate");
+    await this.$store.dispatch("updatePets");
+    this.$store.commit("desactivateUpdate");
+  },
+};
 </script>
 
 <style scoped>

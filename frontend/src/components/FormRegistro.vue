@@ -194,30 +194,33 @@
     methods:{
       async register(){
         if(this.$refs.registerForm.validate()){
-          const {data} = await this.$apollo.mutate({
+          try {
+            const {data} = await this.$apollo.mutate({
             mutation: REGISTER_USER,
-            variables:{userData:this.registerInfo}
-          })
-          if(data.register.register){
-            this.$swal({
-              icon:'success',
-              title:'Registro exitoso',
-              text:'Bienvenido a Peluditos',
-            }).then(()=>{
-              Cookies.set("token", data.register.user.token);
-              Cookies.set("firstName", data.register.user.firstName);
-              Cookies.set("lastName", data.register.user.lastName);
-              Cookies.set("id", data.register.user.id);
-              Cookies.set("verifiedEmail", data.register.user.verified);
-              Cookies.set("profileName", data.register.user.profileType.name);
-              this.$router.push('/inicio')
-            })
-          }else{
-            this.$swal({
-              icon:'error',
-              title:'Algo salio mal',
-              text:'Intentalo de nuevo'
-            })
+            variables:{userData:this.registerInfo}})
+            if(data.register.register){
+              this.$swal({
+                icon:'success',
+                title:'Registro exitoso',
+                text:'Bienvenido a Peluditos',
+              }).then(()=>{
+                Cookies.set("token", data.register.user.token);
+                Cookies.set("firstName", data.register.user.firstName);
+                Cookies.set("lastName", data.register.user.lastName);
+                Cookies.set("id", data.register.user.id);
+                Cookies.set("verifiedEmail", data.register.user.verified);
+                Cookies.set("profileName", data.register.user.profileType.name);
+                this.$router.push('/inicio')
+              })
+            }else{
+              this.$swal({
+                icon:'error',
+                title:'Algo salio mal',
+                text:'Intentalo de nuevo'
+              })
+            }
+          } catch (error) {
+            console.log(error.message)
           }
         }
       }
