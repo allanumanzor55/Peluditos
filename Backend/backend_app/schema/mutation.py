@@ -600,6 +600,7 @@ class restorePassword(graphene.Mutation):
                 except Exception  as ex:
                     return restorePassword(verified=False,msg=ex)
             return restorePassword(verified=False,msg="Alguno de los datos ingresados estan incorrectos")
+
 class Mutation(graphene.AbstractType):
     create_module = CreateModule.Field()
     update_module = UpdateModule.Field()

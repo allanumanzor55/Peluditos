@@ -84,3 +84,4 @@ class AdoptionRequest(models.Model):
     accepted = models.BooleanField(null=False,default=False)
 
 
+

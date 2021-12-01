@@ -52,6 +52,7 @@ export default {
         { text: 'Adoptar', icon: 'mdi-dog',href:'Adoptar' },
         { text: 'Usuarios', icon: 'mdi-account-group',href:'Users' },
         { text: 'Configuraciones', icon: 'mdi-cog',href:'Opciones' },
+        { text: 'Solicitudes', icon: 'mdi-bell',href:'Solicitudes' },
         
       ],
     }
@@ -72,6 +73,7 @@ export default {
     this.items[3].visible = (profileName=='Adopter')?true:false
     this.items[4].visible = (profileName=='Administrador')?true:false
     this.items[5].visible = (profileName=='Administrador')?true:false
+    this.items[6].visible = (profileName=='Adopter')?true:false
   }
 };
 </script>

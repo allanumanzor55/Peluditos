@@ -105,7 +105,15 @@ const routes = [
     meta:{
       requiresAuth:true
     }
-  }
+  },
+    {
+      path: '/solicitudes',
+      name: 'Solicitudes',
+      component: () => import('../views/Solicitudes.vue'),
+      meta:{
+        requiresAuth:false
+      }
+    }
 ]
 
 

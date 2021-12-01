@@ -3,7 +3,7 @@
     <v-app-bar color="orange lighten-1" dark>
       <v-avatar color="white" @click="drawer = true" style="cursor: pointer">
         <span class="orange--text text-h5">
-          {{ inicials }}
+          
         </span>
       </v-avatar>
       <v-spacer></v-spacer>
