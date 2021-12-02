@@ -439,8 +439,8 @@ class UpdatePet(graphene.Mutation):
             if pet_data.color is not None: pet_instance.color = pet_data.color
             if pet_data.size is not None: pet_instance.size = pet_data.size
             if pet_data.gender is not None: pet_instance.gender = pet_data.gender
-            if pet_data.isSterilized is not None: pet_instance.isSterilized = pet_data.isSterilized
-            if pet_data.isAdopted is not None: pet_instance.isAdopted = pet_data.isAdopted
+            if pet_data.isSterilized is not None: pet_instance.isSterilized = str(pet_data.isSterilized)
+            if pet_data.isAdopted is not None: pet_instance.isAdopted = str(pet_data.isAdopted)
             pet_instance.save()
             return UpdatePet(verified=True)
 
@@ -563,7 +563,7 @@ class UserInfo(graphene.Mutation):
         requestAwait = AdoptionRequest.objects.filter(user_id=id).filter(accepted__icontains=False).count()
         return UserInfo(adoptedPets=adoptedPets,adoptionPets=adoptionPets,requestsSent=requestSent,requestsAwait=requestAwait)
 
-class restorePassword(graphene.Mutation):
+class RestorePassword(graphene.Mutation):
     verified = graphene.Boolean()
     msg = graphene.String()
     class Input:
@@ -576,7 +576,7 @@ class restorePassword(graphene.Mutation):
         try:
             us_ins = User.objects.get(email=email,dni=dni)
         except:
-            return restorePassword(verified=False,msg="Datos incorrectos")
+            return RestorePassword(verified=False,msg="Datos incorrectos")
         if us_ins:
             if us_ins.secureAnswer == answer:
                 try:
@@ -596,10 +596,65 @@ class restorePassword(graphene.Mutation):
                     smtp.login(remitente,"Condemilenario")
                     smtp.sendmail(remitente, destinatario, mail.as_string())
                     smtp.quit()
-                    return restorePassword(verified=True,msg="Verificacion correcta, se envio la contraseña a tu correo")
+                    return RestorePassword(verified=True,msg="Verificacion correcta, se envio la contraseña a tu correo")
                 except Exception  as ex:
-                    return restorePassword(verified=False,msg=ex)
-            return restorePassword(verified=False,msg="Alguno de los datos ingresados estan incorrectos")
+                    return RestorePassword(verified=False,msg=ex)
+            return RestorePassword(verified=False,msg="Alguno de los datos ingresados estan incorrectos")
+
+class Like(graphene.Mutation):
+    verified = graphene.Boolean()
+    class Input:
+        user = graphene.ID()
+        pet = graphene.ID()
+    @staticmethod
+    def mutate(root,info,user,pet):
+        try:
+            user_instance = User.objects.get(pk=user)
+            pet_instance = Pet.objects.get(pk=pet)
+            pet_instance.isLike.add(user_instance)
+            return Like(verified=True)
+        except:
+            return  Like(verified=False)
+
+class AdoptionRequestInput(graphene.InputObjectType):
+    id = graphene.ID()
+    sender = graphene.Int()
+    receiver = graphene.Int()
+    pet = graphene.Int()
+
+class SendAdoptionRequest(graphene.Mutation):
+    verified = graphene.Boolean()
+    msg = graphene.String()
+    class Input:
+        request_data = AdoptionRequestInput(required=True)
+    
+    @staticmethod
+    def mutate(root,info,request_data=None):
+        try:
+            AdoptionRequest.objects.create(
+                sender_id=request_data.sender,
+                receiver_id= request_data.receiver,
+                pet_id = request_data.pet
+            )
+            return SendAdoptionRequest(verified=True)
+        except Exception as x:
+            return SendAdoptionRequest(verified=False,msg=str(x))
+
+class UpdateRequest(graphene.Mutation):
+    verified = graphene.Boolean()
+    msg = graphene.String()
+    class Input:
+        id = graphene.ID()
+        state = graphene.String()
+    @staticmethod
+    def mutate(root,info,id,state):
+        try:
+            adoption_instance = AdoptionRequest.objects.get(pk=id)
+            adoption_instance.state = state
+            adoption_instance.save()
+            return UpdateRequest(verified=True,msg="Correcto")
+        except Exception as x:
+            return UpdateRequest(verified=True,msg=str(x))
 
 class Mutation(graphene.AbstractType):
     create_module = CreateModule.Field()
@@ -633,4 +688,7 @@ class Mutation(graphene.AbstractType):
     user_info = UserInfo.Field()
     verify_login = VerifyLogin.Field()
     logout = Logout.Field()
-    restore_password = restorePassword.Field()
+    restore_password = RestorePassword.Field()
+    like = Like.Field()
+    send_adoption_request = SendAdoptionRequest.Field()
+    update_request = UpdateRequest.Field()

@@ -54,6 +54,13 @@ class AdoptionRequestNode(DjangoObjectType):
 class BreedNode(DjangoObjectType):
     class Meta:
         model = Breed
+
+class RequestNode(DjangoObjectType):
+    class Meta:
+        model = AdoptionRequest
+
+
+
 """
     La clase "Query" definida es la que realizara todo tipo de consultas por cada
     atributo creado se creara un "resolve" que es un metodo que definira la consulta
@@ -70,6 +77,8 @@ class Query(graphene.ObjectType):
     all_vaccines = graphene.List(VaccineNode)
     all_breeds = graphene.List(BreedNode)
     #Querys ligadas a valores
+    all_user_request = graphene.List(RequestNode,senderId=graphene.Int(),receiverId=graphene.Int())
+
     permissions = graphene.List(PermissionsNode,roleId=graphene.Int())
     user = graphene.Field(UserNode,id=graphene.Int(),
                         firstName=graphene.String(),
@@ -211,3 +220,11 @@ class Query(graphene.ObjectType):
             return Pet.objects.filter(isSterilized__icontains=isSterilized)    
         elif isAdopted is not None:
             return Pet.objects.filter(isAdopted=isAdopted)
+
+    def resolve_all_user_request(self,info,**kwargs):
+        senderId = kwargs.get('senderId')
+        receiverId = kwargs.get('receiverId')
+        if senderId is not None:
+            return AdoptionRequest.objects.filter(sender_id=senderId)
+        elif receiverId is not None:
+            return AdoptionRequest.objects.filter(receiver_id=receiverId)

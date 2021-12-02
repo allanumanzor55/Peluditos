@@ -111,24 +111,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'CLIENT': {
-            'name': 'db_patitas',
-            'host': 'mongodb+srv://manager:Cy51zyaMmjcWlx02@cluster0.gwqea.mongodb.net/db_patitas?retryWrites=true&w=majority',
-            'username': 'manager',
-            'password':'Cy51zyaMmjcWlx02',
-            'authMechanism': 'SCRAM-SHA-1'
-        }
-    }
-}
 # DATABASES = {
-#     'default':{
-#         'ENGINE':'djongo',
-#         'NAME':'demo_database'
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'CLIENT': {
+#             'name': 'db_patitas',
+#             'host': 'mongodb+srv://manager:Cy51zyaMmjcWlx02@cluster0.gwqea.mongodb.net/db_patitas?retryWrites=true&w=majority',
+#             'username': 'manager',
+#             'password':'Cy51zyaMmjcWlx02',
+#             'authMechanism': 'SCRAM-SHA-1'
+#         }
 #     }
 # }
+DATABASES = {
+    'default':{
+        'ENGINE':'djongo',
+        'NAME':'demo_database'
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

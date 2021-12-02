@@ -62,26 +62,35 @@ class Breed(models.Model):
     name = models.CharField(max_length=50,blank=False,null=False,default="N/D")
 
 class Pet(models.Model):
+    TRUE = "true"
+    FALSE = "false"
+    BOOLEAN_CHOICES = [(TRUE,"True"),(FALSE,"False")]
     name = models.CharField(max_length=70,blank=False,null=False,default="N/D")
     category = models.ForeignKey(PetCategory, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name="owner_set")
     birthDate = models.DateField()
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
     color = models.CharField(max_length=50,blank=False,null=False,default="N/D")
     size = models.CharField(max_length=10,blank=False,null=False,default="N/D")
     gender = models.CharField(max_length=10,blank=False,null=False,default="N/D")
-    isSterilized = models.BooleanField(null=False,default=False)
-    isAdopted = models.BooleanField(null=False,default=False) 
+    isSterilized = models.CharField(max_length=5,choices=BOOLEAN_CHOICES,default=FALSE)
+    isAdopted = models.CharField(max_length=5,choices=BOOLEAN_CHOICES,default=FALSE)
     vaccines = models.ManyToManyField(Vaccine)
     showDetails = models.BooleanField(null=False,default=False)
     description = models.CharField(max_length=1000,blank=False,null=False,default="N/D")
+    isLike = models.ManyToManyField(User)
 
 
 class AdoptionRequest(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    PENDING ="PEN"
+    ACCEPTED = "ACE"
+    DENY  = "DEN"
+    ACCEPTED_CHOICES = [(PENDING,"Pendiente"),(ACCEPTED,"Aceptada"),(DENY,"Denegada")]
+    sender = models.ForeignKey(User,on_delete=models.CASCADE,related_name="sender_set",default=0)
+    receiver = models.ForeignKey(User,on_delete=models.CASCADE,related_name="receiver_set",default=0)
     pet = models.ForeignKey(Pet,on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
-    accepted = models.BooleanField(null=False,default=False)
+    state = models.CharField(max_length=3,choices=ACCEPTED_CHOICES,default=PENDING)
 
 
 
