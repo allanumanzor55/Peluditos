@@ -8,22 +8,22 @@
         <b-tab title="Cambiar Correo" active>
             <div>
             <span>Ingrese sus credenciales actuales</span>
-          <v-form ref="registerForm" v-model="valid" lazy-validation>
+          <v-form ref="updateForm" v-model="valid" lazy-validation>
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-email" v-model="registerInfo.email"
+                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emaila" v-model="form.email"
                     :rules="[rules[0].required,rules[0].valid.email]"
                     required
                     >                      
                     </v-text-field>
-                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-password" v-model="registerInfo.password"
+                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordac" v-model="form.password"
                   :rules="[rules[0].required]">
                   </v-text-field>
 
                   <br>
                   <span>Ingrese su nuevo correo</span>
-                  <v-text-field label="Email" color="orange darken-3"  type="email" id="r-email" v-model="registerInfo.email"
+                  <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emailac" v-model="infoUpdate.email"
                     :rules="[rules[0].required,rules[0].valid.email]"
                     required
                     >                      
@@ -34,7 +34,7 @@
               <v-btn 
               color="orange darken-4 white--text"
               :disabled="!valid"
-              @click="register">
+              @click="updateSeguridad">
               Actualizar
               </v-btn>
           </v-form>
@@ -45,22 +45,22 @@
         <b-tab title="Cambiar Contraseña">
                       <div>
             <span>Ingrese sus credenciales actuales</span>
-          <v-form ref="registerForm" v-model="valid" lazy-validation>
+          <v-form ref="updateForm" v-model="valid" lazy-validation>
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-email" v-model="registerInfo.email"
+                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emailc" v-model="form.email"
                     :rules="[rules[0].required,rules[0].valid.email]"
                     required
                     >                      
                     </v-text-field>
-                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-password" v-model="registerInfo.password"
+                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordc" v-model="form.password"
                   :rules="[rules[0].required]">
                   </v-text-field>
 
                   <br>
                   <span>Ingrese su nueva contraseña</span>
-                  <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-password" v-model="registerInfo.password"
+                  <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordn" v-model="infoUpdate.password"
                   :rules="[rules[0].required]">
                   </v-text-field>
                 </v-col>
@@ -69,7 +69,7 @@
               <v-btn 
               color="orange darken-4 white--text"
               :disabled="!valid"
-              @click="register">
+              @click="updateSeguridad">
               Actualizar
               </v-btn>
           </v-form>
@@ -85,12 +85,19 @@
 </style>
 
 <script>
-  import {REGISTER_USER} from '@/graphql/queries/userQueries.js'
+  import {USER_UPDATE_SEGURIDAD, LOGIN_USER} from '@/graphql/queries/userQueries.js'
+  import Cookies from "js-cookie";
   export default {
     data() {
       return {
         valid:true,
-        registerInfo:{
+        infoUpdate:{
+          password:'',
+          email:''
+        },
+        form: {
+        email: "",
+        password: "",
         },
         rules:[
           {
@@ -104,30 +111,46 @@
       }
     },
     methods:{
-      async register(){
-        if(this.$refs.registerForm.validate()){
-          const {data} = await this.$apollo.mutate({
-            mutation: REGISTER_USER,
-            variables:{userData:this.registerInfo}
-          })
-          console.log(data.register.register)
-          if(data.register.register){
-            this.$swal({
-              icon:'success',
-              title:'Registro exitoso',
-              text:'Bienvenido a Peluditos',
-            }).then(()=>{
-              this.$router.push('/Home')
-            })
-          }else{
-            this.$swal({
-              icon:'error',
-              title:'Algo salio mal',
-              text:'Intentalo de nuevo'
-            })
-          }
+      validate() {
+        if (this.$refs.formLogin.validate()) {
+          this.login_user();
         }
+      },
+      async updateSeguridad() {
+      try {
+        const { data } = await this.$apollo.mutate({
+          mutation: LOGIN_USER,
+          variables: { email: this.form.email, password: this.form.password },
+        });
+        this.login = data.login;
+        if (this.login.verified) {
+          if (!(Cookies.get('token'))=="") {
+            if(this.$refs.updateForm.validate()){
+              const {data} = await this.$apollo.mutate({
+                mutation: USER_UPDATE_SEGURIDAD,
+                variables:{userData:this.infoUpdate}
+              })
+              console.log(data.updateUser.updateUser)
+              if(data.updateUser.updateUser){
+                this.$swal({
+                  icon:'success',
+                  title:'Exitoso',
+                  text:'Los datos se actualizarón correctamente',
+                }).then(()=>{
+                  this.$router.push('/perfilusuario')
+                })
+              }
+            }
+          }
+        } else {
+          if (this.login.user === null) {
+            this.$swal({ icon: "error", title: "credenciales incorrectas" });
+          } 
+        }
+      } catch (error) {
+        console.log(error.message)
       }
+    }
     }
   }
 </script>

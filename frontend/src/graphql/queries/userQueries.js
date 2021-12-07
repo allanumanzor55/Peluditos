@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import {USER_FRAGMENT_FIELDS, ADDRESS_FRAGMENT_FIELDS,PROFILE_FRAGMENTS_FIELDS} from './fragments';
+import {USER_FRAGMENT_FIELDS, ADDRESS_FRAGMENT_FIELDS,PROFILE_FRAGMENTS_FIELDS, USERUPDATE_FRAGMENT_FIELDS} from './fragments';
 export const GET_ALL_USERS_QUERY = gql`
     ${USER_FRAGMENT_FIELDS}
     query {
@@ -129,4 +129,37 @@ export const RESTORE_PASSWORD = gql`
             msg
         }
     }
+`
+export const GET_USER_INFO_UPDATE = gql`
+    ${USERUPDATE_FRAGMENT_FIELDS}
+    ${ADDRESS_FRAGMENT_FIELDS}
+    query($id: Int!){
+        user(id:$id){
+            ...UserUpdateFields
+            address{
+                ...AddressFields
+            }
+        }
+    }
+`
+export const USER_UPDATE_FRAGMENT_FIELDS = gql`
+    ${USERUPDATE_FRAGMENT_FIELDS}
+    ${ADDRESS_FRAGMENT_FIELDS}
+    mutation ($userData:UserInput!){
+        updateUser{
+                ...UserUpdateFields
+                address{
+                    ...AddressFields
+                }
+            }
+        }
+    
+`
+export const USER_UPDATE_SEGURIDAD = gql`
+mutation ($userData:UserInput!){
+    updateUser{
+        email
+        password
+    }
+}
 `
