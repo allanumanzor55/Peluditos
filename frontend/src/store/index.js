@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
 import {AUTHENTICATE_USER} from '@/graphql/queries/userQueries'
-import {GET_OWNER_PETS} from '@/graphql/queries/petQueries'
+import {GET_OWNER_PETS,FAVORITE_PETS} from '@/graphql/queries/petQueries'
 
 import { apolloClient } from '../graphql/apollo'
 Vue.use(Vuex)
@@ -18,6 +18,7 @@ export default new Vuex.Store({
     verify:false,
     restorePassword:false,
     myPets:[],
+    myFavoritesPets:[],
     updateCentinel:false,
   },
   mutations: {
@@ -76,6 +77,16 @@ export default new Vuex.Store({
           query: GET_OWNER_PETS,
           variables: { ownerId: context.state.id },
         })).data.ownerPets
+      } catch (error) {
+        console.error(error.message)
+      }
+    },
+    async updateFavoritesPets(context){
+      try {
+        context.state.myFavoritesPets = (await apolloClient.query({
+          query: FAVORITE_PETS,
+          variables: { id: context.state.id },
+        })).data.favoriteOwnerPets
       } catch (error) {
         console.error(error.message)
       }

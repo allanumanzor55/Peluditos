@@ -18,7 +18,7 @@
         <v-tab>Favoritas</v-tab>
         <v-tab>Adoptadas</v-tab>
 
-        <v-tab-item v-for="n in 3" :key="n">
+        <v-tab-item>
           <v-container fluid>
             <v-row v-if="!getCharge">
               <v-col
@@ -132,6 +132,80 @@
             </v-row>
           </v-container>
         </v-tab-item>
+        <v-tab-item>
+          <v-container fluid>
+            <v-row>
+              <v-col
+                v-for="(item, i) in getMyFavPets"
+                :key="i"
+                cols="6"
+                md="4"
+                style="min-height: 400px !important"
+              >
+                <v-card class="mx-auto" max-width="344">
+                  <v-img
+                    :src="'https://placedog.net/200/344?id=' + (i + 1)"
+                    height="200px"
+                  >
+                  </v-img>
+                  <v-card-text class="mb-0">
+                    <div>{{ item.category.name }}</div>
+                    <p class="text-h4 text--primary">{{ item.name }}</p>
+                    <span>{{ item.breed.name }} - {{ item.gender }}</span>
+                  </v-card-text>
+                  <v-card-actions class="mt-0">
+                  </v-card-actions>
+                  <v-expand-transition>
+                    <v-card
+                      v-if="item.showDetails"
+                      class="transition-fast-in-fast-out v-card--reveal"
+                      style="height: 100%"
+                    >
+                      <v-card-text>
+                        <v-container
+                          class="orange lighten-5"
+                          style="border-radius: 15px"
+                        >
+                          <p class="orange--text">
+                            Color:
+                            <span class="black--text">{{
+                              item.color == "" ? "N/D" : item.color
+                            }}</span>
+                          </p>
+                          <p class="orange--text">
+                            Fecha de nacimiento:
+                            <span class="black--text">{{
+                              item.birthDate
+                            }}</span>
+                          </p>
+                        </v-container>
+                        <v-container
+                          class="orange lighten-4 mt-3"
+                          style="
+                            border-radius: 15px;
+                            min-height: 190px !important;
+                          "
+                        >
+                          <p class="text-h4 orange--text">Descripcion:</p>
+                          {{ item.description }}
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions style="margin-top: calc(100%-1rem)">
+                        <v-btn
+                          text
+                          color="teal accent-4"
+                          @click="item.showDetails = false"
+                        >
+                          Close
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-expand-transition>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-tab-item>
       </v-tabs>
     </v-card>
   </div>
@@ -146,6 +220,7 @@ export default {
   data() {
     return {
       myPets: [],
+      myFavoritePets:[],
       type: "guardar",
       updateActivate: true,
     };
@@ -154,7 +229,10 @@ export default {
     getPets: function () {
       return this.$store.state.myPets;
     },
-    getCharge: function () {
+    getMyFavPets: function(){
+      return this.$store.state.myFavoritesPets;
+    },
+    getCharge: function ()  {
       return this.$store.state.updateCentinel;
     },
   },
@@ -201,6 +279,7 @@ export default {
     this.$store.commit("activateUpdate");
     await this.$store.dispatch("updatePets");
     this.$store.commit("desactivateUpdate");
+    await this.$store.dispatch("updateFavoritesPets");
   },
 };
 </script>

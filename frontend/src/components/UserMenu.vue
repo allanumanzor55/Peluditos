@@ -9,7 +9,7 @@
         >
           <v-img
             height="230"
-            :src="'http://lorempixel.com/400/200/people/'+getUserId"
+            src="http://lorempixel.com/350/150/people/2"
             style="border-radius: 100%; background: none !important"
           >
           </v-img>

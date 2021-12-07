@@ -31,8 +31,8 @@
         </v-card-subtitle>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn icon>
-            <v-icon class="">mdi-heart</v-icon>
+          <v-btn icon @click="like(item.id,item.isLike,i)">
+            <v-icon :class="{'red--text':item.isLike}">mdi-heart</v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -42,47 +42,10 @@
 
 <script>
 import Skeleton from "@/components/Skeleton.vue";
-import { GET_PETS_ADOPT_MIN } from "@/graphql/queries/petQueries";
+import { GET_PETS_ADOPT_MIN,LIKE_PET } from "@/graphql/queries/petQueries";
 export default {
   components: { Skeleton },
   data: () => ({
-    mascota: [
-      {
-        id: 1,
-        nombre: "lorem ipsum",
-        imgn: "https://picsum.photos/600/300/?image=25",
-        lugar: "Tegucigalpa",
-        isLike: false,
-      },
-      {
-        id: 2,
-        nombre: "lorem ipsum2",
-        imgn: "https://picsum.photos/600/300/?image=25",
-        lugar: "Tegucigalpa",
-        isLike: false,
-      },
-      {
-        id: 3,
-        nombre: "lorem ipsum3",
-        imgn: "https://picsum.photos/600/300/?image=25",
-        lugar: "Tegucigalpa",
-        isLike: false,
-      },
-      {
-        id: 4,
-        nombre: "lorem ipsum4",
-        imgn: "https://picsum.photos/600/300/?image=25",
-        lugar: "Tegucigalpa",
-        isLike: false,
-      },
-      {
-        id: 5,
-        nombre: "lorem ipsum5",
-        imgn: "https://picsum.photos/600/300/?image=25",
-        lugar: "Tegucigalpa",
-        isLike: false,
-      },
-    ],
     orden: [1, 2, 3],
     allPets: [],
   }),
@@ -92,6 +55,15 @@ export default {
     },
   },
   methods: {
+    async like(idPet,like,i){
+      try{
+        await this.$apollo.mutate({mutation:LIKE_PET,
+        variables:{idPet:idPet,idUser:this.$store.state.id,like:like}})
+        this.allPets[i].isLike=!this.allPets[i].isLike
+      }catch(e){
+        this.allPets[i].isLike=!!this.allPets[i].isLike
+      }
+    },
     async petDetails(id) {
       this.$router.push({
         name: "DetalleMascota",
@@ -101,13 +73,26 @@ export default {
     async getAllPets() {
       this.$store.commit("desactivateUpdate");
       this.allPets = (
-        await this.$apollo.query({ query: GET_PETS_ADOPT_MIN })
+        await this.$apollo.query({ query: GET_PETS_ADOPT_MIN,variables:{idLoguer:this.$store.state.id} })
       ).data.allPets;
       this.$store.commit("activateUpdate");
     },
+
   },
   async created() {
+    let id =  this.$store.state.id
     await this.getAllPets();
+    try{
+      for(let i in this.allPets){
+        for(let j in this.allPets[i].likes){
+          if (this.allPets[i].likes[j].id==id){
+            this.allPets[i].isLike=true
+          }
+        }
+      }
+    }catch(e){
+      console.log(e.message)
+    }
   },
   async updated() {},
 };

@@ -90,7 +90,6 @@ ${PET_FRAGMENTS_FIELDS}
             color
             size
             gender
-            isSterilized
             isAdopted
             vaccines{
                 id
@@ -133,8 +132,8 @@ export const GET_PETS_ADOPT = gql`
 `
 export const GET_PETS_ADOPT_MIN = gql`
     ${PET_FRAGMENTS_FIELDS}
-    query{
-        allPets{
+    query($idLoguer:Int!){
+        allPets(idLoguer:$idLoguer){
             ...PetFields
             owner{
                 id
@@ -144,6 +143,39 @@ export const GET_PETS_ADOPT_MIN = gql`
                 }
             }
             gender
+            isLike
+            likes{
+                id
+            }
         }
     }
+`
+
+export const LIKE_PET = gql`
+    mutation($idPet:ID!,$idUser:ID!,$like:Boolean!){
+        like(pet:$idPet,user:$idUser,like:$like){
+            verified
+            msg
+        }
+    }
+`
+
+export const FAVORITE_PETS = gql`
+    ${PET_FRAGMENTS_FIELDS}
+    query($id:Int!){
+        favoriteOwnerPets(id:$id){
+            ...PetFields
+            gender
+            isLike
+        }
+    }
+`
+
+export const SEND_REQUEST = gql`
+    mutation($requestData:AdoptionRequestInput!){
+        sendAdoptionRequest(requestData:$requestData){
+            verified
+            msg
+        }
+    }   
 `
