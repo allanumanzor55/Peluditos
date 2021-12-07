@@ -42,3 +42,15 @@ export const PET_FRAGMENTS_FIELDS = gql`
         }
     }
 `
+
+export const USER_UPDATE_FRAGMENT_FIELDS =gql`
+    fragment UserUpdateFields on UserNode{
+        id
+        firstName
+        lastName
+        dni
+        age
+        principalCellphone
+        auxiliarCellphone
+    }
+`

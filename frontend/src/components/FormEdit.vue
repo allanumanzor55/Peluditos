@@ -5,29 +5,29 @@
         <h4 class="text-center">Datos personales</h4>
           <v-divider inset></v-divider>
         <div class="pad">
-          <v-form ref="registerForm" v-model="valid" lazy-validation>
+          <v-form ref="updateForm" v-model="valid" lazy-validation>
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Nombres" color="orange darken-3"  type="text" id="r-nombre" v-model="registerInfo.firstName"
+                    <v-text-field label="Nombres" v color="orange darken-3" type="text" id="r-nombre" v-model="infoUpdate.firstName"
                     :rules="[rules[0].required]"
                     >
                     </v-text-field>
-                    <v-text-field label="Edad" color="orange darken-3"  type="text" id="r-edad" v-model="registerInfo.age"
+                    <v-text-field label="Edad" color="orange darken-3"  type="text" id="r-edad" v-model="infoUpdate.age"
                     :rules="[rules[0].required,rules[0].valid.age,rules[0].max.age,rules[0].min.age]">
                     </v-text-field>
-                    <v-text-field label=" Celular principal" color="orange darken-3" type="text" id="r-celularp" v-model="registerInfo.principalCellphone"
+                    <v-text-field label=" Celular principal" color="orange darken-3" type="text" id="r-celularp" v-model="infoUpdate.principalCellphone"
                     :rules="[rules[0].required,rules[0].valid.number]">
                     </v-text-field>
                 </v-col>
                 <v-col>
-                  <v-text-field label="Primer apellido" color="orange darken-3"  type="text" id="r-apellido" v-model="registerInfo.lastName"
+                  <v-text-field label="Primer apellido" color="orange darken-3"  type="text" id="r-apellido" v-model="infoUpdate.lastName"
                   :rules="[rules[0].required]">
                   </v-text-field>
-                  <v-text-field label="DNI" color="orange darken-3"  type="text" id="r-id" v-model="registerInfo.dni"
+                  <v-text-field label="DNI" color="orange darken-3"  type="text" id="r-id" v-model="infoUpdate.dni"
                   :rules="[rules[0].required,rules[0].valid.dni]">
                   </v-text-field>
-                  <v-text-field label="Celular auxiliar" hint="opcional" persistent-hint color="orange darken-3" type="text" id="r-ccelularax" v-model="registerInfo.auxiliarCellphone">
+                  <v-text-field label="Celular auxiliar" hint="opcional" persistent-hint color="orange darken-3" type="text" id="r-ccelularax" v-model="infoUpdate.auxiliarCellphone">
                   </v-text-field>
                 </v-col>
               </v-row>
@@ -43,42 +43,31 @@
                   <v-col>
                     <v-combobox
                       clearable
-                      v-model="registerInfo.address.department"
+                      v-model="infoUpdate.address.department"
                       :items="optionsDepa"
                       label="Departamento"
                       color="orange darken-3"
                       :rules="[rules[0].required]"
                     ></v-combobox>
-                    <v-text-field label="Colonia" color="orange darken-3"  type="text" id="r-colonia" v-model="registerInfo.address.suburb" 
+                    <v-text-field label="Colonia" color="orange darken-3"  type="text" id="r-colonia" v-model="infoUpdate.address.suburb" 
                     :rules="[rules[0].required]">
                     </v-text-field>
-                    <v-text-field label="Residencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-residencia" v-model="registerInfo.address.residence">
+                    <v-text-field label="Residencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-residencia" v-model="infoUpdate.address.residence">
                     </v-text-field>
-                    <v-combobox
-                      clearable
-                      v-model="registerInfo.secureQuestion"
-                      :items="optionsQuestion"
-                      label="Pregunta de seguridad"
-                      color="orange darken-3"
-                      :rules="[rules[0].required]"
-                    ></v-combobox>
                   </v-col>
                   <v-col>
                     <v-combobox
                       clearable
                       label="Ciudad"
-                      v-model="registerInfo.address.city"
+                      v-model="infoUpdate.address.city"
                       :items="optionsCity"
                       color="orange darken-3"
                       :rules="[rules[0].required]"
                     ></v-combobox>
-                    <v-text-field label="Calle" color="orange darken-3"  type="text" id="r-calle" v-model="registerInfo.address.street"
+                    <v-text-field label="Calle" color="orange darken-3"  type="text" id="r-calle" v-model="infoUpdate.address.street"
                     :rules="[rules[0].required]">
                     </v-text-field>
-                    <v-text-field label="Referencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-referencia" v-model="registerInfo.address.reference">
-                    </v-text-field>
-                    <v-text-field label="Respuesta de seguridad" color="orange darken-3"  type="text" id="r-referencia" v-model="registerInfo.secureAnswer" 
-                    :rules="[rules[0].required]">
+                    <v-text-field label="Referencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-referencia" v-model="infoUpdate.address.reference">
                     </v-text-field>
                   </v-col>
                 </v-row>
@@ -87,7 +76,7 @@
               <v-btn 
               color="orange darken-4 white--text"
               :disabled="!valid"
-              @click="register">
+              @click="updateUsers">
               Actualizar
               </v-btn>
           </v-form>
@@ -113,12 +102,13 @@
 </style>
 
 <script>
-  import {REGISTER_USER} from '@/graphql/queries/userQueries.js'
+  import {GET_USER_INFO_UPDATE, USER_UPDATE} from '@/graphql/queries/userQueries.js'
   export default {
     data() {
       return {
         valid:true,
-        registerInfo:{
+        idUser:0,
+        infoUpdate:{
           firstName:'',
           lastName:'',
           age:'',
@@ -129,11 +119,10 @@
             department:'',
             city:'',
             suburb:'',
+            street:'',
             residence:'',
             reference:''
-          },
-          secureAnswer:'',
-          secureQuestion:'',
+          }
         },
         rules:[
           {
@@ -197,20 +186,20 @@
       }
     },
     methods:{
-      async register(){
-        if(this.$refs.registerForm.validate()){
+      async updateUsers(){
+        if(this.$refs.updateForm.validate()){
           const {data} = await this.$apollo.mutate({
-            mutation: REGISTER_USER,
-            variables:{userData:this.registerInfo}
+            mutation: USER_UPDATE,
+            variables:{userData:this.infoUpdate}
           })
-          console.log(data.register.register)
-          if(data.register.register){
+          console.log(data.updateUser.updateUser)
+          if(data.updateUser.updateUser){
             this.$swal({
               icon:'success',
-              title:'Peluditos',
+              title:'Exitoso',
               text:'Los datos se actualizarón correctamente',
             }).then(()=>{
-              this.$router.push('/inicio')
+              this.$router.push('/perfilusuario')
             })
           }else{
             this.$swal({
@@ -220,7 +209,19 @@
             })
           }
         }
+      },
+      async getUser(){
+      this.idUser = this.$store.state.id;
+      try{
+        this.infoUpdate = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user;
+        console.log(this.infoUpdate);
+      }catch(e){
+        console.log(e.getMessage)
       }
+    }
+    },
+    async created(){
+      await this.getUser();
     }
   }
 </script>
