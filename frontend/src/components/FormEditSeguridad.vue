@@ -12,12 +12,12 @@
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emaila" v-model="form.email"
+                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emaila" 
                     :rules="[rules[0].required,rules[0].valid.email]"
                     required
                     >                      
                     </v-text-field>
-                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordac" v-model="form.password"
+                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordac"
                   :rules="[rules[0].required]">
                   </v-text-field>
 
@@ -49,12 +49,12 @@
             <v-container class="bv-example-row">
               <v-row>
                 <v-col>
-                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emailc" v-model="form.email"
+                    <v-text-field label="Email" color="orange darken-3"  type="email" id="r-emailc" 
                     :rules="[rules[0].required,rules[0].valid.email]"
                     required
                     >                      
                     </v-text-field>
-                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordc" v-model="form.password"
+                    <v-text-field label="Contraseña" color="orange darken-3"  type="password" id="r-passwordc"
                   :rules="[rules[0].required]">
                   </v-text-field>
 
@@ -85,7 +85,7 @@
 </style>
 
 <script>
-  import {USER_UPDATE_SEGURIDAD, LOGIN_USER} from '@/graphql/queries/userQueries.js'
+  import {USER_UPDATE_SEGURIDAD} from '@/graphql/queries/userQueries.js'
   import Cookies from "js-cookie";
   export default {
     data() {
@@ -94,10 +94,6 @@
         infoUpdate:{
           password:'',
           email:''
-        },
-        form: {
-        email: "",
-        password: "",
         },
         rules:[
           {
@@ -111,19 +107,8 @@
       }
     },
     methods:{
-      validate() {
-        if (this.$refs.formLogin.validate()) {
-          this.login_user();
-        }
-      },
       async updateSeguridad() {
       try {
-        const { data } = await this.$apollo.mutate({
-          mutation: LOGIN_USER,
-          variables: { email: this.form.email, password: this.form.password },
-        });
-        this.login = data.login;
-        if (this.login.verified) {
           if (!(Cookies.get('token'))=="") {
             if(this.$refs.updateForm.validate()){
               const {data} = await this.$apollo.mutate({
@@ -142,11 +127,6 @@
               }
             }
           }
-        } else {
-          if (this.login.user === null) {
-            this.$swal({ icon: "error", title: "credenciales incorrectas" });
-          } 
-        }
       } catch (error) {
         console.log(error.message)
       }

@@ -54,14 +54,6 @@
                     </v-text-field>
                     <v-text-field label="Residencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-residencia" v-model="infoUpdate.address.residence">
                     </v-text-field>
-                    <v-combobox
-                      clearable
-                      v-model="infoUpdate.secureQuestion"
-                      :items="optionsQuestion"
-                      label="Pregunta de seguridad"
-                      color="orange darken-3"
-                      :rules="[rules[0].required]"
-                    ></v-combobox>
                   </v-col>
                   <v-col>
                     <v-combobox
@@ -77,9 +69,6 @@
                     </v-text-field>
                     <v-text-field label="Referencia" hint="opcional" persistent-hint color="orange darken-3"  type="text" id="r-referencia" v-model="infoUpdate.address.reference">
                     </v-text-field>
-                    <v-text-field label="Respuesta de seguridad" color="orange darken-3"  type="text" id="r-referencia" v-model="infoUpdate.secureAnswer" 
-                    :rules="[rules[0].required]">
-                    </v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
@@ -87,7 +76,7 @@
               <v-btn 
               color="orange darken-4 white--text"
               :disabled="!valid"
-              @click="updateUser">
+              @click="updateUsers">
               Actualizar
               </v-btn>
           </v-form>
@@ -113,13 +102,28 @@
 </style>
 
 <script>
-  import {GET_USER_INFO_UPDATE, USER_UPDATE_FRAGMENT_FIELDS} from '@/graphql/queries/userQueries.js'
+  import {GET_USER_INFO_UPDATE, USER_UPDATE} from '@/graphql/queries/userQueries.js'
   export default {
     data() {
       return {
         valid:true,
         idUser:0,
-        infoUpdate:{},
+        infoUpdate:{
+          firstName:'',
+          lastName:'',
+          age:'',
+          dni:'',
+          principalCellphone:'',
+          auxiliarCellphone:'',
+          address:{
+            department:'',
+            city:'',
+            suburb:'',
+            street:'',
+            residence:'',
+            reference:''
+          }
+        },
         rules:[
           {
             required: value=>!!value  || 'Campo requerido',
@@ -182,10 +186,10 @@
       }
     },
     methods:{
-      async updateUser(){
+      async updateUsers(){
         if(this.$refs.updateForm.validate()){
           const {data} = await this.$apollo.mutate({
-            mutation: USER_UPDATE_FRAGMENT_FIELDS,
+            mutation: USER_UPDATE,
             variables:{userData:this.infoUpdate}
           })
           console.log(data.updateUser.updateUser)
@@ -209,11 +213,15 @@
       async getUser(){
       this.idUser = this.$store.state.id;
       try{
-        this.infoy = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user
+        this.infoUpdate = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user;
+        console.log(this.infoUpdate);
       }catch(e){
         console.log(e.getMessage)
       }
     }
+    },
+    async created(){
+      await this.getUser();
     }
   }
 </script>

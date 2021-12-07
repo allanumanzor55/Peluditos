@@ -76,11 +76,10 @@
     <v-img
       class="align-end"
       height="380px"
-      :src="'http://lorempixel.com/400/200/people/'+ getUserId"
 
     >
     </v-img>
-    <v-card-title>{{infoUser.firstName}} {{infoUser.lastName}}</v-card-title>
+    <!-- <v-card-title>{{infoUpdate.firstName}}</v-card-title>  -->
     <v-card-text class="text--primary">
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     </v-card-text>
@@ -125,7 +124,7 @@ div{
 import FormEdit from '@/components/FormEdit.vue'
 import FormEditSeguridad from '@/components/FormEditSeguridad.vue'
 import BioUsuario from '@/components/BioUsuario.vue'
-import {GET_USER_INFO_UPDATE} from '@/graphql/queries/userQueries.js'
+// import {GET_USER_INFO_UPDATE} from '@/graphql/queries/userQueries.js'
 export default {
   data() {
       return {
@@ -137,19 +136,18 @@ export default {
         FormEdit,
         FormEditSeguridad,
         BioUsuario
-    },
-    computed:{
-    getUserId(){
-      return this.$store.state.id
     }
-    },
-      async getUser(){
-      this.idUser = this.$store.state.id;
-      try{
-        this.infoUser = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user
-      }catch(e){
-        console.log(e.getMessage)
-      }
-    }
+    // async getUser(){  
+    // this.idUser = this.$store.state.id;
+    //   try{
+    //     this.infoUser = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user;
+    //     console.log(this.infoUser);
+    //   }catch(e){
+    //     console.log(e.getMessage)
+    //   }
+    // },
+    // async created(){
+    //   await this.getUser();
+    // }
 }
 </script>
