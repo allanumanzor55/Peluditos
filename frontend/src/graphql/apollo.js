@@ -6,7 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 
 const httpLink = new HttpLink({
-    uri: 'https://allan-peluditos.herokuapp.com/graphql'
+    uri: 'https://allan-peluditos.herokuapp.com/graphql/'
 })
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
