@@ -103,26 +103,13 @@
 
 <script>
   import {GET_USER_INFO_UPDATE, USER_UPDATE} from '@/graphql/queries/userQueries.js'
+  import Cookies from "js-cookie";
   export default {
     data() {
       return {
         valid:true,
         idUser:0,
         infoUpdate:{
-          firstName:'',
-          lastName:'',
-          age:'',
-          dni:'',
-          principalCellphone:'',
-          auxiliarCellphone:'',
-          address:{
-            department:'',
-            city:'',
-            suburb:'',
-            street:'',
-            residence:'',
-            reference:''
-          }
         },
         rules:[
           {
@@ -192,15 +179,14 @@
             mutation: USER_UPDATE,
             variables:{userData:this.infoUpdate}
           })
-          console.log(data.updateUser.updateUser)
-          if(data.updateUser.updateUser){
+          if(data.updateUser.verified){
             this.$swal({
               icon:'success',
               title:'Exitoso',
               text:'Los datos se actualizarón correctamente',
-            }).then(()=>{
-              this.$router.push('/perfilusuario')
             })
+            Cookies.set("firstName", data.updateUser.user.firstName);
+            Cookies.set("lastName", data.updateUser.user.lastName);
           }else{
             this.$swal({
               icon:'error',
@@ -214,9 +200,11 @@
       this.idUser = this.$store.state.id;
       try{
         this.infoUpdate = (await this.$apollo.query({query:GET_USER_INFO_UPDATE,variables:{id:this.idUser}})).data.user;
+        delete this.infoUpdate['__typename']
+        delete this.infoUpdate.address['__typename']
         console.log(this.infoUpdate);
       }catch(e){
-        console.log(e.getMessage)
+        console.log(e.message)
       }
     }
     },

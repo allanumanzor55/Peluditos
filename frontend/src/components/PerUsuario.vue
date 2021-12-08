@@ -76,7 +76,7 @@
     <v-img
       class="align-end"
       height="380px"
-
+      src="https://picsum.photos/380/380?random=12"
     >
     </v-img>
     <!-- <v-card-title>{{infoUpdate.firstName}}</v-card-title>  -->

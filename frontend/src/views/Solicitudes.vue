@@ -3,11 +3,12 @@
     <NavbarHome />
     <v-card elevation="0">
       <v-tabs color="deep-orange accent-4" class="amber lighten-4" right>
-        <v-tab>Pendientes</v-tab>
+        <v-tab>Recibidas</v-tab>
         <v-tab>Enviadas</v-tab>
         <v-tab-item class="mt-4">
-          <v-container>
-            <v-row>
+          <SkeletonSoli v-if="loader" />
+          <v-container v-else>
+            <v-row v-if="receiveRequest.length>0">
               <v-expansion-panels focusable popout>
                 <v-expansion-panel
                   v-for="(item, i) in receiveRequest"
@@ -26,7 +27,7 @@
                     ></v-img>
 
                     <h5 class="deep-orange--text ml-3">
-                      {{ item.sender.firstName + " " + item.sender.lastName }}
+                      {{ item.sender.firstName + " " + item.sender.lastName }} - {{item.pet.name}}
                     </h5>
                     {{ item.date }}
                   </v-expansion-panel-header>
@@ -76,11 +77,16 @@
                 </v-expansion-panel>
               </v-expansion-panels>
             </v-row>
+            <v-row v-else class="orange lighten-2" align="center" justify="center" style="min-height:150px;border-radius:10px">
+              <h1 class="white--text">No has recibido Solicitudes</h1>
+            </v-row>
           </v-container>
+
         </v-tab-item>
         <v-tab-item class="mt-4">
-          <v-container>
-            <v-row>
+          <SkeletonSoli v-if="loader" />
+          <v-container v-else>
+            <v-row v-if="sendRequest.length>0">
               <v-expansion-panels focusable popout>
                 <v-expansion-panel
                   v-for="(item, i) in sendRequest"
@@ -108,22 +114,20 @@
                             'dark--text':sendRequest[i].state==='PENDIENTE'
                             }"
                     >
-                      {{ item.receiver.firstName + " " + item.receiver.lastName }}
+                      {{ item.receiver.firstName + " " + item.receiver.lastName }} -
+                      {{item.pet.name}}
                     </h5>
                     {{ item.date }}
                   </v-expansion-panel-header>
 
                   <v-expansion-panel-content>
                     <v-row class="m-3">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Aliquid sint est sunt quidem, repellat distinctio
-                      consequuntur quod vero, laboriosam porro recusandae
-                      nostrum hic quas debitis deserunt similique exercitationem
-                      fugiat incidunt aut ab facere molestiae adipisci ipsa?
-                      Provident ullam modi, accusantium commodi in incidunt
-                      soluta doloremque earum corporis, ea, officiis deleniti.
+                      {{item.description}}
                     </v-row>
                     <v-row class="m-2" justify="end">
+                      <span v-if="item.state!='PENDIENTE'">
+                        {{item.state.toUpperCase()}}
+                      </span>
                       <v-speed-dial
                         v-model="fab"
                         top="top"
@@ -133,6 +137,7 @@
                         direction="left"
                         :open-on-hover="true"
                         transition="slide-y-reverse-transition"
+                        v-if="item.state=='PENDIENTE'"
                       >
                         <template v-slot:activator>
                           <v-btn v-model="fab" color="orange darken-2" dark fab>
@@ -142,25 +147,21 @@
                         </template>
                         <v-tooltip bottom>
                           <template v-slot:activator="{ on, attrs }">
-                            <v-btn fab dark small color="red" v-bind="attrs" v-on="on">
-                              <v-icon>mdi-cancel</v-icon>
+                            <v-btn fab dark small color="grey darken-3" v-bind="attrs" v-on="on"
+                            @click="cancelRequest(item.sender.id,item.pet.id)">
+                              <v-icon>mdi-close</v-icon>
                             </v-btn>
                           </template>
-                          <span>Rechazar</span>
-                        </v-tooltip>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn fab dark small color="green" v-bind="attrs" v-on="on">
-                              <v-icon>mdi-check</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Aceptar</span>
+                          <span>Cancelar</span>
                         </v-tooltip>
                       </v-speed-dial>
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
+            </v-row>
+            <v-row v-else class="orange lighten-2" align="center" justify="center" style="min-height:150px;border-radius:10px">
+              <h1 class="white--text">No has enviado Solicitudes</h1>
             </v-row>
           </v-container>
         </v-tab-item>
@@ -170,18 +171,20 @@
 </template>
 
 <script>
-import { RECEIVE_REQUEST,SEND_REQUEST,UPDATE_REQUEST } from "@/graphql/queries/requestQueries";
+import { RECEIVE_REQUEST,SEND_REQUEST,UPDATE_REQUEST,CANCEL_REQUEST } from "@/graphql/queries/requestQueries";
 import NavbarHome from "@/components/NavbarHome";
+import SkeletonSoli from "@/components/SkeletonSoli";
 export default {
   name: "Solicitudes",
-  components: { NavbarHome },
+  components: { NavbarHome,SkeletonSoli },
   data() {
     return {
       fab: false,
       receiveRequest: [],
       sendRequest:[],
       stateColor:'',
-      stateText:''
+      stateText:'',
+      loader:false
     };
   },
   computed:{
@@ -197,6 +200,7 @@ export default {
           })
         ).data;
         this.receiveRequest = allUserRequest;
+        
       } catch (error) {
         console.error(error);
       }
@@ -238,11 +242,24 @@ export default {
         this.$swal({icon:'success',title:'Solicitud Denegada'})
         this.getReceiveRequest()
       }
+    },
+    async cancelRequest(idSender,idPet){
+      const {cancelRequest} = (await this.$apollo.mutate({
+        mutation:CANCEL_REQUEST,
+        variables:{senderId:idSender,petId:idPet}})).data
+        if(cancelRequest.verified){
+          await this.$swal({icon:'success',title:'Solicitud cancelada'})
+          this.getSendRequest()
+        }else{
+          this.$swal({icon:'error',title:'Algo salio mal, intentalo de nuevo'})
+        }
     }
   },
   async created() {
+    this.loader=true
     await this.getReceiveRequest();
     await this.getSendRequest();
+    this.loader=false
   },
 };
 </script>

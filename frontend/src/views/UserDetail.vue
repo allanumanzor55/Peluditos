@@ -3,7 +3,14 @@
     <NavbarHome />
     <v-container fluid class="p-0 position-relative" fill-height>
       <v-row>
-        <v-breadcrumbs :items="items" class="mb-0">
+        <v-breadcrumbs :items="itemsAdmin" class="mb-0" v-if="getTypeProfile=='Administrador'">
+          <template v-slot:item="{ item }">
+            <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
+              {{ item.text.toUpperCase() }}
+            </v-breadcrumbs-item>
+          </template>
+        </v-breadcrumbs>
+        <v-breadcrumbs :items="itemsOwner" class="mb-0" v-else>
           <template v-slot:item="{ item }">
             <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
               {{ item.text.toUpperCase() }}
@@ -21,7 +28,7 @@
           </h1>
         </v-row>
         
-        <v-row class="white--text rotulo-opciones" justify="center">
+        <v-row class="white--text rotulo-opciones" justify="center" v-if="getTypeProfile=='Administrador'">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="ma-2 gray lighten-3" fab v-bind="attrs" v-on="on"
@@ -48,7 +55,7 @@
             <v-container class="orange lighten-4 b-radius">
               <v-card>
                 <v-img
-                  :src="'http://lorempixel.com/400/200/people/'+idUser+'/'"
+                  src="https://picsum.photos/200/300?random=11"
                   class="white--text align-end"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                   height="200px"
@@ -56,7 +63,7 @@
                   <v-card-title v-text="user.firstName"></v-card-title>
                 </v-img>
                 <v-card-actions class="orange lighten-1 white--text" style="min-height:80px !important;">
-                  No disponible
+                  {{motto}}
                 </v-card-actions>
               </v-card>
               <v-row
@@ -111,7 +118,7 @@
                   Biografia
                 </v-container>
                 <v-container class="my-0">
-                  No disponible
+                  {{biography}}
                 </v-container>
               </v-row>
             </v-container>
@@ -213,6 +220,8 @@ export default {
   name: "UserDetail",
   data() {
     return {
+      biography:'',
+      motto:'',
       activeText:'',
       idUser: 0,
       user: {},
@@ -220,7 +229,7 @@ export default {
       firstInfo: {},
       addressInfo: {},
       userPetInfo: {},
-      items: [
+      itemsAdmin: [
         {
           text: "Inicio",
           disabled: false,
@@ -237,7 +246,40 @@ export default {
           href: "#/usuarios/detalle",
         },
       ],
+      itemsOwner:[
+        {
+          text: "Inicio",
+          disabled: false,
+          href: "#/inicio/",
+        },
+        {
+          text: "Adoptar",
+          disabled: false,
+          href: "#/adoptar",
+        },
+        {
+          text: "Detalle",
+          disabled: false,
+          href: "#/adoptar/detalle/"+this.$route.params.idPet,
+        },
+        {
+          text: "Perfil De Usuario",
+          disabled: true,
+          href: "#/usuarios/detalle",
+        },
+      ]
     };
+  },
+  computed:{
+    getTypeProfile:function(){
+      try {
+        return this.$store.state.profileName
+      } catch (error) {
+        console.log(this.$store.state.profileName)
+        return 'Owner'
+      }
+      
+    }
   },
   methods: {
     async disableProfile(){
@@ -303,6 +345,8 @@ export default {
     this.addressInfo.colonia = this.user.address.suburb;
     this.addressInfo.residencia = this.user.address.residence;
     this.addressInfo.referencia = this.user.address.reference;
+    this.biography = this.user.biography
+    this.motto = this.user.motto
     try {
       const data2 = await this.$apollo.mutate({
       mutation: USER_N_INFO,

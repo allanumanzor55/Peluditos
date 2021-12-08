@@ -28,6 +28,8 @@ export const GET_USER_INFO = gql`
             password
             verified
             active
+            biography
+            motto
         }
     }
 `
@@ -46,6 +48,23 @@ export const LOGIN_USER = gql`
     ${USER_FRAGMENT_FIELDS}
     mutation ($email:String!,$password:String!){
         login(email: $email, password: $password){
+            verified
+            user{
+                verified
+                active
+                token
+                profileType{
+                    name
+                }
+                ...UserFields
+            }
+        }
+    }`
+
+export const TRY_LOGIN = gql`
+    ${USER_FRAGMENT_FIELDS}
+    mutation ($email:String!,$password:String!){
+        tryLogin(email: $email, password: $password){
             verified
             user{
                 verified
@@ -146,9 +165,37 @@ export const GET_USER_INFO_UPDATE = gql`
         }
     }
 `
+export const UPDATE_BIOGRAFY_INFO = gql`
+    mutation ($userData:UserInput!){
+        updateUser(userData:$userData){
+            verified
+            user{
+                id
+                biography
+                motto
+            }
+        }
+    }
+`
+
+export const GET_BIOGRAFY_INFO = gql`
+    query ($id:Int!){
+        user(id:$id){
+            id
+            biography
+            motto
+        }
+    }
+`
+
+
 export const USER_UPDATE = gql`
     mutation ($userData:UserInput!){
         updateUser(userData:$userData){
+            verified
+            msg
+            user{  
+                id
                 firstName
                 lastName
                 dni
@@ -163,6 +210,7 @@ export const USER_UPDATE = gql`
                     residence
                     reference
                 }
+            }
         }
     }
     

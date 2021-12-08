@@ -6,7 +6,7 @@
         class="mx-auto"
         max-width="344"
       >
-        <v-img :src="'http://lorempixel.com/344/255/people/'+userData.id+'/'" style="height:225px;"></v-img>
+        <v-img src="https://picsum.photos/200/300?random=2" style="height:225px;"></v-img>
         <v-card-title class="orange--text">
           {{userData.firstName.split(" ")[0]+" "+userData.lastName.split(" ")[0]}}
         </v-card-title>

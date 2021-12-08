@@ -113,7 +113,12 @@ const routes = [
       meta:{
         requiresAuth:false
       }
-    }
+    },
+  {
+    path: '/adoptar/usuario/detalle/:idPet/:id',
+    name:'PerfilUsuario2',
+    component: ()=>import('../views/UserDetail')
+  }
 ]
 
 
